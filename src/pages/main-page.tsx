@@ -5,7 +5,7 @@ import { Header } from '../shared/ui/header';
 import { Footer } from '../shared/ui/footer';
 
 function MainPage() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Container maxWidth="xl" disableGutters>
