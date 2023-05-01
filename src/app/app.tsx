@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 
-import App from '../pages/App.tsx';
+import { MainPage } from '../pages/main-page.tsx';
 
 import '../shared/styles/index.css';
 
@@ -17,6 +17,6 @@ const updateSW = registerSW({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <MainPage />
   </React.StrictMode>,
 );
