@@ -10,7 +10,7 @@ function MainPage() {
   return (
     <Container maxWidth="xl" disableGutters>
       <Header />
-      <Container>
+      <Container sx={{ mt: '1rem' }}>
         <List>
           <ListItem>1 {t('Welcome to React')}</ListItem>
           <ListItem>2 {t('Welcome to React')}</ListItem>

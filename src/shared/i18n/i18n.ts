@@ -7,11 +7,13 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
+      'Split Bill Easy': 'Split Bill Easy',
       'Welcome to React': 'Welcome to React and react-i18next',
     },
   },
   rus: {
     translation: {
+      'Split Bill Easy': 'Делите Счёт Легко!',
       'Welcome to React': 'Добро пожаловать в React и react-i18next',
     },
   },

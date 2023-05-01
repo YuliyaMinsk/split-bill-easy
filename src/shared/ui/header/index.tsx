@@ -1,10 +1,15 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const Header = (): JSX.Element => {
+  const { t, i18n } = useTranslation();
+
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <Typography variant="h6">Split Bill Easy</Typography>
+        <Typography variant="h6" component="h1">
+          {t('Split Bill Easy')}
+        </Typography>
       </Toolbar>
     </AppBar>
   );
