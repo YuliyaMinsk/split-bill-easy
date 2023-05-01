@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
 import { registerSW } from 'virtual:pwa-register';
 
-import './index.css';
+import App from '../pages/App.tsx';
+
+import '../shared/styles/index.css';
 
 // add this to prompt for a refresh
 const updateSW = registerSW({
