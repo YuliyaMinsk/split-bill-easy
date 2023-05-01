@@ -7,10 +7,12 @@ function MainPage() {
   return (
     <Container maxWidth="xl" disableGutters>
       <Header />
-      <List>
-        <ListItem>1 Test information</ListItem>
-        <ListItem>2 Test information</ListItem>
-      </List>
+      <Container>
+        <List>
+          <ListItem>1 Test information</ListItem>
+          <ListItem>2 Test information</ListItem>
+        </List>
+      </Container>
       <Footer />
     </Container>
   );

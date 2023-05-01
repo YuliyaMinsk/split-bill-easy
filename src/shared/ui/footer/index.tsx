@@ -6,7 +6,7 @@ const Footer = (): JSX.Element => {
   const [value, setValue] = useState(0);
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box>
       <BottomNavigation
         showLabels
         value={value}

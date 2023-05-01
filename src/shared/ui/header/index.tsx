@@ -2,7 +2,7 @@ import { AppBar, Toolbar, Typography } from '@mui/material';
 
 const Header = (): JSX.Element => {
   return (
-    <AppBar position="sticky" sx={{ width: '100%' }}>
+    <AppBar position="sticky">
       <Toolbar>
         <Typography variant="h6">Split Bill Easy</Typography>
       </Toolbar>
