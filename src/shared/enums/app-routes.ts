@@ -1,8 +1,8 @@
 enum AppRoutes {
-  HOME = '/',
-  PAYERS = '/payers',
-  ITEMS = '/items',
-  CALCULATIONS = '/calculations',
+  HOME = '',
+  PAYERS = 'payers',
+  ITEMS = 'items',
+  CALCULATIONS = 'calculations',
 }
 
 export { AppRoutes };

@@ -18,8 +18,8 @@ export default (configEnv: ConfigEnv) => {
         },
         includeAssets: ['**/*'],
         manifest: {
-          'theme_color': '#f69435',
-          'background_color': '#f69435',
+          'theme_color': '#FFFFFF',
+          'background_color': '#FFFFFF',
           'display': 'standalone',
           'scope': process.env.VITE_APP_BASE_URL,
           'start_url': process.env.VITE_API_BASE_URL,

@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { Person, ReceiptLong, Functions } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from '../../enums';
+import { createPath } from '../../utils';
 
 const Footer = (): JSX.Element => {
   const navigate = useNavigate();
@@ -24,20 +25,20 @@ const Footer = (): JSX.Element => {
         <BottomNavigationAction
           label={t('Payers')}
           icon={<Person />}
-          value={AppRoutes.PAYERS.substring(1)}
-          onClick={() => navigate(AppRoutes.PAYERS)}
+          value={AppRoutes.PAYERS}
+          onClick={() => navigate(createPath(AppRoutes.PAYERS))}
         />
         <BottomNavigationAction
           label={t('Items')}
           icon={<ReceiptLong />}
-          value={AppRoutes.ITEMS.substring(1)}
-          onClick={() => navigate(AppRoutes.ITEMS)}
+          value={AppRoutes.ITEMS}
+          onClick={() => navigate(createPath(AppRoutes.ITEMS))}
         />
         <BottomNavigationAction
           label={t('Calculations')}
           icon={<Functions />}
-          value={AppRoutes.CALCULATIONS.substring(1)}
-          onClick={() => navigate(AppRoutes.CALCULATIONS)}
+          value={AppRoutes.CALCULATIONS}
+          onClick={() => navigate(createPath(AppRoutes.CALCULATIONS))}
         />
       </BottomNavigation>
     </Paper>
