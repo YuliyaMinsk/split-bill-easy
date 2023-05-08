@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 
-import '../shared/i18n/i18n.ts';
 import { MainPage } from '../pages/main-page.tsx';
 
+import '../shared/i18n/i18n.ts';
 import '../shared/styles/index.css';
 
 // add this to prompt for a refresh
