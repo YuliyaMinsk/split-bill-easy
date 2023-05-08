@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { registerSW } from 'virtual:pwa-register';
 
-import { MainPage } from '../pages/main-page.tsx';
+import { RoutesApp } from './routes-app.tsx';
 
 import '../shared/i18n/i18n.ts';
 import '../shared/styles/index.css';
@@ -18,6 +19,8 @@ const updateSW = registerSW({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <MainPage />
+    <BrowserRouter>
+      <RoutesApp />
+    </BrowserRouter>
   </React.StrictMode>,
 );

@@ -21,7 +21,7 @@ export default (configEnv: ConfigEnv) => {
           'theme_color': '#f69435',
           'background_color': '#f69435',
           'display': 'standalone',
-          'scope': '/',
+          'scope': process.env.VITE_APP_BASE_URL,
           'start_url': process.env.VITE_API_BASE_URL,
           'name': 'split bill easy',
           'short_name': 'split bill easy',
