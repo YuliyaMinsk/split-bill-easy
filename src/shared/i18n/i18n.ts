@@ -9,12 +9,22 @@ const resources = {
     translation: {
       'Split Bill Easy': 'Split Bill Easy',
       'Welcome to React': 'Welcome to React and react-i18next',
+
+      // bottom navigation
+      'Payers': 'Payers',
+      'Items': 'Items',
+      'Calculations': 'Calculations',
     },
   },
   rus: {
     translation: {
       'Split Bill Easy': 'Делите Счёт Легко!',
       'Welcome to React': 'Добро пожаловать в React и react-i18next',
+
+      // bottom navigation
+      'Payers': 'Платящие',
+      'Items': 'Позиции',
+      'Calculations': 'Подсчёты',
     },
   },
 };
