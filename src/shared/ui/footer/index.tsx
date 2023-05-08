@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { Person, ReceiptLong, Functions } from '@mui/icons-material';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from '../../enums';
 import { createPath } from '../../utils';
@@ -16,6 +16,7 @@ const Footer = (): JSX.Element => {
   return (
     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
       <BottomNavigation
+        sx={{ mb: 3 }}
         showLabels
         value={value}
         onChange={(_event, newValue) => {
