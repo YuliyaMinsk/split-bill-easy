@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { Person, ReceiptLong, Functions } from '@mui/icons-material';
@@ -11,36 +11,19 @@ const Footer = (): JSX.Element => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(location.pathname.replace(import.meta.env.VITE_APP_BASE_URL, ''));
+
+  const handleChange = (_event: SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+    navigate(createPath(newValue));
+  };
 
   return (
     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-      <BottomNavigation
-        sx={{ mb: 3 }}
-        showLabels
-        value={value}
-        onChange={(_event, newValue) => {
-          setValue(newValue);
-        }}
-      >
-        <BottomNavigationAction
-          label={t('Payers')}
-          icon={<Person />}
-          value={AppRoutes.PAYERS}
-          onClick={() => navigate(createPath(AppRoutes.PAYERS))}
-        />
-        <BottomNavigationAction
-          label={t('Items')}
-          icon={<ReceiptLong />}
-          value={AppRoutes.ITEMS}
-          onClick={() => navigate(createPath(AppRoutes.ITEMS))}
-        />
-        <BottomNavigationAction
-          label={t('Calculations')}
-          icon={<Functions />}
-          value={AppRoutes.CALCULATIONS}
-          onClick={() => navigate(createPath(AppRoutes.CALCULATIONS))}
-        />
+      <BottomNavigation sx={{ mb: 2 }} showLabels value={value} onChange={handleChange}>
+        <BottomNavigationAction label={t('Payers')} icon={<Person />} value={AppRoutes.PAYERS} />
+        <BottomNavigationAction label={t('Items')} icon={<ReceiptLong />} value={AppRoutes.ITEMS} />
+        <BottomNavigationAction label={t('Calculations')} icon={<Functions />} value={AppRoutes.CALCULATIONS} />
       </BottomNavigation>
     </Paper>
   );
