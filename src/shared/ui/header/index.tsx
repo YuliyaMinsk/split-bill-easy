@@ -10,7 +10,7 @@ const Header = ({ text }: HeaderProps): JSX.Element => {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
+      <Toolbar sx={{ justifyContent: 'center' }}>
         <Typography variant="h6" component="h1">
           {text || t('Split Bill Easy')}
         </Typography>
