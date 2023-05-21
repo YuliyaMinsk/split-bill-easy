@@ -1,5 +1,5 @@
 import { ListItem, TextField } from '@mui/material';
-import { Payer } from '../../../../shared/types';
+import { Payer } from '@shared/types';
 
 type PayerListItemProps = {
   payer: Payer;

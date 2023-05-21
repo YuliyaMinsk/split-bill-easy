@@ -1,8 +1,9 @@
 import { Container } from '@mui/material';
 
-import { Header } from '../shared/ui/header';
-import { Footer } from '../shared/ui/footer';
-import { SetPayers } from '../widgets/set-payers';
+import { SetPayers } from '@widgets/set-payers';
+
+import { Header } from '@shared/ui/header';
+import { Footer } from '@shared/ui/footer';
 
 function PayersPage() {
   return (

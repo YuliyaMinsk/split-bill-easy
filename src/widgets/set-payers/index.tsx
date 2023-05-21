@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { PayerList } from '../../entities/payer/ui/payer-list';
-import { AddPayer } from '../../features/add-payer';
-import { RemovePayer } from '../../features/remove-payer';
-import { Payer } from '../../shared/types';
+
+import { AddPayer } from '@features/add-payer';
+import { RemovePayer } from '@features/remove-payer';
+
+import { PayerList } from '@entities/payer/ui/payer-list';
+
+import { Payer } from '@shared/types';
 
 const payersFake = [
   {

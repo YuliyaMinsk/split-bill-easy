@@ -1,6 +1,7 @@
 import { List } from '@mui/material';
+
+import { Payer } from '@shared/types';
 import { PayerListItem } from '../payer-list-item';
-import { Payer } from '../../../../shared/types';
 
 type PayerListProps = {
   payerList: Payer[];
