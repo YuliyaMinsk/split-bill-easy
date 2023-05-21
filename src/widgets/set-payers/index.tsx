@@ -32,7 +32,7 @@ const SetPayers = (): JSX.Element => {
 
   const handleAdd = () => {
     if (newNamePayer !== '') {
-      const lastId = payerList[payerList.length - 1].id.split('-')[1];
+      const lastId = payerList.length ? payerList[payerList.length - 1].id.split('-')[1] : 0;
       const newPayer = { id: `item-${Number(lastId) + 1}`, name: newNamePayer };
       console.log(newPayer);
       setPayerList([...payerList, newPayer]);
