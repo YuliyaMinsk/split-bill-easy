@@ -1,4 +1,6 @@
 import { ListItem, TextField } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+
 import { Payer } from '@shared/types';
 
 type PayerListItemProps = {
@@ -14,6 +16,8 @@ const PayerListItem = ({
   onNewPayerChange,
   onPayerChange,
 }: PayerListItemProps): JSX.Element => {
+  const { t } = useTranslation();
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onNewPayerChange) {
       onNewPayerChange(event);
@@ -25,7 +29,15 @@ const PayerListItem = ({
 
   return (
     <ListItem key={payer.id}>
-      <TextField id="outlined-basic" fullWidth sx={{ mr: 1 }} value={payer.name} onChange={handleInputChange} />
+      <TextField
+        id="outlined-basic"
+        fullWidth
+        sx={{ mr: 1 }}
+        label={t('Name') || ''}
+        placeholder={t('Enter a new name') || ''}
+        value={payer.name}
+        onChange={handleInputChange}
+      />
       {ActionComponent}
     </ListItem>
   );

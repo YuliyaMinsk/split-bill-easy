@@ -8,8 +8,8 @@ function MainPage() {
   const { t } = useTranslation();
 
   return (
-    <Container maxWidth="xl" disableGutters>
-      <Header />
+    <Container maxWidth="sm" disableGutters>
+      <Header text={t('Split Bill Easy')} />
       <Container sx={{ mt: '1rem' }}>
         <List>
           <ListItem>1 {t('Welcome to React')}</ListItem>

@@ -8,8 +8,8 @@ function CalculationsPage() {
   const { t } = useTranslation();
 
   return (
-    <Container maxWidth="xl" disableGutters>
-      <Header text={'Calculations'} />
+    <Container maxWidth="sm" disableGutters>
+      <Header text={t('Calculations')} />
       <Container sx={{ mt: '1rem' }}>
         <List>
           <ListItem>1 {t('Calculations')}</ListItem>

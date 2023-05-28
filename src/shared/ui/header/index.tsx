@@ -1,14 +1,11 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { Menu } from '@mui/icons-material';
-import { useTranslation } from 'react-i18next';
 
 type HeaderProps = {
-  text?: string;
+  text: string;
 };
 
 const Header = ({ text }: HeaderProps): JSX.Element => {
-  const { t } = useTranslation();
-
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -16,7 +13,7 @@ const Header = ({ text }: HeaderProps): JSX.Element => {
           <Menu />
         </IconButton>
         <Typography variant="h6" component="h1">
-          {text || t('Split Bill Easy')}
+          {text}
         </Typography>
       </Toolbar>
     </AppBar>

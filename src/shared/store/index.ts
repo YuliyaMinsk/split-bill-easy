@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { payerReducer } from './payer/payer-slice';
+import { dishReducer } from './dish/dish-slice';
 
 export const store = configureStore({
   reducer: {
     payer: payerReducer,
+    dish: dishReducer,
   },
 });
 

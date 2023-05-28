@@ -14,6 +14,19 @@ const resources = {
       'Payers': 'Payers',
       'Items': 'Items',
       'Calculations': 'Calculations',
+
+      // payers
+      'Name': 'Name',
+      'Enter a new name': 'Enter a new name',
+
+      // items
+      'Item': 'Item',
+      'Enter an item': 'Enter an item',
+      'Item cost': 'Item cost',
+      'Enter an item cost': 'Enter an item cost',
+      'Quantity': 'Quantity',
+      'Enter a quantity': 'Enter a quantity',
+      'Choose who bought this item': 'Choose who bought this item',
     },
   },
   rus: {
@@ -25,6 +38,19 @@ const resources = {
       'Payers': 'Платящие',
       'Items': 'Позиции',
       'Calculations': 'Подсчёты',
+
+      // payers
+      'Name': 'Имя',
+      'Enter a new name': 'Введите новое имя',
+
+      // items
+      'Item': 'Позиция',
+      'Enter an item': 'Введите позицию',
+      'Item cost': 'Стоимость позиции',
+      'Enter an item cost': 'Введите стоимость позиции',
+      'Quantity': 'Количество',
+      'Enter a quantity': 'Введите количество',
+      'Choose who bought this item': 'Выберите кто купил эту позицию',
     },
   },
 };
