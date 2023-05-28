@@ -27,6 +27,7 @@ const resources = {
       'Quantity': 'Quantity',
       'Enter a quantity': 'Enter a quantity',
       'Choose who bought this item': 'Choose who bought this item',
+      'Save': 'Save',
     },
   },
   rus: {
@@ -51,6 +52,7 @@ const resources = {
       'Quantity': 'Количество',
       'Enter a quantity': 'Введите количество',
       'Choose who bought this item': 'Выберите кто купил эту позицию',
+      'Save': 'Сохранить',
     },
   },
 };

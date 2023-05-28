@@ -1,8 +1,16 @@
 import { List, ListItem, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-const DishNew = (): JSX.Element => {
+type DishNewProps = {
+  onQuantityChange: (quantity: number) => void;
+};
+
+const DishNew = ({ onQuantityChange }: DishNewProps): JSX.Element => {
   const { t } = useTranslation();
+
+  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onQuantityChange(Number(event.target.value));
+  };
 
   return (
     <List>
@@ -27,10 +35,12 @@ const DishNew = (): JSX.Element => {
       <ListItem>
         <TextField
           id="outlined-basic"
+          type="number"
           fullWidth
           sx={{ mr: 1 }}
           label={t('Quantity') || ''}
           placeholder={t('Enter a quantity') || ''}
+          onChange={handleQuantityChange}
         />
       </ListItem>
     </List>
