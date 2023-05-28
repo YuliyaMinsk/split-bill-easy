@@ -12,7 +12,7 @@ function PayersPage() {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={t('Payers')} />
-      <Container sx={{ mt: '1rem' }}>
+      <Container sx={{ mt: '1rem', mb: '6rem' }}>
         <SetPayers />
       </Container>
       <Footer />

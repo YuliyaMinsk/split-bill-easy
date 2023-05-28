@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Checkbox, List, ListItem, ListItemIcon, ListItemText, TextField } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { Checkbox, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 
 import { Payer } from '@/shared/types';
 
@@ -10,7 +9,6 @@ type PayerListForSplitBillProps = {
 };
 
 const PayerListForSplitBill = ({ payerList, totalQuantity }: PayerListForSplitBillProps): JSX.Element => {
-  const { t } = useTranslation();
   const [checkedPayers, setCheckedPayers] = useState<string[]>([]);
 
   const handleCheckChange = (payerId: string) => {
@@ -27,19 +25,21 @@ const PayerListForSplitBill = ({ payerList, totalQuantity }: PayerListForSplitBi
   return (
     <List>
       {payerList.map((payer) => (
-        <ListItem key={payer.id}>
+        <ListItem key={payer.id} sx={{ display: 'flex' }}>
           <ListItemIcon>
             <Checkbox onChange={() => handleCheckChange(payer.id)} />
           </ListItemIcon>
           <ListItemText primary={payer.name} />
-          <TextField
-            sx={{ mr: 1 }}
+          {/* <TextField
+            sx={{ mr: 1, width: '100px' }}
             id="outlined-basic"
-            type="number"
             size="small"
-            label={t('Quantity') || ''}
-            placeholder={t('Enter a quantity') || ''}
             value={checkedPayers.includes(payer.id) ? quantityPerPayer : 0}
+          /> */}
+          <ListItemText
+            primaryTypographyProps={{ fontSize: '18px' }}
+            primary={checkedPayers.includes(payer.id) ? quantityPerPayer : 0}
+            sx={{ textAlign: 'right', mr: 1 }}
           />
         </ListItem>
       ))}

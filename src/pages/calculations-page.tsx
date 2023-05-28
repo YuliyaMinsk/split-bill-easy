@@ -10,7 +10,7 @@ function CalculationsPage() {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={t('Calculations')} />
-      <Container sx={{ mt: '1rem' }}>
+      <Container sx={{ mt: '1rem', mb: '6rem' }}>
         <List>
           <ListItem>1 {t('Calculations')}</ListItem>
           <ListItem>2 {t('Welcome to React')}</ListItem>

@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { AddPointBill } from '@/features/add-point-bill-item';
@@ -12,9 +12,9 @@ function ItemsPage() {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={t('Items')} />
-      <Container sx={{ mt: '1rem' }}>
+      <Box sx={{ mt: '1rem', ml: 0, mr: 0, mb: '6rem' }}>
         <AddPointBill />
-      </Container>
+      </Box>
       <Footer />
     </Container>
   );

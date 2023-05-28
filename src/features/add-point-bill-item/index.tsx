@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, Container, Typography } from '@mui/material';
 
@@ -12,7 +12,7 @@ const AddPointBill = (): JSX.Element => {
   const [totalQuantity, setTotalQuantity] = useState(0);
 
   const payerList = useSelector((state: RootState) => state.payer);
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   return (
     <Container>

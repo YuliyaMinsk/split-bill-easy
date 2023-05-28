@@ -10,7 +10,7 @@ function MainPage() {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={t('Split Bill Easy')} />
-      <Container sx={{ mt: '1rem' }}>
+      <Container sx={{ mt: '1rem', mb: '6rem' }}>
         <List>
           <ListItem>1 {t('Welcome to React')}</ListItem>
           <ListItem>2 {t('Welcome to React')}</ListItem>
