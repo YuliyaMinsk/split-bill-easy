@@ -44,8 +44,12 @@ const SetPayers = (): JSX.Element => {
     setPayerList(payerList.filter((_, i) => i !== index));
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNewPayerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewNamePayer(event.target.value);
+  };
+
+  const handlePayerChange = (index: number, newValue: string) => {
+    setPayerList(payerList.map((payer, i) => (i === index ? { ...payer, name: newValue } : payer)));
   };
 
   return (
@@ -54,7 +58,8 @@ const SetPayers = (): JSX.Element => {
       AddComponent={<AddPayer onAdd={handleAdd} />}
       RemoveComponent={(index) => <RemovePayer onRemove={handleRemove(index)} />}
       newPayer={newNamePayer}
-      onInputChange={handleInputChange}
+      onNewPayerChange={handleNewPayerChange}
+      onPayerChange={handlePayerChange}
     />
   );
 };

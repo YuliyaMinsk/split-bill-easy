@@ -4,13 +4,30 @@ import { Payer } from '@shared/types';
 type PayerListItemProps = {
   payer: Payer;
   ActionComponent: JSX.Element;
-  onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onNewPayerChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onPayerChange?: (index: number, newValue: string) => void;
+  index?: number;
 };
 
-const PayerListItem = ({ payer, ActionComponent, onInputChange }: PayerListItemProps): JSX.Element => {
+const PayerListItem = ({
+  payer,
+  ActionComponent,
+  onNewPayerChange,
+  onPayerChange,
+  index,
+}: PayerListItemProps): JSX.Element => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (onNewPayerChange) {
+      onNewPayerChange(event);
+    }
+    if (onPayerChange && index !== undefined) {
+      onPayerChange(index, event.target.value);
+    }
+  };
+
   return (
     <ListItem key={payer.id}>
-      <TextField id="outlined-basic" fullWidth sx={{ mr: 1 }} value={payer.name} onChange={onInputChange} />
+      <TextField id="outlined-basic" fullWidth sx={{ mr: 1 }} value={payer.name} onChange={handleInputChange} />
       {ActionComponent}
     </ListItem>
   );

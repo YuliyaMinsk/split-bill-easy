@@ -8,7 +8,8 @@ type PayerListProps = {
   AddComponent: JSX.Element;
   RemoveComponent: (index: number) => JSX.Element;
   newPayer: string;
-  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onNewPayerChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onPayerChange: (index: number, newValue: string) => void;
 };
 
 const PayerList = ({
@@ -16,17 +17,24 @@ const PayerList = ({
   AddComponent,
   RemoveComponent,
   newPayer,
-  onInputChange,
+  onNewPayerChange,
+  onPayerChange,
 }: PayerListProps): JSX.Element => {
   return (
     <List>
       {payerList.map((payer, index) => (
-        <PayerListItem key={payer.id} payer={payer} ActionComponent={RemoveComponent(index)} />
+        <PayerListItem
+          key={payer.id}
+          payer={payer}
+          ActionComponent={RemoveComponent(index)}
+          onPayerChange={onPayerChange}
+          index={index}
+        />
       ))}
       <PayerListItem
         key={'new-payer'}
         payer={{ id: 'new-payer', name: newPayer }}
-        onInputChange={onInputChange}
+        onNewPayerChange={onNewPayerChange}
         ActionComponent={AddComponent}
       />
     </List>
