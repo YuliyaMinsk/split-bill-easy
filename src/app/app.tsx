@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { registerSW } from 'virtual:pwa-register';
+import { Provider } from 'react-redux';
+
+import { store } from '@/shared/store/index.ts';
 
 import { RoutesApp } from './routes-app.tsx';
-
 import '../shared/i18n/i18n.ts';
 import '../shared/styles/index.css';
 
@@ -19,8 +21,10 @@ const updateSW = registerSW({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <RoutesApp />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <RoutesApp />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
 );

@@ -6,10 +6,10 @@ import { PayerListItem } from '../payer-list-item';
 type PayerListProps = {
   payerList: Payer[];
   AddComponent: JSX.Element;
-  RemoveComponent: (index: number) => JSX.Element;
+  RemoveComponent: (id: string) => JSX.Element;
   newPayer: string;
   onNewPayerChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onPayerChange: (index: number, newValue: string) => void;
+  onPayerChange: (id: string, newValue: string) => void;
 };
 
 const PayerList = ({
@@ -22,13 +22,12 @@ const PayerList = ({
 }: PayerListProps): JSX.Element => {
   return (
     <List>
-      {payerList.map((payer, index) => (
+      {payerList.map((payer) => (
         <PayerListItem
           key={payer.id}
           payer={payer}
-          ActionComponent={RemoveComponent(index)}
+          ActionComponent={RemoveComponent(payer.id)}
           onPayerChange={onPayerChange}
-          index={index}
         />
       ))}
       <PayerListItem

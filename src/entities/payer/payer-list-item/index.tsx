@@ -5,8 +5,7 @@ type PayerListItemProps = {
   payer: Payer;
   ActionComponent: JSX.Element;
   onNewPayerChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onPayerChange?: (index: number, newValue: string) => void;
-  index?: number;
+  onPayerChange?: (id: string, newValue: string) => void;
 };
 
 const PayerListItem = ({
@@ -14,14 +13,13 @@ const PayerListItem = ({
   ActionComponent,
   onNewPayerChange,
   onPayerChange,
-  index,
 }: PayerListItemProps): JSX.Element => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onNewPayerChange) {
       onNewPayerChange(event);
     }
-    if (onPayerChange && index !== undefined) {
-      onPayerChange(index, event.target.value);
+    if (onPayerChange) {
+      onPayerChange(payer.id, event.target.value);
     }
   };
 
