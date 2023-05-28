@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { AddPayer } from '@features/add-payer';
 import { RemovePayer } from '@features/remove-payer';
 
-import { PayerList } from '@entities/payer/ui/payer-list';
+import { PayerList } from '@/entities/payer/payer-list';
 
 import { Payer } from '@shared/types';
 
@@ -31,10 +31,9 @@ const SetPayers = (): JSX.Element => {
   const [newNamePayer, setNewNamePayer] = useState<string>('');
 
   const handleAdd = () => {
-    if (newNamePayer !== '') {
+    if (newNamePayer.length > 0) {
       const lastId = payerList.length ? payerList[payerList.length - 1].id.split('-')[1] : 0;
       const newPayer = { id: `item-${Number(lastId) + 1}`, name: newNamePayer };
-      console.log(newPayer);
       setPayerList([...payerList, newPayer]);
       setNewNamePayer('');
     }
