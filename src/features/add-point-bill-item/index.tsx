@@ -21,9 +21,6 @@ const AddPointBill = (): JSX.Element => {
         {t('Payers')}
       </Typography>
       <PayerListForSplitBill payerList={payerList} totalQuantity={totalQuantity} />
-      <Typography variant="caption" display="block" sx={{ ml: 2 }} gutterBottom>
-        {t('Choose who bought this item')}
-      </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
         <Button size="large" variant="contained">
           {t('Save')}

@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Checkbox, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Checkbox, List, ListItem, ListItemIcon, ListItemText, TextField, Typography } from '@mui/material';
 
-import { Payer } from '@/shared/types';
+import { Payer, PayersWithQuantity } from '@/shared/types';
 
 type PayerListForSplitBillProps = {
   payerList: Payer[];
@@ -9,41 +10,81 @@ type PayerListForSplitBillProps = {
 };
 
 const PayerListForSplitBill = ({ payerList, totalQuantity }: PayerListForSplitBillProps): JSX.Element => {
-  const [checkedPayers, setCheckedPayers] = useState<string[]>([]);
+  const { t } = useTranslation();
+  const [payersWithQuantity, setPayersWithQuantity] = useState<PayersWithQuantity[]>(
+    payerList.map((payer) => ({ ...payer, isChecked: false, quantity: 0 })),
+  );
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const totalQuantityEntered = payersWithQuantity.reduce((sum, payer) => sum + payer.quantity, 0);
+    console.log('totalQuantityEntered:', totalQuantityEntered, 'totalQuantity:', totalQuantity);
+    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.015) {
+      setError(t('Error: Incorrect amount') as string);
+    } else {
+      setError('');
+    }
+  }, [payersWithQuantity, t, totalQuantity]);
 
   const handleCheckChange = (payerId: string) => {
-    const isChecked = checkedPayers.includes(payerId);
-    if (isChecked) {
-      setCheckedPayers(checkedPayers.filter((id) => id !== payerId));
-    } else {
-      setCheckedPayers([...checkedPayers, payerId]);
-    }
+    const updatedPayers = payersWithQuantity.map((payer) =>
+      payer.id === payerId ? { ...payer, isChecked: !payer.isChecked } : payer,
+    );
+
+    const checkedPayers = updatedPayers.filter((payer) => payer.isChecked);
+    const quantityPerPayer = checkedPayers.length ? Math.round((totalQuantity / checkedPayers.length) * 100) / 100 : 0;
+
+    setPayersWithQuantity(
+      updatedPayers.map((payer) => {
+        if (payer.isChecked) {
+          return { ...payer, quantity: quantityPerPayer };
+        }
+        return { ...payer, quantity: 0 };
+      }),
+    );
   };
 
-  const quantityPerPayer = checkedPayers.length ? Math.round((totalQuantity / checkedPayers.length) * 100) / 100 : 0;
+  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, payerId: string) => {
+    const newQuantity = Number(event.target.value);
+
+    setPayersWithQuantity(
+      payersWithQuantity.map((payer) => (payer.id === payerId ? { ...payer, quantity: newQuantity } : payer)),
+    );
+  };
+
+  console.log('PayerListForSplitBill payersWithQuantity:', payersWithQuantity);
 
   return (
-    <List>
-      {payerList.map((payer) => (
-        <ListItem key={payer.id} sx={{ display: 'flex' }}>
-          <ListItemIcon>
-            <Checkbox onChange={() => handleCheckChange(payer.id)} />
-          </ListItemIcon>
-          <ListItemText primary={payer.name} />
-          {/* <TextField
-            sx={{ mr: 1, width: '100px' }}
-            id="outlined-basic"
-            size="small"
-            value={checkedPayers.includes(payer.id) ? quantityPerPayer : 0}
-          /> */}
-          <ListItemText
-            primaryTypographyProps={{ fontSize: '18px' }}
-            primary={checkedPayers.includes(payer.id) ? quantityPerPayer : 0}
-            sx={{ textAlign: 'right', mr: 1 }}
-          />
-        </ListItem>
-      ))}
-    </List>
+    <>
+      <List>
+        {payersWithQuantity.map((payer) => (
+          <ListItem key={payer.id} sx={{ display: 'flex' }}>
+            <ListItemIcon>
+              <Checkbox onChange={() => handleCheckChange(payer.id)} value={payer.isChecked} />
+            </ListItemIcon>
+            <ListItemText primary={payer.name} />
+            <TextField
+              sx={{ textAlign: 'right', mr: 1, width: '150px' }}
+              id="outlined-basic"
+              size="small"
+              type="number"
+              value={payer.quantity}
+              onChange={(event) => handleQuantityChange(event, payer.id)}
+              error={error !== ''}
+            />
+          </ListItem>
+        ))}
+      </List>
+      <Typography
+        variant="caption"
+        display="block"
+        sx={{ ml: 2 }}
+        color={error !== '' ? 'error' : 'inherit'}
+        gutterBottom
+      >
+        {error === '' ? t('Choose who bought this item') : error}
+      </Typography>
+    </>
   );
 };
 

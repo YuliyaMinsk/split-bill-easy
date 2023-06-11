@@ -28,6 +28,9 @@ const resources = {
       'Enter a quantity': 'Enter a quantity',
       'Choose who bought this item': 'Choose who bought this item',
       'Save': 'Save',
+
+      // error messages
+      'Error: Incorrect amount': 'Error: Incorrect amount',
     },
   },
   rus: {
@@ -53,6 +56,9 @@ const resources = {
       'Enter a quantity': 'Введите количество',
       'Choose who bought this item': 'Выберите кто купил эту позицию',
       'Save': 'Сохранить',
+
+      // error messages
+      'Error: Incorrect amount': 'Ошибка: Некорректная сумма',
     },
   },
 };

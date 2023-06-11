@@ -3,4 +3,9 @@ type Payer = {
   name: string;
 };
 
-export type { Payer };
+type PayersWithQuantity = Payer & {
+  isChecked: boolean;
+  quantity: number;
+};
+
+export type { Payer, PayersWithQuantity };
