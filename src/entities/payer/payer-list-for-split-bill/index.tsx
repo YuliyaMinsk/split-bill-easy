@@ -7,9 +7,10 @@ import { Payer, PayersWithQuantity } from '@/shared/types';
 type PayerListForSplitBillProps = {
   payerList: Payer[];
   totalQuantity: number;
+  updateValue: (payersWithQuantity: PayersWithQuantity[]) => void;
 };
 
-const PayerListForSplitBill = ({ payerList, totalQuantity }: PayerListForSplitBillProps): JSX.Element => {
+const PayerListForSplitBill = ({ payerList, totalQuantity, updateValue }: PayerListForSplitBillProps): JSX.Element => {
   const { t } = useTranslation();
   const [payersWithQuantity, setPayersWithQuantity] = useState<PayersWithQuantity[]>(
     payerList.map((payer) => ({ ...payer, isChecked: false, quantity: 0 })),
@@ -18,13 +19,28 @@ const PayerListForSplitBill = ({ payerList, totalQuantity }: PayerListForSplitBi
 
   useEffect(() => {
     const totalQuantityEntered = payersWithQuantity.reduce((sum, payer) => sum + payer.quantity, 0);
-    console.log('totalQuantityEntered:', totalQuantityEntered, 'totalQuantity:', totalQuantity);
-    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.015) {
+
+    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.015 && totalQuantity > 0) {
       setError(t('Error: Incorrect amount') as string);
     } else {
       setError('');
+      updateValue(payersWithQuantity);
     }
-  }, [payersWithQuantity, t, totalQuantity]);
+  }, [payersWithQuantity]);
+
+  useEffect(() => {
+    const checkedPayers = payersWithQuantity.filter((payer) => payer.isChecked);
+    const quantityPerPayer = checkedPayers.length ? Math.round((totalQuantity / checkedPayers.length) * 100) / 100 : 0;
+
+    setPayersWithQuantity(
+      payersWithQuantity.map((payer) => {
+        if (payer.isChecked) {
+          return { ...payer, quantity: quantityPerPayer };
+        }
+        return { ...payer, quantity: 0 };
+      }),
+    );
+  }, [totalQuantity]);
 
   const handleCheckChange = (payerId: string) => {
     const updatedPayers = payersWithQuantity.map((payer) =>
@@ -51,8 +67,6 @@ const PayerListForSplitBill = ({ payerList, totalQuantity }: PayerListForSplitBi
       payersWithQuantity.map((payer) => (payer.id === payerId ? { ...payer, quantity: newQuantity } : payer)),
     );
   };
-
-  console.log('PayerListForSplitBill payersWithQuantity:', payersWithQuantity);
 
   return (
     <>

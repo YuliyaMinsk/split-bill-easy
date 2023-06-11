@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { payerReducer } from './payer/payer-slice';
-import { dishReducer } from './dish/dish-slice';
+import { billReducer } from './bill/bill-slice';
 
 export const store = configureStore({
   reducer: {
     payer: payerReducer,
-    dish: dishReducer,
+    bill: billReducer,
   },
 });
 
