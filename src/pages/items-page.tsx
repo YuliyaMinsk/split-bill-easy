@@ -14,7 +14,7 @@ function ItemsPage() {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={t('Items')} />
-      <Box sx={{ mt: '1rem', ml: 1, mr: 1, mb: '6rem' }}>
+      <Box sx={{ mt: '1rem', ml: 1, mr: 1, mb: '2rem' }}>
         <DishList />
       </Box>
       <Box sx={{ mt: '1rem', ml: 0, mr: 0, mb: '6rem' }}>
