@@ -28,6 +28,8 @@ const resources = {
       'Enter a quantity': 'Enter a quantity',
       'Choose who bought this item': 'Choose who bought this item',
       'Save': 'Save',
+      'Edit': 'Edit',
+      'Delete': 'Delete',
 
       // error messages
       'Error: Incorrect amount': 'Error: Incorrect amount',
@@ -56,6 +58,8 @@ const resources = {
       'Enter a quantity': 'Введите количество',
       'Choose who bought this item': 'Выберите кто купил эту позицию',
       'Save': 'Сохранить',
+      'Edit': 'Редактировать',
+      'Delete': 'Удалить',
 
       // error messages
       'Error: Incorrect amount': 'Ошибка: Некорректная сумма',
