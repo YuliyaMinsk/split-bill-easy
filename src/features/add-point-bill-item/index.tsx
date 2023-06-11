@@ -12,14 +12,14 @@ import { addBillLine } from '@/shared/store/bill/bill-slice';
 
 const AddPointBill = (): JSX.Element => {
   const { t } = useTranslation();
+  const payerList = useSelector((state: RootState) => state.payer);
+  const dispatch = useDispatch();
+
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [billLine, setBillLine] = useState<BillLine>({
     dish: { id: '', name: '', price: 0, quantity: 0 },
-    payers: [],
+    payers: payerList.map((payer) => ({ ...payer, isChecked: false, quantity: 0 })),
   });
-
-  const payerList = useSelector((state: RootState) => state.payer);
-  const dispatch = useDispatch();
 
   const handleSave = () => {
     dispatch(addBillLine(billLine));
@@ -55,7 +55,11 @@ const AddPointBill = (): JSX.Element => {
       <Typography variant="h6" component="h2" sx={{ ml: 2, mt: 2 }} gutterBottom>
         {t('Payers')}
       </Typography>
-      <PayerListForSplitBill payerList={payerList} totalQuantity={totalQuantity} updateValue={handleUpdatePayerList} />
+      <PayerListForSplitBill
+        payerList={billLine.payers}
+        totalQuantity={totalQuantity}
+        updateValue={handleUpdatePayerList}
+      />
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
         <Button size="large" variant="contained" onClick={handleSave}>
           {t('Save')}

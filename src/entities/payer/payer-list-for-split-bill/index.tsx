@@ -2,19 +2,17 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Checkbox, List, ListItem, ListItemIcon, ListItemText, TextField, Typography } from '@mui/material';
 
-import { Payer, PayersWithQuantity } from '@/shared/types';
+import { PayersWithQuantity } from '@/shared/types';
 
 type PayerListForSplitBillProps = {
-  payerList: Payer[];
+  payerList: PayersWithQuantity[];
   totalQuantity: number;
   updateValue: (payersWithQuantity: PayersWithQuantity[]) => void;
 };
 
 const PayerListForSplitBill = ({ payerList, totalQuantity, updateValue }: PayerListForSplitBillProps): JSX.Element => {
   const { t } = useTranslation();
-  const [payersWithQuantity, setPayersWithQuantity] = useState<PayersWithQuantity[]>(
-    payerList.map((payer) => ({ ...payer, isChecked: false, quantity: 0 })),
-  );
+  const [payersWithQuantity, setPayersWithQuantity] = useState<PayersWithQuantity[]>(payerList);
   const [error, setError] = useState('');
 
   useEffect(() => {
