@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { List } from '@mui/material';
 
-import { AddPayer } from '@features/add-payer';
-import { RemovePayer } from '@features/remove-payer';
-
-import { PayerList } from '@/entities/payer/payer-list';
+import { AddPayer } from '@/features/add-payer';
+import { RemovePayer } from '@/features/remove-payer';
 
 import { RootState } from '@/shared/store';
 import { addPayer, editPayer, removePayer } from '@/shared/store/payer/payer-slice';
+
+import { PayerListItem } from './view/payer-list-item';
 
 const SetPayers = (): JSX.Element => {
   const [newNamePayer, setNewNamePayer] = useState<string>('');
@@ -37,14 +38,22 @@ const SetPayers = (): JSX.Element => {
   };
 
   return (
-    <PayerList
-      payerList={payerList}
-      AddComponent={<AddPayer onAdd={handleAdd} />}
-      RemoveComponent={(id) => <RemovePayer onRemove={() => handleRemove(id)} />}
-      newPayer={newNamePayer}
-      onNewPayerChange={handleNewPayerChange}
-      onPayerChange={handlePayerChange}
-    />
+    <List>
+      {payerList.map((payer) => (
+        <PayerListItem
+          key={payer.id}
+          payer={payer}
+          ActionComponent={<RemovePayer onRemove={() => handleRemove(payer.id)} />}
+          onPayerChange={handlePayerChange}
+        />
+      ))}
+      <PayerListItem
+        key={'new-payer'}
+        payer={{ id: 'new-payer', name: newNamePayer }}
+        onNewPayerChange={handleNewPayerChange}
+        ActionComponent={<AddPayer onAdd={handleAdd} />}
+      />
+    </List>
   );
 };
 
