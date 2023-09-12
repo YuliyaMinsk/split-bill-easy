@@ -1,18 +1,18 @@
 const payersFake = [
   {
-    id: 'item-1',
+    id: '1',
     name: 'Сергей',
   },
   {
-    id: 'item-2',
+    id: '2',
     name: 'Айдана',
   },
   {
-    id: 'item-3',
+    id: '3',
     name: 'Марат',
   },
   {
-    id: 'item-4',
+    id: '4',
     name: 'Алихан',
   },
 ];

@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import { SetPayers } from '@widgets/set-payers';
+import { PayerList } from '@/widgets/payer-list';
 
 import { Header } from '@shared/ui/header';
 import { Footer } from '@shared/ui/footer';
@@ -13,7 +13,7 @@ function PayersPage() {
     <Container maxWidth="sm" disableGutters>
       <Header text={t('Payers')} />
       <Container sx={{ mt: '1rem', mb: '6rem' }}>
-        <SetPayers />
+        <PayerList />
       </Container>
       <Footer />
     </Container>

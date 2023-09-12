@@ -12,7 +12,7 @@ type PayerListForSplitBillProps = {
 
 const PayerListForSplitBill = ({ payerList, totalQuantity, updateValue }: PayerListForSplitBillProps): JSX.Element => {
   const { t } = useTranslation();
-  const [payersWithQuantity, setPayersWithQuantity] = useState<PayersWithQuantity[]>(payerList);
+  const [payersWithQuantity, PayerListWithQuantity] = useState<PayersWithQuantity[]>(payerList);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const PayerListForSplitBill = ({ payerList, totalQuantity, updateValue }: PayerL
     const checkedPayers = payersWithQuantity.filter((payer) => payer.isChecked);
     const quantityPerPayer = checkedPayers.length ? Math.round((totalQuantity / checkedPayers.length) * 100) / 100 : 0;
 
-    setPayersWithQuantity(
+    PayerListWithQuantity(
       payersWithQuantity.map((payer) => {
         if (payer.isChecked) {
           return { ...payer, quantity: quantityPerPayer };
@@ -48,7 +48,7 @@ const PayerListForSplitBill = ({ payerList, totalQuantity, updateValue }: PayerL
     const checkedPayers = updatedPayers.filter((payer) => payer.isChecked);
     const quantityPerPayer = checkedPayers.length ? Math.round((totalQuantity / checkedPayers.length) * 100) / 100 : 0;
 
-    setPayersWithQuantity(
+    PayerListWithQuantity(
       updatedPayers.map((payer) => {
         if (payer.isChecked) {
           return { ...payer, quantity: quantityPerPayer };
@@ -61,7 +61,7 @@ const PayerListForSplitBill = ({ payerList, totalQuantity, updateValue }: PayerL
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, payerId: string) => {
     const newQuantity = Number(event.target.value);
 
-    setPayersWithQuantity(
+    PayerListWithQuantity(
       payersWithQuantity.map((payer) => (payer.id === payerId ? { ...payer, quantity: newQuantity } : payer)),
     );
   };

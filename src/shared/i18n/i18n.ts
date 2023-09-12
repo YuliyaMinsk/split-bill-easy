@@ -17,6 +17,7 @@ const resources = {
 
       // payers
       'Name': 'Name',
+      'New name': 'New name',
       'Enter a new name': 'Enter a new name',
 
       // items
@@ -47,6 +48,7 @@ const resources = {
 
       // payers
       'Name': 'Имя',
+      'New name': 'Новое имя',
       'Enter a new name': 'Введите новое имя',
 
       // items

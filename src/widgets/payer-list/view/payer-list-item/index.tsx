@@ -6,22 +6,13 @@ import { Payer } from '@shared/types';
 type PayerListItemProps = {
   payer: Payer;
   ActionComponent: JSX.Element;
-  onNewPayerChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onPayerChange?: (id: string, newValue: string) => void;
 };
 
-const PayerListItem = ({
-  payer,
-  ActionComponent,
-  onNewPayerChange,
-  onPayerChange,
-}: PayerListItemProps): JSX.Element => {
+const PayerListItem = ({ payer, ActionComponent, onPayerChange }: PayerListItemProps): JSX.Element => {
   const { t } = useTranslation();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onNewPayerChange) {
-      onNewPayerChange(event);
-    }
     if (onPayerChange) {
       onPayerChange(payer.id, event.target.value);
     }
@@ -34,7 +25,6 @@ const PayerListItem = ({
         fullWidth
         sx={{ mr: 1 }}
         label={t('Name') || ''}
-        placeholder={t('Enter a new name') || ''}
         value={payer.name}
         onChange={handleInputChange}
       />
