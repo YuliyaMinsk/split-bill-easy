@@ -1,5 +1,5 @@
-import { Container, List, ListItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Container, List, ListItem } from '@mui/material';
 
 import { Header } from '@shared/ui/header';
 import { Footer } from '@shared/ui/footer';

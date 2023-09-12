@@ -10,7 +10,7 @@ import { RoutesApp } from './routes-app.tsx';
 import '../shared/i18n/i18n.ts';
 import '../shared/styles/index.css';
 
-// add this to prompt for a refresh
+// Prompt for a refresh
 const updateSW = registerSW({
   onNeedRefresh() {
     if (confirm('New content available. Reload?')) {
