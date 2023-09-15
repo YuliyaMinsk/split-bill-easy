@@ -15,31 +15,6 @@ const PayerListForSplitBill = ({ payerList, totalQuantity, updateValue }: PayerL
   const [payersWithQuantity, PayerListWithQuantity] = useState<PayersWithQuantity[]>(payerList);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    const totalQuantityEntered = payersWithQuantity.reduce((sum, payer) => sum + payer.quantity, 0);
-
-    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.015 && totalQuantity > 0) {
-      setError(t('Error: Incorrect amount') as string);
-    } else {
-      setError('');
-      updateValue(payersWithQuantity);
-    }
-  }, [payersWithQuantity]);
-
-  useEffect(() => {
-    const checkedPayers = payersWithQuantity.filter((payer) => payer.isChecked);
-    const quantityPerPayer = checkedPayers.length ? Math.round((totalQuantity / checkedPayers.length) * 100) / 100 : 0;
-
-    PayerListWithQuantity(
-      payersWithQuantity.map((payer) => {
-        if (payer.isChecked) {
-          return { ...payer, quantity: quantityPerPayer };
-        }
-        return { ...payer, quantity: 0 };
-      }),
-    );
-  }, [totalQuantity]);
-
   const handleCheckChange = (payerId: string) => {
     const updatedPayers = payersWithQuantity.map((payer) =>
       payer.id === payerId ? { ...payer, isChecked: !payer.isChecked } : payer,
@@ -65,6 +40,31 @@ const PayerListForSplitBill = ({ payerList, totalQuantity, updateValue }: PayerL
       payersWithQuantity.map((payer) => (payer.id === payerId ? { ...payer, quantity: newQuantity } : payer)),
     );
   };
+
+  useEffect(() => {
+    const totalQuantityEntered = payersWithQuantity.reduce((sum, payer) => sum + payer.quantity, 0);
+
+    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.015 && totalQuantity > 0) {
+      setError(t('Error: Incorrect amount') as string);
+    } else {
+      setError('');
+      updateValue(payersWithQuantity);
+    }
+  }, [payersWithQuantity]);
+
+  useEffect(() => {
+    const checkedPayers = payersWithQuantity.filter((payer) => payer.isChecked);
+    const quantityPerPayer = checkedPayers.length ? Math.round((totalQuantity / checkedPayers.length) * 100) / 100 : 0;
+
+    PayerListWithQuantity(
+      payersWithQuantity.map((payer) => {
+        if (payer.isChecked) {
+          return { ...payer, quantity: quantityPerPayer };
+        }
+        return { ...payer, quantity: 0 };
+      }),
+    );
+  }, [totalQuantity]);
 
   return (
     <>

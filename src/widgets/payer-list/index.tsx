@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { List } from '@mui/material';
+import { Box, List } from '@mui/material';
 
 import { AddPayer } from '@/features/add-payer';
 import { RemovePayer } from '@/features/remove-payer';
@@ -42,7 +42,7 @@ const PayerList = (): JSX.Element => {
   };
 
   return (
-    <>
+    <Box sx={{ mt: '1rem', mb: '6rem' }}>
       <List>
         {payerList.map((payer) => (
           <PayerListItem
@@ -60,7 +60,7 @@ const PayerList = (): JSX.Element => {
         handleAdd={handleAdd}
         ActionComponent={<AddPayer onAdd={handleAdd} />}
       />
-    </>
+    </Box>
   );
 };
 

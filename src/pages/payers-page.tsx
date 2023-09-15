@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { PayerList } from '@/widgets/payer-list';
@@ -12,9 +12,7 @@ function PayersPage() {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={t('Payers')} />
-      <Box sx={{ mt: '1rem', mb: '6rem' }}>
-        <PayerList />
-      </Box>
+      <PayerList />
       <Footer />
     </Container>
   );

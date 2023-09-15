@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 import { DishNew } from '@/entities/dish/dish-new';
 import { PayerListForSplitBill } from '@/entities/payer/payer-list-for-split-bill';
@@ -12,8 +12,9 @@ import { addBillLine } from '@/shared/store/bill/bill-slice';
 
 const AddPointBill = (): JSX.Element => {
   const { t } = useTranslation();
-  const payerList = useSelector((state: RootState) => state.payer);
   const dispatch = useDispatch();
+
+  const payerList = useSelector((state: RootState) => state.payer);
 
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [billLine, setBillLine] = useState<BillLine>({
@@ -29,10 +30,6 @@ const AddPointBill = (): JSX.Element => {
     });
   };
 
-  useEffect(() => {
-    setTotalQuantity(billLine.dish.quantity);
-  }, [billLine.dish.quantity]);
-
   const handleUpdatePayerList = useCallback((payersWithQuantity: PayersWithQuantity[]) => {
     setBillLine((prevBillLine) => ({
       ...prevBillLine,
@@ -47,10 +44,14 @@ const AddPointBill = (): JSX.Element => {
     }));
   }, []);
 
-  console.log('billLine:', billLine);
+  useEffect(() => {
+    setTotalQuantity(billLine.dish.quantity);
+  }, [billLine.dish.quantity]);
+
+  //console.log('billLine:', billLine);
 
   return (
-    <Container>
+    <Box sx={{ mt: '1rem', ml: 0, mr: 0, mb: '6rem' }}>
       <DishNew onQuantityChange={setTotalQuantity} dish={billLine.dish} updateValue={handleUpdateDish} />
       <Typography variant="h6" component="h2" sx={{ ml: 2, mt: 2 }} gutterBottom>
         {t('Payers')}
@@ -65,7 +66,7 @@ const AddPointBill = (): JSX.Element => {
           {t('Save')}
         </Button>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

@@ -4,6 +4,8 @@ import { List, ListItem, TextField } from '@mui/material';
 
 import { Dish } from '@/shared/types';
 
+import { handleKeyDown } from './utils/handle-key-down';
+
 type DishNewProps = {
   dish: Dish;
   onQuantityChange: (quantity: number) => void;
@@ -14,57 +16,57 @@ const DishNew = ({ dish, onQuantityChange, updateValue }: DishNewProps): JSX.Ele
   const { t } = useTranslation();
   const [newDish, setNewDish] = useState(dish);
 
-  useEffect(() => {
-    updateValue(newDish);
-  }, [newDish, updateValue]);
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newName = event.target.value;
+  const saveName = (newName: string) => {
     setNewDish({ ...dish, name: newName });
   };
 
-  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newPrice = Number(event.target.value);
+  const savePrice = (newPrice: number) => {
     setNewDish({ ...dish, price: newPrice });
   };
 
-  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = Number(event.target.value);
+  const saveQuantity = (newQuantity: number) => {
     onQuantityChange(newQuantity);
     setNewDish({ ...dish, quantity: newQuantity });
   };
+
+  useEffect(() => {
+    updateValue(newDish);
+  }, [newDish, updateValue]);
 
   return (
     <List>
       <ListItem>
         <TextField
-          id="outlined-basic"
+          id="item-name"
           fullWidth
           sx={{ mr: 1 }}
           label={t('Item') || ''}
           placeholder={t('Enter an item') || ''}
-          onChange={handleNameChange}
+          onBlur={(e) => saveName(e.target.value)}
+          onKeyDown={(e) => handleKeyDown(e, saveName)}
         />
       </ListItem>
       <ListItem>
         <TextField
-          id="outlined-basic"
+          id="item-cost"
           fullWidth
           sx={{ mr: 1 }}
           label={t('Item cost') || ''}
           placeholder={t('Enter an item cost') || ''}
-          onChange={handlePriceChange}
+          onBlur={(e) => savePrice(parseFloat(e.target.value))}
+          onKeyDown={(e) => handleKeyDown(e, savePrice)}
         />
       </ListItem>
       <ListItem>
         <TextField
-          id="outlined-basic"
+          id="item-quantity"
           type="number"
           fullWidth
           sx={{ mr: 1 }}
           label={t('Quantity') || ''}
           placeholder={t('Enter a quantity') || ''}
-          onChange={handleQuantityChange}
+          onBlur={(e) => saveQuantity(parseInt(e.target.value, 10))}
+          onKeyDown={(e) => handleKeyDown(e, saveQuantity)}
         />
       </ListItem>
     </List>
