@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -25,22 +24,19 @@ type DishProps = {
 
 const Dish = ({ dish }: DishProps): JSX.Element => {
   const { t } = useTranslation();
-  const [expanded, setExpanded] = useState<string | false>(false);
 
-  const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false);
-  };
-
+  const { payers } = dish;
   const individualPrice = dish.dish.price / dish.dish.quantity;
 
   return (
-    <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
+    <Accordion>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
         <Typography sx={{ width: '40%', flexShrink: 0 }}>{dish.dish.name}</Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {dish.dish.quantity} -&gt; {dish.dish.price}
+          {dish.dish.quantity} → {dish.dish.price}
         </Typography>
       </AccordionSummary>
+
       <AccordionDetails>
         <TableContainer
           sx={{
@@ -52,7 +48,7 @@ const Dish = ({ dish }: DishProps): JSX.Element => {
         >
           <Table sx={{ minWidth: '100%' }} size="small">
             <TableBody>
-              {dish.payers.map(
+              {payers.map(
                 (payer) =>
                   payer.isChecked && (
                     <TableRow key={payer.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -70,6 +66,7 @@ const Dish = ({ dish }: DishProps): JSX.Element => {
               )}
             </TableBody>
           </Table>
+
           <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
             <Button size="small" variant="text" sx={{ mr: 1 }}>
               {t('Edit')}
