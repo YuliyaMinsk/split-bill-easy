@@ -5,4 +5,9 @@ type Dish = {
   quantity: number;
 };
 
-export type { Dish };
+type DishFieldUpdate = {
+  field: keyof Dish;
+  value: string;
+};
+
+export type { Dish, DishFieldUpdate };

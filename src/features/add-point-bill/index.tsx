@@ -44,13 +44,15 @@ const AddPointBill = (): JSX.Element => {
     }));
   }, []);
 
+  const recalculateQuantity = useCallback(
+    (quantity: number) =>
+      setBillLine((prevBillLine) => ({ ...prevBillLine, dish: { ...prevBillLine.dish, quantity } })),
+    [],
+  );
+
   return (
     <Box sx={{ mt: '1rem', ml: 0, mr: 0, mb: '6rem' }}>
-      <DishNew
-        onQuantityChange={(quantity) => setBillLine((prev) => ({ ...prev, dish: { ...prev.dish, quantity } }))}
-        dish={billLine.dish}
-        updateValue={handleUpdateDish}
-      />
+      <DishNew onQuantityChange={recalculateQuantity} dish={billLine.dish} updateValue={handleUpdateDish} />
       <Typography variant="h6" component="h2" sx={{ ml: 2, mt: 2 }} gutterBottom>
         {t('Payers')}
       </Typography>
