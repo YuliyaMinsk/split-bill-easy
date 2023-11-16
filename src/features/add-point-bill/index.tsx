@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, Button, Typography } from '@mui/material';
 
 import { DishNew } from '@/entities/dish/dish-new';
-import { PayerListForSplitBill } from '@/entities/payer/payer-list-for-split-bill';
+import { PayersForBill } from '@/entities/payer/payer-for-bill';
 
 import { RootState } from '@/shared/store';
 import { BillLine, Dish, PayersWithQuantity } from '@/shared/types';
@@ -16,18 +16,17 @@ const AddPointBill = (): JSX.Element => {
 
   const payerList = useSelector((state: RootState) => state.payer);
 
-  const [totalQuantity, setTotalQuantity] = useState(0);
-  const [billLine, setBillLine] = useState<BillLine>({
+  const blankBillLine = {
     dish: { id: '', name: '', price: 0, quantity: 0 },
     payers: payerList.map((payer) => ({ ...payer, isChecked: false, quantity: 0 })),
-  });
+  };
+
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [billLine, setBillLine] = useState<BillLine>(blankBillLine);
 
   const handleSave = () => {
     dispatch(addBillLine(billLine));
-    setBillLine({
-      dish: { id: '', name: '', price: 0, quantity: 0 },
-      payers: [],
-    });
+    setBillLine(blankBillLine);
   };
 
   const handleUpdatePayerList = useCallback((payersWithQuantity: PayersWithQuantity[]) => {
@@ -48,16 +47,14 @@ const AddPointBill = (): JSX.Element => {
     setTotalQuantity(billLine.dish.quantity);
   }, [billLine.dish.quantity]);
 
-  //console.log('billLine:', billLine);
-
   return (
     <Box sx={{ mt: '1rem', ml: 0, mr: 0, mb: '6rem' }}>
       <DishNew onQuantityChange={setTotalQuantity} dish={billLine.dish} updateValue={handleUpdateDish} />
       <Typography variant="h6" component="h2" sx={{ ml: 2, mt: 2 }} gutterBottom>
         {t('Payers')}
       </Typography>
-      <PayerListForSplitBill
-        payerList={billLine.payers}
+      <PayersForBill
+        payerListWithQuantity={billLine.payers}
         totalQuantity={totalQuantity}
         updateValue={handleUpdatePayerList}
       />

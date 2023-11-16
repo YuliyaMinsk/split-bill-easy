@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import { AddPointBill } from '@/features/add-point-bill-item';
+import { AddPointBill } from '@/features/add-point-bill';
 
 import { DishList } from '@/entities/dish/dish-list';
 

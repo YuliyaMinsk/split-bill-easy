@@ -19,21 +19,22 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { BillLine } from '@/shared/types';
 
 type DishProps = {
-  dish: BillLine;
+  bill: BillLine;
 };
 
-const Dish = ({ dish }: DishProps): JSX.Element => {
+const Dish = ({ bill }: DishProps): JSX.Element => {
   const { t } = useTranslation();
 
-  const { payers } = dish;
-  const individualPrice = dish.dish.price / dish.dish.quantity;
+  const { dish } = bill;
+  const { payers } = bill;
+  const individualPrice = dish.price / dish.quantity;
 
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
-        <Typography sx={{ width: '40%', flexShrink: 0 }}>{dish.dish.name}</Typography>
+        <Typography sx={{ width: '40%', flexShrink: 0 }}>{dish.name}</Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {dish.dish.quantity} → {dish.dish.price}
+          {dish.quantity} → {dish.price}
         </Typography>
       </AccordionSummary>
 

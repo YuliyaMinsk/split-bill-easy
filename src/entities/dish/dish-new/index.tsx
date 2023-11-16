@@ -25,7 +25,9 @@ const DishNew = ({ dish, onQuantityChange, updateValue }: DishNewProps): JSX.Ele
   };
 
   const saveQuantity = (newQuantity: number) => {
-    onQuantityChange(newQuantity);
+    if (newQuantity > 0) {
+      onQuantityChange(newQuantity);
+    }
     setNewDish({ ...dish, quantity: newQuantity });
   };
 
