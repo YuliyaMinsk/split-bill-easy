@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, Typography } from '@mui/material';
@@ -13,21 +13,22 @@ import { addBillLine } from '@/shared/store/bill/bill-slice';
 const AddPointBill = (): JSX.Element => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
   const payerList = useSelector((state: RootState) => state.payer);
 
-  const blankBillLine = {
-    dish: { id: '', name: '', price: 0, quantity: 0 },
-    payers: payerList.map((payer) => ({ ...payer, isChecked: false, quantity: 0 })),
-  };
+  const blankBillLine = useMemo(
+    () => ({
+      dish: { id: '', name: '', price: 0, quantity: 0 },
+      payers: payerList.map((payer) => ({ ...payer, isChecked: false, quantity: 0 })),
+    }),
+    [payerList],
+  );
 
-  const [totalQuantity, setTotalQuantity] = useState(0);
   const [billLine, setBillLine] = useState<BillLine>(blankBillLine);
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     dispatch(addBillLine(billLine));
     setBillLine(blankBillLine);
-  };
+  }, [dispatch, billLine, blankBillLine]);
 
   const handleUpdatePayerList = useCallback((payersWithQuantity: PayersWithQuantity[]) => {
     setBillLine((prevBillLine) => ({
@@ -43,19 +44,19 @@ const AddPointBill = (): JSX.Element => {
     }));
   }, []);
 
-  useEffect(() => {
-    setTotalQuantity(billLine.dish.quantity);
-  }, [billLine.dish.quantity]);
-
   return (
     <Box sx={{ mt: '1rem', ml: 0, mr: 0, mb: '6rem' }}>
-      <DishNew onQuantityChange={setTotalQuantity} dish={billLine.dish} updateValue={handleUpdateDish} />
+      <DishNew
+        onQuantityChange={(quantity) => setBillLine((prev) => ({ ...prev, dish: { ...prev.dish, quantity } }))}
+        dish={billLine.dish}
+        updateValue={handleUpdateDish}
+      />
       <Typography variant="h6" component="h2" sx={{ ml: 2, mt: 2 }} gutterBottom>
         {t('Payers')}
       </Typography>
       <PayersForBill
         payerListWithQuantity={billLine.payers}
-        totalQuantity={totalQuantity}
+        totalQuantity={billLine.dish.quantity}
         updateValue={handleUpdatePayerList}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
