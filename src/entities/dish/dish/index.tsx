@@ -16,7 +16,35 @@ import {
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { BillLine } from '@/shared/types';
+import { BillLine, PayersWithQuantity } from '@/shared/types';
+
+const calculateIndividualPrices = (price: number, quantity: number, payers: PayersWithQuantity[]): number[] => {
+  const totalCost = price * quantity;
+
+  const totalPaidPortions = payers.reduce((total, payer) => (payer.isChecked ? total + payer.quantity : total), 0);
+
+  if (totalPaidPortions === 0) {
+    return payers.map(() => 0);
+  }
+
+  const basePricePerPortion = Math.floor(totalCost / totalPaidPortions);
+  let remainder = totalCost - basePricePerPortion * totalPaidPortions;
+
+  return payers.map((payer) => {
+    if (payer.isChecked && payer.quantity > 0) {
+      let individualCost = basePricePerPortion * payer.quantity;
+      if (remainder > 0 && remainder >= payer.quantity) {
+        individualCost += payer.quantity;
+        remainder -= payer.quantity;
+      } else if (remainder > 0) {
+        individualCost += remainder;
+        remainder = 0;
+      }
+      return Math.ceil(individualCost);
+    }
+    return 0;
+  });
+};
 
 type DishProps = {
   bill: BillLine;
@@ -25,9 +53,11 @@ type DishProps = {
 const Dish = ({ bill }: DishProps): JSX.Element => {
   const { t } = useTranslation();
 
-  const { dish } = bill;
-  const { payers } = bill;
-  const individualPrice = dish.price / dish.quantity;
+  const { dish, payers } = bill;
+  const individualPrices = calculateIndividualPrices(dish.price, dish.quantity, payers);
+
+  console.log('😇 bill', bill);
+  console.log('😇 individualPrices', individualPrices);
 
   return (
     <Accordion>
@@ -50,18 +80,18 @@ const Dish = ({ bill }: DishProps): JSX.Element => {
           <Table sx={{ minWidth: '100%' }} size="small">
             <TableBody>
               {payers.map(
-                (payer) =>
+                (payer, index) =>
                   payer.isChecked && (
-                    <TableRow key={payer.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    <TableRow key={payer.id}>
                       <TableCell component="th" scope="row">
                         {payer.name}
                       </TableCell>
                       <TableCell align="right">----</TableCell>
                       <TableCell align="right">
-                        {payer.quantity} х {individualPrice} тнг
+                        {payer.quantity} х {dish.price} тнг
                       </TableCell>
                       <TableCell align="right">----</TableCell>
-                      <TableCell align="right">{payer.quantity * individualPrice} тнг</TableCell>
+                      <TableCell align="right">{individualPrices[index]} тнг</TableCell>
                     </TableRow>
                   ),
               )}
