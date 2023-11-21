@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { List, ListItem, TextField } from '@mui/material';
 
@@ -17,15 +17,25 @@ const DishNew = ({ dish, onQuantityChange, updateValue }: DishNewProps): JSX.Ele
   const [newDish, setNewDish] = useState(dish);
 
   useEffect(() => {
-    setNewDish(dish);
-  }, [dish]);
+    if (newDish.quantity !== dish.quantity) {
+      setNewDish(dish);
+    }
+  }, [dish, newDish.quantity]);
 
   const handleInputChange = ({ field, value }: DishFieldUpdate) => {
-    const updatedValue = field === 'quantity' ? parseInt(value, 10) : value;
-    const updatedDish = { ...newDish, [field]: updatedValue };
-    setNewDish(updatedDish);
     if (field === 'quantity') {
-      onQuantityChange(parseInt(value, 10));
+      if (value === '') {
+        setNewDish({ ...newDish, [field]: 0 });
+        onQuantityChange(0);
+      } else {
+        const parsedValue = parseInt(value, 10);
+        if (!isNaN(parsedValue)) {
+          setNewDish({ ...newDish, [field]: parsedValue });
+          onQuantityChange(parsedValue);
+        }
+      }
+    } else {
+      setNewDish({ ...newDish, [field]: value });
     }
   };
 
@@ -62,7 +72,6 @@ const DishNew = ({ dish, onQuantityChange, updateValue }: DishNewProps): JSX.Ele
       <ListItem>
         <TextField
           id="item-quantity"
-          name="quantity"
           type="number"
           fullWidth
           label={t('Quantity') || ''}
@@ -76,4 +85,5 @@ const DishNew = ({ dish, onQuantityChange, updateValue }: DishNewProps): JSX.Ele
   );
 };
 
-export { DishNew };
+const MemoizedDishNew: React.FC<DishNewProps> = memo(DishNew);
+export { MemoizedDishNew as DishNew };

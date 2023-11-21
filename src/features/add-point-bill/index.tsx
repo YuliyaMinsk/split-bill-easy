@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, Typography } from '@mui/material';
@@ -15,7 +15,7 @@ const AddPointBill = (): JSX.Element => {
   const dispatch = useDispatch();
   const payerList = useSelector((state: RootState) => state.payer);
 
-  const blankBillLine = useMemo(
+  const blankBillLine = useCallback(
     () => ({
       dish: { id: '', name: '', price: 0, quantity: 0 },
       payers: payerList.map((payer) => ({ ...payer, isChecked: false, quantity: 0 })),
@@ -44,11 +44,9 @@ const AddPointBill = (): JSX.Element => {
     }));
   }, []);
 
-  const recalculateQuantity = useCallback(
-    (quantity: number) =>
-      setBillLine((prevBillLine) => ({ ...prevBillLine, dish: { ...prevBillLine.dish, quantity } })),
-    [],
-  );
+  const recalculateQuantity = useCallback((quantity: number) => {
+    setBillLine((prevBillLine) => ({ ...prevBillLine, dish: { ...prevBillLine.dish, quantity } }));
+  }, []);
 
   return (
     <Box sx={{ mt: '1rem', ml: 0, mr: 0, mb: '6rem' }}>
@@ -58,7 +56,7 @@ const AddPointBill = (): JSX.Element => {
       </Typography>
       <PayersForBill
         payerListWithQuantity={billLine.payers}
-        totalQuantity={billLine.dish.quantity}
+        totalQuantity={billLine.dish.quantity || 0}
         updateValue={handleUpdatePayerList}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>

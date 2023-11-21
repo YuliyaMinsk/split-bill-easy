@@ -53,7 +53,7 @@ const Dish = ({ bill }: DishProps): JSX.Element => {
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
         <Typography sx={{ width: '40%', flexShrink: 0 }}>{name}</Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {quantity} → {price} {!!overpayment && ' + ' + overpayment} тнг
+          {quantity} → {price} {!!overpayment && ' + ' + overpayment} ₸
         </Typography>
       </AccordionSummary>
 
@@ -77,10 +77,10 @@ const Dish = ({ bill }: DishProps): JSX.Element => {
                       </TableCell>
                       <TableCell align="right">----</TableCell>
                       <TableCell align="right">
-                        {payer.quantity} х {price} тнг
+                        {payer.quantity} х {price} ₸
                       </TableCell>
                       <TableCell align="right">----</TableCell>
-                      <TableCell align="right">{individualPrices[index]} тнг</TableCell>
+                      <TableCell align="right">{individualPrices[index]} ₸</TableCell>
                     </TableRow>
                   ),
               )}

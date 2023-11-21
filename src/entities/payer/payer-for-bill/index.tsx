@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Checkbox, List, ListItem, ListItemIcon, ListItemText, TextField, Typography } from '@mui/material';
 
@@ -91,4 +91,5 @@ const PayersForBill = ({ payerListWithQuantity, totalQuantity, updateValue }: Pa
   );
 };
 
-export { PayersForBill };
+const MemoizedPayersForBill: React.FC<PayersForBillProps> = memo(PayersForBill);
+export { MemoizedPayersForBill as PayersForBill };
