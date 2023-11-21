@@ -18,28 +18,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { BillLine, PayersWithQuantity } from '@/shared/types';
 
+// TODO: move functions to utils
 const calculateIndividualPrices = (price: number, quantity: number, payers: PayersWithQuantity[]): number[] => {
   const totalCost = price * quantity;
-
   const totalPaidPortions = payers.reduce((total, payer) => (payer.isChecked ? total + payer.quantity : total), 0);
-
-  if (totalPaidPortions === 0) {
-    return payers.map(() => 0);
-  }
-
-  const basePricePerPortion = Math.floor(totalCost / totalPaidPortions);
-  let remainder = totalCost - basePricePerPortion * totalPaidPortions;
 
   return payers.map((payer) => {
     if (payer.isChecked && payer.quantity > 0) {
-      let individualCost = basePricePerPortion * payer.quantity;
-      if (remainder > 0 && remainder >= payer.quantity) {
-        individualCost += payer.quantity;
-        remainder -= payer.quantity;
-      } else if (remainder > 0) {
-        individualCost += remainder;
-        remainder = 0;
-      }
+      const share = payer.quantity / totalPaidPortions;
+      const individualCost = totalCost * share;
       return Math.ceil(individualCost);
     }
     return 0;
@@ -54,17 +41,19 @@ const Dish = ({ bill }: DishProps): JSX.Element => {
   const { t } = useTranslation();
 
   const { dish, payers } = bill;
-  const individualPrices = calculateIndividualPrices(dish.price, dish.quantity, payers);
+  const { name, price, quantity } = dish;
 
-  console.log('😇 bill', bill);
-  console.log('😇 individualPrices', individualPrices);
+  const individualPrices = calculateIndividualPrices(price, quantity, payers);
+  const totalPaid = individualPrices.reduce((sum, price) => sum + price, 0);
+  const totalCost = price * quantity;
+  const overpayment = totalPaid - totalCost;
 
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
-        <Typography sx={{ width: '40%', flexShrink: 0 }}>{dish.name}</Typography>
+        <Typography sx={{ width: '40%', flexShrink: 0 }}>{name}</Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {dish.quantity} → {dish.price}
+          {quantity} → {price} {!!overpayment && ' + ' + overpayment} тнг
         </Typography>
       </AccordionSummary>
 
@@ -88,7 +77,7 @@ const Dish = ({ bill }: DishProps): JSX.Element => {
                       </TableCell>
                       <TableCell align="right">----</TableCell>
                       <TableCell align="right">
-                        {payer.quantity} х {dish.price} тнг
+                        {payer.quantity} х {price} тнг
                       </TableCell>
                       <TableCell align="right">----</TableCell>
                       <TableCell align="right">{individualPrices[index]} тнг</TableCell>
