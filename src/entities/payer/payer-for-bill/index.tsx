@@ -4,14 +4,7 @@ import { Checkbox, List, ListItem, ListItemIcon, ListItemText, TextField, Typogr
 
 import { PayersWithQuantity } from '@/shared/types';
 
-// TODO: move functions to utils
-const filterPayers = (payerListWithQuantity: PayersWithQuantity[]): PayersWithQuantity[] =>
-  payerListWithQuantity.filter((payer) => payer.isChecked);
-
-const countQuantityPerPayer = (payerListWithQuantity: PayersWithQuantity[], totalQuantity: number): number => {
-  const checkedPayers = filterPayers(payerListWithQuantity);
-  return checkedPayers.length ? Math.round((totalQuantity / checkedPayers.length) * 100) / 100 : 0;
-};
+import { countQuantity } from '../utils';
 
 type PayersForBillProps = {
   payerListWithQuantity: PayersWithQuantity[];
@@ -29,7 +22,7 @@ const PayersForBill = ({ payerListWithQuantity, totalQuantity, updateValue }: Pa
       payer.id === payerId ? { ...payer, isChecked: !payer.isChecked } : payer,
     );
 
-    const quantityPerPayer = countQuantityPerPayer(updatedPayers, totalQuantity);
+    const quantityPerPayer = countQuantity(updatedPayers, totalQuantity);
     const finalPayers = updatedPayers.map((payer) => {
       return payer.isChecked ? { ...payer, quantity: quantityPerPayer } : { ...payer, quantity: 0 };
     });
