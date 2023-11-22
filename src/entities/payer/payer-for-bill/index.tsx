@@ -10,9 +10,17 @@ type PayersForBillProps = {
   payerListWithQuantity: PayersWithQuantity[];
   totalQuantity: number;
   updateValue: (payersWithQuantity: PayersWithQuantity[]) => void;
+  validatePayers: (payersWithQuantity: PayersWithQuantity[]) => void;
+  isDefault?: boolean;
 };
 
-const PayersForBill = ({ payerListWithQuantity, totalQuantity, updateValue }: PayersForBillProps): JSX.Element => {
+const PayersForBill = ({
+  payerListWithQuantity,
+  totalQuantity,
+  updateValue,
+  validatePayers,
+  isDefault = false,
+}: PayersForBillProps): JSX.Element => {
   const { t } = useTranslation();
   const [payersWithQuantity, setPayersWithQuantity] = useState<PayersWithQuantity[]>(payerListWithQuantity);
   const [error, setError] = useState('');
@@ -42,13 +50,21 @@ const PayersForBill = ({ payerListWithQuantity, totalQuantity, updateValue }: Pa
   useEffect(() => {
     const totalQuantityEntered = payersWithQuantity.reduce((sum, payer) => sum + payer.quantity, 0);
 
-    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.015 && totalQuantity > 0) {
+    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.014 && totalQuantity > 0) {
       setError(t('Error: Incorrect amount') as string);
     } else {
       setError('');
       updateValue(payersWithQuantity);
     }
-  }, [payersWithQuantity, t, totalQuantity, updateValue]);
+
+    validatePayers(payersWithQuantity);
+  }, [payersWithQuantity, t, totalQuantity, updateValue, validatePayers]);
+
+  useEffect(() => {
+    if (isDefault) {
+      setPayersWithQuantity(payerListWithQuantity);
+    }
+  }, [isDefault, payerListWithQuantity]);
 
   return (
     <>
@@ -56,7 +72,7 @@ const PayersForBill = ({ payerListWithQuantity, totalQuantity, updateValue }: Pa
         {payersWithQuantity.map((payer) => (
           <ListItem key={payer.id} sx={{ display: 'flex' }}>
             <ListItemIcon>
-              <Checkbox onChange={() => handleCheckChange(payer.id)} value={payer.isChecked} />
+              <Checkbox onChange={() => handleCheckChange(payer.id)} checked={payer.isChecked} />
             </ListItemIcon>
             <ListItemText primary={payer.name} />
             <TextField

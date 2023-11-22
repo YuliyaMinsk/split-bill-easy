@@ -34,6 +34,9 @@ const resources = {
 
       // error messages
       'Error: Incorrect amount': 'Error: Incorrect amount',
+      'Item is required': 'Item is required',
+      'Price is required': 'Price is required',
+      'Quantity is required': 'Quantity is required',
     },
   },
   rus: {
@@ -65,6 +68,9 @@ const resources = {
 
       // error messages
       'Error: Incorrect amount': 'Ошибка: Некорректная сумма',
+      'Item is required': 'Необходимо ввести название позиции',
+      'Price is required': 'Нужно указать цену',
+      'Quantity is required': 'Нужно указать количество',
     },
   },
 };
