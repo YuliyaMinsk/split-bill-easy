@@ -25,17 +25,19 @@ const PayersForBill = ({
   const [payersWithQuantity, setPayersWithQuantity] = useState<PayersWithQuantity[]>(payerListWithQuantity);
   const [error, setError] = useState('');
 
+  const updatePayersWithQuantity = (currentPayers: PayersWithQuantity[], quantity: number) => {
+    const quantityPerPayer = countQuantity(currentPayers, quantity);
+    return currentPayers.map((payer) => {
+      return payer.isChecked ? { ...payer, quantity: quantityPerPayer } : { ...payer, quantity: 0 };
+    });
+  };
+
   const handleCheckChange = (payerId: string) => {
     const updatedPayers = payersWithQuantity.map((payer) =>
       payer.id === payerId ? { ...payer, isChecked: !payer.isChecked } : payer,
     );
 
-    const quantityPerPayer = countQuantity(updatedPayers, totalQuantity);
-    const finalPayers = updatedPayers.map((payer) => {
-      return payer.isChecked ? { ...payer, quantity: quantityPerPayer } : { ...payer, quantity: 0 };
-    });
-
-    setPayersWithQuantity(finalPayers);
+    setPayersWithQuantity(updatePayersWithQuantity(updatedPayers, totalQuantity));
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<EventTarget>, payerId: string) => {
@@ -59,6 +61,12 @@ const PayersForBill = ({
 
     validatePayers(payersWithQuantity);
   }, [payersWithQuantity, t, totalQuantity, updateValue, validatePayers]);
+
+  useEffect(() => {
+    if (totalQuantity > 0) {
+      setPayersWithQuantity((currentPayers) => updatePayersWithQuantity(currentPayers, totalQuantity));
+    }
+  }, [totalQuantity]);
 
   useEffect(() => {
     if (isDefault) {
