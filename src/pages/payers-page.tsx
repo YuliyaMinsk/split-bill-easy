@@ -1,10 +1,9 @@
 import { Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import { PayerList } from '@/widgets/payer-list';
+import { PayerList } from '@/entities/payer/payer-list';
 
-import { Header } from '@shared/ui/header';
-import { Footer } from '@shared/ui/footer';
+import { Header, Footer } from '@shared/ui';
 
 function PayersPage() {
   const { t } = useTranslation();

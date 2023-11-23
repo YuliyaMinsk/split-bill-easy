@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Container, List, ListItem } from '@mui/material';
 
-import { Header } from '@shared/ui/header';
-import { Footer } from '@shared/ui/footer';
+import { Header, Footer } from '@shared/ui';
 
 function MainPage() {
   const { t } = useTranslation();

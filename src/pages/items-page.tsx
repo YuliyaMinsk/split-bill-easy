@@ -5,8 +5,7 @@ import { AddPointBill } from '@/features/add-point-bill';
 
 import { DishList } from '@/entities/dish/dish-list';
 
-import { Header } from '@shared/ui/header';
-import { Footer } from '@shared/ui/footer';
+import { Header, Footer } from '@shared/ui';
 
 function ItemsPage() {
   const { t } = useTranslation();
