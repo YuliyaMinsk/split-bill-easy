@@ -1,36 +1,48 @@
-import { ListItem, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { FormControl, ListItem, MenuItem, MenuProps, Select, SelectChangeEvent, Typography } from '@mui/material';
+
+const percentages = Array.from({ length: 21 }, (_, i) => i * 5);
+
+const customMenuProps: Partial<MenuProps> = {
+  PaperProps: {
+    style: {
+      maxHeight: 200,
+      overflow: 'auto',
+    },
+  },
+};
 
 type FieldWithPercentProps = {
   name: string;
-  value: number;
+  value: string;
+  updateValue: (name: string, value: number) => void;
 };
 
-const FieldWithPercent = ({ name, value }: FieldWithPercentProps): JSX.Element => {
+const FieldWithPercent = ({ name, value, updateValue }: FieldWithPercentProps): JSX.Element => {
   const { t } = useTranslation();
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: SelectChangeEvent) => {
     console.log(event.target.value);
+    updateValue(name, Number(event.target.value));
   };
 
   return (
     <ListItem key={name}>
-      <TextField
-        id="outlined-basic"
-        fullWidth
-        sx={{ mr: 1 }}
-        label={t('Name') || ''}
-        value={value}
-        onChange={handleInputChange}
-      />
-      <TextField
-        id="outlined-basic"
-        fullWidth
-        sx={{ mr: 1 }}
-        label={t('Name') || ''}
-        value={value}
-        onChange={handleInputChange}
-      />
+      <Typography
+        variant="body1"
+        sx={{ width: '80%', display: 'inline-block', mr: 1, pb: 1, borderBottom: '1px solid rgba(0, 0, 0, 0.42)' }}
+      >
+        {name}
+      </Typography>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <Select id={`outlined-basic-${name}`} value={value} onChange={handleInputChange} MenuProps={customMenuProps}>
+          {percentages.map((percent) => (
+            <MenuItem key={percent} value={percent.toString()}>
+              {percent}%
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </ListItem>
   );
 };
