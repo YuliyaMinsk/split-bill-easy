@@ -32,7 +32,7 @@ const FieldWithPercent = ({ name, value, updateValue }: FieldWithPercentProps): 
         variant="body1"
         sx={{ width: '80%', display: 'inline-block', mr: 1, pb: 1, borderBottom: '1px solid rgba(0, 0, 0, 0.42)' }}
       >
-        {name}
+        {t(name)}
       </Typography>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <Select id={`outlined-basic-${name}`} value={value} onChange={handleInputChange} MenuProps={customMenuProps}>

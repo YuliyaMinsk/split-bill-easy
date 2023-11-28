@@ -32,6 +32,12 @@ const resources = {
       'Edit': 'Edit',
       'Delete': 'Delete',
 
+      // services
+      'Service Charge': 'Service Charge',
+      'Tips': 'Tips',
+      'Discount': 'Discount',
+      'Tax': 'Tax',
+
       // error messages
       'Error: Incorrect amount': 'Error: Incorrect amount',
       'Item is required': 'Item is required',
@@ -65,6 +71,12 @@ const resources = {
       'Save': 'Сохранить',
       'Edit': 'Редактировать',
       'Delete': 'Удалить',
+
+      // services
+      'Service Charge': 'Сервисный сбор',
+      'Tips': 'Чаевые',
+      'Discount': 'Скидка',
+      'Tax': 'Налог',
 
       // error messages
       'Error: Incorrect amount': 'Ошибка: Некорректная сумма',

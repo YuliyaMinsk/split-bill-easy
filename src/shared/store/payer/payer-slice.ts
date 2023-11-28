@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { Payer } from '@/shared/types';
-import { payersFake } from '@/shared/constants';
+import { PAYERS_FAKE } from '@/shared/constants';
 
-const initialState: Payer[] = payersFake;
+const initialState: Payer[] = PAYERS_FAKE;
 
 const payerSlice = createSlice({
   name: 'payers',

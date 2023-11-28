@@ -2,21 +2,7 @@ import { useState } from 'react';
 import { List } from '@mui/material';
 
 import { FieldWithPercent } from '@/shared/ui';
-
-const SERVICE_NAMES = [
-  {
-    name: 'Service Charge',
-  },
-  {
-    name: 'Tips',
-  },
-  {
-    name: 'Discount',
-  },
-  {
-    name: 'Tax',
-  },
-];
+import { SERVICE_NAMES } from '@/shared/constants';
 
 type Service = {
   name: string;

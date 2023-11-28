@@ -1,4 +1,4 @@
-const payersFake = [
+const PAYERS_FAKE = [
   {
     id: '1',
     name: 'Сергей',
@@ -17,4 +17,4 @@ const payersFake = [
   },
 ];
 
-export { payersFake };
+export { PAYERS_FAKE };
