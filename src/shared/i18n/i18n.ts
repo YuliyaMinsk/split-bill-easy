@@ -31,6 +31,7 @@ const resources = {
       'Save': 'Save',
       'Edit': 'Edit',
       'Delete': 'Delete',
+      'Calculate after extra charges': 'Calculate after extra charges',
 
       // services
       'Service Charge': 'Service Charge',
@@ -71,6 +72,7 @@ const resources = {
       'Save': 'Сохранить',
       'Edit': 'Редактировать',
       'Delete': 'Удалить',
+      'Calculate after extra charges': 'Рассчитать после дополнительных сборов',
 
       // services
       'Service Charge': 'Сервисный сбор',
