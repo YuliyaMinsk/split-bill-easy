@@ -9,7 +9,7 @@ const CopyPaymentSummary = (): JSX.Element => {
   };
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1, mb: 4 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1, ml: 2, mr: 2, mb: 4 }}>
       <Button size="large" variant="contained" sx={{ width: '100%', mr: 1 }} onClick={handleCopy}>
         {t('Copy to clipboard for everyone')}
       </Button>

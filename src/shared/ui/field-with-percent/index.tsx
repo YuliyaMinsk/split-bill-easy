@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormControl, ListItem, MenuItem, MenuProps, Select, SelectChangeEvent, Typography } from '@mui/material';
 
@@ -20,9 +21,11 @@ type FieldWithPercentProps = {
 
 const FieldWithPercent = ({ name, value, updateValue }: FieldWithPercentProps): JSX.Element => {
   const { t } = useTranslation();
+  const [percent, setPercent] = useState(value);
 
   const handleInputChange = (event: SelectChangeEvent) => {
     console.log(event.target.value);
+    setPercent(event.target.value);
     updateValue(name, Number(event.target.value));
   };
 
@@ -35,10 +38,10 @@ const FieldWithPercent = ({ name, value, updateValue }: FieldWithPercentProps): 
         {t(name)}
       </Typography>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <Select id={`outlined-basic-${name}`} value={value} onChange={handleInputChange} MenuProps={customMenuProps}>
-          {percentages.map((percent) => (
-            <MenuItem key={percent} value={percent.toString()}>
-              {percent}%
+        <Select id={`outlined-basic-${name}`} value={percent} onChange={handleInputChange} MenuProps={customMenuProps}>
+          {percentages.map((percentItem) => (
+            <MenuItem key={percentItem} value={percentItem.toString()}>
+              {percentItem}%
             </MenuItem>
           ))}
         </Select>
