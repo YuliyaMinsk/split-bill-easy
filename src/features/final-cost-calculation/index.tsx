@@ -10,7 +10,7 @@ const FinalCostCalculator = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
-      <Button size="large" variant="contained" sx={{ mr: 1 }} onClick={handleCalculate}>
+      <Button size="large" variant="contained" sx={{ width: '100%', mr: 1 }} onClick={handleCalculate}>
         {t('Calculate after extra charges')}
       </Button>
     </Box>

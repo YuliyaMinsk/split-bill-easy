@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ServiceCharge } from '@/features/set-service-charge';
 import { FinalCostCalculator } from '@/features/final-cost-calculation';
+import { CopyPaymentSummary } from '@/features/copy-payment-summary';
 
 import { PayerListForCalculation } from '@/entities/payer/payer-list-for-calculation';
 
@@ -16,6 +17,7 @@ function CalculationsPage() {
       <Header text={t('Calculations')} />
       <ServiceCharge />
       <FinalCostCalculator />
+      <CopyPaymentSummary />
       <PayerListForCalculation />
       <Footer />
     </Container>
