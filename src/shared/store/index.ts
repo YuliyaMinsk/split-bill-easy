@@ -5,7 +5,7 @@ import { billReducer } from './bill/bill-slice';
 
 export const store = configureStore({
   reducer: {
-    payer: payerReducer,
+    payers: payerReducer,
     bill: billReducer,
   },
 });

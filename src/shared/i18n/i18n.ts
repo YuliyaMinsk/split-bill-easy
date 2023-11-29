@@ -33,6 +33,7 @@ const resources = {
       'Delete': 'Delete',
       'Calculate after extra charges': 'Calculate after extra charges',
       'Copy to clipboard for everyone': 'Copy to clipboard for everyone',
+      'Copy to clipboard for ': 'Copy to clipboard for ',
 
       // services
       'Service Charge': 'Service Charge',
@@ -75,6 +76,7 @@ const resources = {
       'Delete': 'Удалить',
       'Calculate after extra charges': 'Рассчитать после дополнительных сборов',
       'Copy to clipboard for everyone': 'Копировать список участников с итоговыми суммами',
+      'Copy to clipboard for ': 'Копировать список для ',
 
       // services
       'Service Charge': 'Сервисный сбор',

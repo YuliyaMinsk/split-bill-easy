@@ -14,7 +14,8 @@ import { deepEqual } from '@/shared/utils';
 const AddPointBill = (): JSX.Element => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const payerList = useSelector((state: RootState) => state.payer);
+  const payerList = useSelector((state: RootState) => state.payers);
+  const billList = useSelector((state: RootState) => state.bill);
 
   const blankBillLine = useMemo(
     () => ({
@@ -44,10 +45,29 @@ const AddPointBill = (): JSX.Element => {
     setIsPayersValid(isValid);
   }, []);
 
+  const getNextDishId = useCallback(() => {
+    const maxId = billList.reduce((max, billLine) => {
+      const currentId = Number(billLine.dish.id);
+      return currentId > max ? currentId : max;
+    }, 0);
+    return (maxId + 1).toString();
+  }, [billList]);
+
+  const recalculateQuantity = useCallback((quantity: number) => {
+    setBillLine((prevBillLine) => ({ ...prevBillLine, dish: { ...prevBillLine.dish, quantity } }));
+  }, []);
+
   const handleSave = useCallback(() => {
-    dispatch(addBillLine(billLine));
+    const newBillLine = {
+      ...billLine,
+      dish: {
+        ...billLine.dish,
+        id: getNextDishId(),
+      },
+    };
+    dispatch(addBillLine(newBillLine));
     setBillLine(blankBillLine);
-  }, [dispatch, billLine, blankBillLine]);
+  }, [dispatch, billLine, blankBillLine, getNextDishId]);
 
   const handleUpdatePayerList = useCallback((payersWithQuantity: PayersWithQuantity[]) => {
     setBillLine((prevBillLine) => ({
@@ -61,10 +81,6 @@ const AddPointBill = (): JSX.Element => {
       ...prevBillLine,
       dish: newDish,
     }));
-  }, []);
-
-  const recalculateQuantity = useCallback((quantity: number) => {
-    setBillLine((prevBillLine) => ({ ...prevBillLine, dish: { ...prevBillLine.dish, quantity } }));
   }, []);
 
   return (

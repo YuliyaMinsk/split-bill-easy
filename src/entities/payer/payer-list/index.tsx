@@ -15,7 +15,7 @@ const BLANK_NAME = '';
 
 const PayerList = (): JSX.Element => {
   const dispatch = useDispatch();
-  const payerList = useSelector((state: RootState) => state.payer);
+  const payerList = useSelector((state: RootState) => state.payers);
 
   const [name, setName] = useState<string>(BLANK_NAME);
 

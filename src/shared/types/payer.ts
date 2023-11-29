@@ -8,4 +8,15 @@ type PayersWithQuantity = Payer & {
   quantity: number;
 };
 
-export type { Payer, PayersWithQuantity };
+type PayerDishes = {
+  id: string;
+  name: string;
+  dishes: {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+  }[];
+};
+
+export type { Payer, PayersWithQuantity, PayerDishes };
