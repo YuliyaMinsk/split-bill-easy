@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { payerReducer } from './payer/payer-slice';
 import { billReducer } from './bill/bill-slice';
+import { serviceReducer } from './service/service-slice';
 
 export const store = configureStore({
   reducer: {
     payers: payerReducer,
     bill: billReducer,
+    services: serviceReducer,
   },
 });
 

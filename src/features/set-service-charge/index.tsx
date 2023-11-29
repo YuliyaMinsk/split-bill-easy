@@ -1,44 +1,24 @@
-import { useState } from 'react';
 import { List } from '@mui/material';
 
 import { FieldWithPercent } from '@/shared/ui';
-import { SERVICE_NAMES } from '@/shared/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/shared/store';
+import { updateServices } from '@/shared/store/service/service-slice';
 
-type Service = {
-  name: string;
-  value: number;
-};
-
-type ServiceChargeProps = {
-  name?: string;
-};
-
-const ServiceCharge = ({ name }: ServiceChargeProps): JSX.Element => {
-  const [services, setServices] = useState<Service[]>(() =>
-    SERVICE_NAMES.map((service) => ({
-      name: service.name,
-      value: 0,
-    })),
-  );
+const ServiceCharge = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const serviceList = useSelector((state: RootState) => state.services);
 
   const handleUpdateValue = (name: string, value: number) => {
-    const newServices = services.map((service) => {
-      if (service.name === name) {
-        return {
-          ...service,
-          value,
-        };
-      }
-
-      return service;
-    });
-
-    setServices(newServices);
+    const serviceToUpdate = serviceList.find((service) => service.name === name);
+    if (serviceToUpdate) {
+      dispatch(updateServices({ ...serviceToUpdate, value }));
+    }
   };
 
   return (
     <List>
-      {services.map((service) => (
+      {serviceList.map((service) => (
         <FieldWithPercent name={service.name} value={'0'} updateValue={handleUpdateValue} />
       ))}
     </List>
