@@ -1,11 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { Service } from '@/shared/types';
-import { SERVICE_NAMES } from '@/shared/constants';
+import { SERVICE_FEE_ADJUSTMENTS } from '@/shared/constants';
 
-const initialState: Service[] = SERVICE_NAMES.map((service, index) => ({
+const initialState: Service[] = SERVICE_FEE_ADJUSTMENTS.map(({ name, type }, index) => ({
   id: String(index),
-  name: service.name,
+  name: name,
+  type: type,
   value: 0,
 }));
 

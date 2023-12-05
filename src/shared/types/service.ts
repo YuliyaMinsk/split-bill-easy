@@ -1,7 +1,11 @@
-type Service = {
-  id: string;
+type ServiceFeeAdjustments = {
   name: string;
+  type: 'add' | 'subtract';
+};
+
+type Service = ServiceFeeAdjustments & {
+  id: string;
   value: number;
 };
 
-export type { Service };
+export type { Service, ServiceFeeAdjustments };

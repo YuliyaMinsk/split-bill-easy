@@ -19,7 +19,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { Payer } from '@/shared/types';
 import { RootState } from '@/shared/store';
-import { transformBillData } from '@/shared/utils';
+import { addServiceToBill, transformBillData } from '@/shared/utils';
 
 type PayerItemCalculationProps = {
   currentPayer: Payer;
@@ -28,18 +28,22 @@ type PayerItemCalculationProps = {
 const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.Element => {
   const { t } = useTranslation();
   const billList = useSelector((state: RootState) => state.bill);
+  const serviceList = useSelector((state: RootState) => state.services);
+
+  const translatedServices = serviceList.map((service) => ({
+    ...service,
+    name: t(service.name),
+  }));
 
   const { name } = currentPayer;
 
   const transformedData = transformBillData(billList, currentPayer.id);
 
-  const { totalPrice } = transformedData.dishes.reduce(
-    (acc, item) => {
-      const itemTotal = item.quantity * item.price;
-      return { totalPrice: acc.totalPrice + itemTotal };
-    },
-    { totalPrice: 0 },
-  );
+  const baseTotalPrice = transformedData.dishes.reduce((acc, item) => acc + item.quantity * item.price, 0);
+
+  const transformedDataWithServices = addServiceToBill(transformedData, translatedServices, baseTotalPrice);
+
+  const totalPrice = transformedDataWithServices.dishes.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
   return (
     <Accordion>
