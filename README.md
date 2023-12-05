@@ -2,6 +2,8 @@
 
 **Introducing "Split Bill Easy"** - the hassle-free way to divide your restaurant bills among friends! Gone are the days of manual calculations and awkward money discussions. With our user-friendly app, you can easily split the tab in just a few taps.
 
+[Link to deploy, click to open](https://yuliyaminsk.github.io/split-bill-easy/)
+
 ## Key features of Split Bill Easy:
 
 1. **Quick and accurate bill splitting**: Simply enter the total bill amount, the number of people, and let our app do the magic.

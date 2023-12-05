@@ -18,8 +18,8 @@ const ServiceCharge = (): JSX.Element => {
 
   return (
     <List>
-      {serviceList.map((service) => (
-        <FieldWithPercent name={service.name} value={'0'} updateValue={handleUpdateValue} />
+      {serviceList.map(({ id, name, value }) => (
+        <FieldWithPercent key={id} name={name} value={String(value) || '0'} updateValue={handleUpdateValue} />
       ))}
     </List>
   );
