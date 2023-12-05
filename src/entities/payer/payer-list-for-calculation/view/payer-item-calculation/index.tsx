@@ -19,7 +19,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { Payer } from '@/shared/types';
 import { RootState } from '@/shared/store';
-import { addServiceToBill, transformBillData } from '@/shared/utils';
+import { generateBillText } from '@/shared/utils';
 
 type PayerItemCalculationProps = {
   currentPayer: Payer;
@@ -27,33 +27,18 @@ type PayerItemCalculationProps = {
 
 const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.Element => {
   const { t } = useTranslation();
-  const billList = useSelector((state: RootState) => state.bill);
+  const bill = useSelector((state: RootState) => state.bill);
   const serviceList = useSelector((state: RootState) => state.services);
-
-  const translatedServices = serviceList.map((service) => ({
-    ...service,
-    name: t(service.name),
-  }));
 
   const { name } = currentPayer;
 
-  const transformedData = transformBillData(billList, currentPayer.id);
+  const payerBillData = generateBillText([currentPayer], bill, serviceList, t);
 
-  const baseTotalPrice = transformedData.dishes.reduce((acc, item) => acc + item.quantity * item.price, 0);
-
-  const transformedDataWithServices = addServiceToBill(transformedData, translatedServices, baseTotalPrice);
-
-  const totalPrice = transformedDataWithServices.dishes.reduce((acc, item) => acc + item.quantity * item.price, 0);
+  const { billText, transformedData, totalPrice } = payerBillData[0];
 
   const handleCopyToClipboard = async () => {
-    const line = '----------------------------------------';
-    const billString = transformedDataWithServices.dishes
-      .map((dish) => `${dish.name}: ${dish.quantity} x ${dish.price} ₸`)
-      .join('\n');
-    const totalString = t('Total price') + `: ${totalPrice} ₸`;
-
     try {
-      await navigator.clipboard.writeText(t('Bill for') + `: ${name}\n${line}\n${billString}\n${line}\n${totalString}`);
+      await navigator.clipboard.writeText(billText);
       console.log('Bill copied to clipboard');
     } catch (err) {
       console.error('Failed to copy: ', err);
