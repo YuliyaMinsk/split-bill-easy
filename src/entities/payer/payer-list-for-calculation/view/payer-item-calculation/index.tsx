@@ -45,6 +45,21 @@ const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.
 
   const totalPrice = transformedDataWithServices.dishes.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
+  const handleCopyToClipboard = async () => {
+    const line = '----------------------------------------';
+    const billString = transformedDataWithServices.dishes
+      .map((dish) => `${dish.name}: ${dish.quantity} x ${dish.price} ₸`)
+      .join('\n');
+    const totalString = t('Total price') + `: ${totalPrice} ₸`;
+
+    try {
+      await navigator.clipboard.writeText(t('Bill for') + `: ${name}\n${line}\n${billString}\n${line}\n${totalString}`);
+      console.log('Bill copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
@@ -82,7 +97,7 @@ const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.
           </Table>
 
           <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
-            <Button size="small" variant="text" sx={{ mr: 1 }}>
+            <Button size="small" variant="text" sx={{ mr: 1 }} onClick={handleCopyToClipboard}>
               {t('Copy to clipboard for ') + name}
             </Button>
           </Box>

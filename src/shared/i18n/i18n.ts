@@ -35,6 +35,10 @@ const resources = {
       'Copy to clipboard for everyone': 'Copy to clipboard for everyone',
       'Copy to clipboard for ': 'Copy to clipboard for ',
 
+      // copy to clipboard
+      'Bill for': 'Bill for',
+      'Total price': 'Total price',
+
       // services
       'Service Charge': 'Service Charge',
       'Tips': 'Tips',
@@ -77,6 +81,10 @@ const resources = {
       'Calculate after extra charges': 'Рассчитать после дополнительных сборов',
       'Copy to clipboard for everyone': 'Копировать список участников с итоговыми суммами',
       'Copy to clipboard for ': 'Копировать список для ',
+
+      // copy to clipboard
+      'Bill for': 'Счёт для',
+      'Total price': 'Итоговая сумма',
 
       // services
       'Service Charge': 'Сервисный сбор',
