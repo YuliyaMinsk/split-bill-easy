@@ -7,7 +7,7 @@ import { generateBillText } from '@/shared/utils';
 
 const CopyPaymentSummary = (): JSX.Element => {
   const { t } = useTranslation();
-  const bill = useSelector((state: RootState) => state.bill);
+  const bill = useSelector((state: RootState) => state.bill.billList);
   const serviceList = useSelector((state: RootState) => state.services);
   const payerList = useSelector((state: RootState) => state.payers);
 

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, Typography } from '@mui/material';
@@ -8,14 +8,16 @@ import { PayersForBill } from '@/entities/payer/payer-for-bill';
 
 import { RootState } from '@/shared/store';
 import { BillLine, Dish, PayersWithQuantity } from '@/shared/types';
-import { addBillLine } from '@/shared/store/bill/bill-slice';
+import { addBillLine, editBillLine, setEditingBillLine } from '@/shared/store/bill/bill-slice';
 import { deepEqual } from '@/shared/utils';
 
 const AddPointBill = (): JSX.Element => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const payerList = useSelector((state: RootState) => state.payers);
-  const billList = useSelector((state: RootState) => state.bill);
+  const billList = useSelector((state: RootState) => state.bill.billList);
+  const editingBillLine = useSelector((state: RootState) => state.bill.editingBillLine);
+  const [isEditing, setIsEditing] = useState(false);
 
   const blankBillLine = useMemo(
     () => ({
@@ -58,16 +60,19 @@ const AddPointBill = (): JSX.Element => {
   }, []);
 
   const handleSave = useCallback(() => {
-    const newBillLine = {
-      ...billLine,
-      dish: {
-        ...billLine.dish,
-        id: getNextDishId(),
-      },
-    };
-    dispatch(addBillLine(newBillLine));
+    if (editingBillLine) {
+      dispatch(
+        editBillLine({
+          index: billList.findIndex((bill) => bill.dish.id === editingBillLine.dish.id),
+          newBillLine: billLine,
+        }),
+      );
+    } else {
+      dispatch(addBillLine({ ...billLine, dish: { ...billLine.dish, id: getNextDishId() } }));
+    }
     setBillLine(blankBillLine);
-  }, [dispatch, billLine, blankBillLine, getNextDishId]);
+    dispatch(setEditingBillLine(null));
+  }, [editingBillLine, blankBillLine, dispatch, billList, billLine, getNextDishId]);
 
   const handleUpdatePayerList = useCallback((payersWithQuantity: PayersWithQuantity[]) => {
     setBillLine((prevBillLine) => ({
@@ -82,6 +87,22 @@ const AddPointBill = (): JSX.Element => {
       dish: newDish,
     }));
   }, []);
+
+  useEffect(() => {
+    if (editingBillLine) {
+      setBillLine(editingBillLine);
+      setIsEditing(true);
+    } else {
+      setBillLine(blankBillLine);
+      setIsEditing(false);
+    }
+  }, [editingBillLine, blankBillLine]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setEditingBillLine(null));
+    };
+  }, [dispatch]);
 
   return (
     <Box sx={{ mt: '1rem', ml: 0, mr: 0, mb: '6rem' }}>
@@ -99,7 +120,7 @@ const AddPointBill = (): JSX.Element => {
         totalQuantity={billLine.dish.quantity || 0}
         updateValue={handleUpdatePayerList}
         validatePayers={validatePayers}
-        isDefault={isPayersDefault}
+        isDefault={isPayersDefault || isEditing}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
         <Button size="large" variant="contained" onClick={handleSave} disabled={isSaveButtonDisabled}>

@@ -27,7 +27,7 @@ type PayerItemCalculationProps = {
 
 const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.Element => {
   const { t } = useTranslation();
-  const bill = useSelector((state: RootState) => state.bill);
+  const bill = useSelector((state: RootState) => state.bill.billList);
   const serviceList = useSelector((state: RootState) => state.services);
 
   const { name } = currentPayer;

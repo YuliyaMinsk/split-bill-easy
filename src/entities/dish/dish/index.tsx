@@ -18,25 +18,29 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { BillLine } from '@/shared/types';
-import { removeBillLine } from '@/shared/store/bill/bill-slice';
+import { removeBillLine, setEditingBillLine } from '@/shared/store/bill/bill-slice';
 
 import { calculateIndividualPrices } from '../utils';
 
 type DishProps = {
-  bill: BillLine;
+  billLine: BillLine;
 };
 
-const Dish = ({ bill }: DishProps): JSX.Element => {
+const Dish = ({ billLine }: DishProps): JSX.Element => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const { dish, payers } = bill;
+  const { dish, payers } = billLine;
   const { name, price, quantity } = dish;
 
   const individualPrices = calculateIndividualPrices(price, quantity, payers);
   const totalPaid = individualPrices.reduce((sum, price) => sum + price, 0);
   const totalCost = price * quantity;
   const overpayment = totalPaid - totalCost;
+
+  const handleEdit = () => {
+    dispatch(setEditingBillLine(billLine));
+  };
 
   const handleDelete = () => {
     dispatch(removeBillLine(dish.id));
@@ -82,7 +86,7 @@ const Dish = ({ bill }: DishProps): JSX.Element => {
           </Table>
 
           <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
-            <Button size="small" variant="text" sx={{ mr: 1 }}>
+            <Button size="small" variant="text" sx={{ mr: 1 }} onClick={handleEdit}>
               {t('Edit')}
             </Button>
             <Button size="small" variant="text" onClick={handleDelete}>
