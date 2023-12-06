@@ -49,7 +49,7 @@ const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
         <Typography sx={{ width: '40%', flexShrink: 0 }}>{name}</Typography>
-        <Typography sx={{ color: 'text.secondary' }}>{totalPrice} ₸</Typography>
+        <Typography sx={{ color: 'text.secondary' }}>{totalPrice.toFixed()} ₸</Typography>
       </AccordionSummary>
 
       <AccordionDetails>
@@ -71,10 +71,10 @@ const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.
                     </TableCell>
                     <TableCell align="right">----</TableCell>
                     <TableCell align="right">
-                      {dish.quantity} х {dish.price} ₸
+                      {dish.quantity} х {Number(dish.price).toFixed()} ₸
                     </TableCell>
                     <TableCell align="right">----</TableCell>
-                    <TableCell align="right">{dish.quantity * dish.price} ₸</TableCell>
+                    <TableCell align="right">{Number(dish.quantity * dish.price).toFixed()} ₸</TableCell>
                   </TableRow>
                 );
               })}

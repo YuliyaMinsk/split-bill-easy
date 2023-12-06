@@ -5,7 +5,8 @@ import { addServiceToBill, transformBillData } from '.';
 
 const formatLine = (name: string, quantity: number, price: number, totalWidth = 30): string => {
   const nameWidth = name.length;
-  const quantityPricePart = `${quantity} x ${price} ₸`;
+  const priceFormatted = Number(price).toFixed();
+  const quantityPricePart = `${quantity} x ${priceFormatted} ₸`;
   const quantityFormatted = quantityPricePart.padStart(totalWidth - nameWidth, ' ');
   return `${name}${quantityFormatted}`;
 };
@@ -13,7 +14,7 @@ const formatLine = (name: string, quantity: number, price: number, totalWidth = 
 const formatBillString = (payerName: string, dishes: Dish[], totalPrice: number, t: TFunction): string => {
   const line = '------------------------------';
   const billString = dishes.map((dish) => formatLine(dish.name, dish.quantity, dish.price)).join('\n');
-  const totalString = t('Total price').padEnd(20, ' ') + `: ${totalPrice} ₸`;
+  const totalString = t('Total price').padEnd(20, ' ') + `: ${totalPrice.toFixed()} ₸`;
 
   return '```\n' + t('Bill for') + `: ${payerName}\n${line}\n${billString}\n${line}\n${totalString}` + '\n```';
 };
