@@ -17,10 +17,9 @@ const billSlice = createSlice({
     addBillLine: (state, action: PayloadAction<BillLine>) => {
       state.push(action.payload);
     },
-    removeBillLine: (state, action: PayloadAction<number>) => {
-      if (action.payload < state.length) {
-        state.splice(action.payload, 1);
-      }
+    removeBillLine: (state, action: PayloadAction<string>) => {
+      const dishIdToRemove = action.payload;
+      return state.filter((billLine) => billLine.dish.id !== dishIdToRemove);
     },
     editBillLine: (state, action: PayloadAction<EditBillPayload>) => {
       const { index, newBillLine } = action.payload;

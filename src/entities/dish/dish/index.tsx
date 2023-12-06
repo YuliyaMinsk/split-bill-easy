@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 
 import {
   Accordion,
@@ -17,6 +18,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { BillLine } from '@/shared/types';
+import { removeBillLine } from '@/shared/store/bill/bill-slice';
 
 import { calculateIndividualPrices } from '../utils';
 
@@ -26,6 +28,7 @@ type DishProps = {
 
 const Dish = ({ bill }: DishProps): JSX.Element => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const { dish, payers } = bill;
   const { name, price, quantity } = dish;
@@ -34,6 +37,10 @@ const Dish = ({ bill }: DishProps): JSX.Element => {
   const totalPaid = individualPrices.reduce((sum, price) => sum + price, 0);
   const totalCost = price * quantity;
   const overpayment = totalPaid - totalCost;
+
+  const handleDelete = () => {
+    dispatch(removeBillLine(dish.id));
+  };
 
   return (
     <Accordion>
@@ -78,7 +85,7 @@ const Dish = ({ bill }: DishProps): JSX.Element => {
             <Button size="small" variant="text" sx={{ mr: 1 }}>
               {t('Edit')}
             </Button>
-            <Button size="small" variant="text">
+            <Button size="small" variant="text" onClick={handleDelete}>
               {t('Delete')}
             </Button>
           </Box>
