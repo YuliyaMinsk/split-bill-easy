@@ -18,7 +18,7 @@ const vitestConfig = vitestDefineConfig({
 });
 
 const viteConfig = defineViteConfig({
-  base: process.env.VITE_APP_BASE_URL,
+  base: '/split-bill-easy/',
   plugins: [
     react(),
     VitePWA({
@@ -70,6 +70,9 @@ const viteConfig = defineViteConfig({
       { find: '@entities', replacement: fileURLToPath(new URL('./src/entities', import.meta.url)) },
       { find: '@shared', replacement: fileURLToPath(new URL('./src/shared', import.meta.url)) },
     ],
+  },
+  build: {
+    outDir: 'build',
   },
 });
 
