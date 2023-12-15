@@ -8,8 +8,8 @@
     "dev": "vite",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "gh-pages -d build",
-    "build": "tsc && vite build",
+    "deploy": "pwd && gh-pages -d build",
+    "build": "pwd && tsc && vite build && pwd",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "knip": "knip"
