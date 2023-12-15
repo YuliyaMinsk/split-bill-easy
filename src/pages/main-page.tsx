@@ -8,7 +8,7 @@ function MainPage() {
 
   return (
     <MainLayout title={t('Split Bill Easy')}>
-      <Box sx={{ mt: '1rem', mb: '6rem' }}>
+      <Box sx={{ m: '1rem', mb: '6rem' }}>
         <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', mb: '2rem' }}>
           {t('Welcome to "Split Bill Easy"!')}
         </Typography>

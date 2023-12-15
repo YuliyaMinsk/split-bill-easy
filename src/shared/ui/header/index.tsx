@@ -1,5 +1,9 @@
-import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { Menu } from '@mui/icons-material';
+import { AppBar, IconButton, Link as MuiLink, Toolbar, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+
+import { createPath } from '@/shared/utils';
+import { AppRoutes } from '@/shared/enums';
 
 type HeaderProps = {
   text: string;
@@ -13,7 +17,13 @@ const Header = ({ text }: HeaderProps): JSX.Element => {
           <Menu />
         </IconButton>
         <Typography variant="h6" component="h1">
-          {text}
+          <MuiLink
+            component={RouterLink}
+            to={createPath(AppRoutes.HOME)}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            {text}
+          </MuiLink>
         </Typography>
       </Toolbar>
     </AppBar>
