@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://yuliyaminsk.github.io/split-bill-easy/",
+  "homepage": "https://yuliyaminsk.github.io/",
   "scripts": {
     "deploy": "gh-pages -d build",
     "dev": "vite",
