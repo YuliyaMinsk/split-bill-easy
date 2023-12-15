@@ -29,8 +29,8 @@
       "@shared/*": ["./src/shared/*"]
     },
 
-    "types": ["vite-plugin-pwa/client"]
+    "types": ["node", "@testing-library/jest-dom", "vitest/globals", "vite-plugin-pwa/client"]
   },
-  "include": ["src"],
+  "include": ["src", "./src/shared/tests/test-setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
