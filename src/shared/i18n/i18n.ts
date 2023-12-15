@@ -50,6 +50,20 @@ const resources = {
       'Item is required': 'Item is required',
       'Price is required': 'Price is required',
       'Quantity is required': 'Quantity is required',
+
+      // main instructions
+      'Welcome to "Split Bill Easy"!': 'Welcome to "Split Bill Easy"!',
+      'Say goodbye to the hassle of dividing restaurant bills! Our app makes it simple and quick:':
+        'Say goodbye to the hassle of dividing restaurant bills! Our app makes it simple and quick:',
+      '1. Payers Tab': '1. Payers Tab',
+      "Add everyone who's sharing the bill.": "Add everyone who's sharing the bill.",
+      '2. Items Tab': '2. Items Tab',
+      'Enter each item on the bill, who ordered it, and how the cost is split.':
+        'Enter each item on the bill, who ordered it, and how the cost is split.',
+      '3. Calculations Tab': '3. Calculations Tab',
+      'Add any extra charges like service fees or tips.': 'Add any extra charges like service fees or tips.',
+      'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍':
+        'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍',
     },
   },
   rus: {
@@ -58,7 +72,7 @@ const resources = {
       'Welcome to React': 'Добро пожаловать в React и react-i18next',
 
       // bottom navigation
-      'Payers': 'Платящие',
+      'Payers': 'Участники',
       'Items': 'Позиции',
       'Calculations': 'Подсчёты',
 
@@ -97,6 +111,21 @@ const resources = {
       'Item is required': 'Необходимо ввести название позиции',
       'Price is required': 'Нужно указать цену',
       'Quantity is required': 'Нужно указать количество',
+
+      // main instructions
+      'Welcome to "Split Bill Easy"!': 'Добро пожаловать в "Делите Счёт Легко"!',
+      'Say goodbye to the hassle of dividing restaurant bills! Our app makes it simple and quick:':
+        'Забудьте о проблемах с разделением счёта в ресторане! Наше приложение делает это просто и быстро:',
+      '1. Payers Tab': '1. Участники',
+      "Add everyone who's sharing the bill.": 'Добавьте всех, кто участвует в оплате счета',
+      '2. Items Tab': '2. Позиции',
+      'Enter each item on the bill, who ordered it, and how the cost is split.':
+        'Введите каждую позицию в счете, кто её заказал, и как будет разделена стоимость',
+      '3. Calculations Tab': '3. Подсчёты',
+      'Add any extra charges like service fees or tips.':
+        'Добавьте любые дополнительные расходы, такие как сервисный сбор или чаевые',
+      'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍':
+        'Затем просто скопируйте и поделитесь итоговым расчетом с друзьями. Наслаждайтесь вашей трапезой без неловких математических расчетов! 🍽️👍',
     },
   },
 };

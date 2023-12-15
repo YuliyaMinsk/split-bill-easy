@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Container } from '@mui/material';
+import { Container, Paper } from '@mui/material';
 
 import { Footer, Header } from '@shared/ui';
 
@@ -12,7 +12,7 @@ const MainLayout = ({ children, title }: MainLayoutProps): JSX.Element => {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={title} />
-      {children}
+      <Paper style={{ padding: '20px', marginTop: '20px' }}>{children}</Paper>
       <Footer />
     </Container>
   );
