@@ -27,6 +27,8 @@ const resources = {
       'Enter a new name': 'Enter a new name',
 
       // items
+      'There are no items in your bill. Fill the form below to add it':
+        'There are no items in your bill. Fill the form below to add it',
       'Item': 'Item',
       'Enter an item': 'Enter an item',
       'Item cost': 'Item cost',
@@ -94,6 +96,8 @@ const resources = {
       'Enter a new name': 'Введите новое имя',
 
       // items
+      'There are no items in your bill. Fill the form below to add it':
+        'В счёте нет позиций. Заполните форму ниже, чтобы добавить позицию в счёт',
       'Item': 'Позиция',
       'Enter an item': 'Введите позицию',
       'Item cost': 'Стоимость позиции',
