@@ -7,10 +7,11 @@ const percentages = Array.from({ length: 21 }, (_, i) => i * 5);
 const customMenuProps: Partial<MenuProps> = {
   PaperProps: {
     style: {
-      maxHeight: 200,
-      overflow: 'auto',
+      maxHeight: 195,
+      overflowY: 'auto',
     },
   },
+  disableScrollLock: true,
 };
 
 type FieldWithPercentProps = {

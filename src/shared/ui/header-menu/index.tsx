@@ -55,6 +55,7 @@ const HeaderMenu = (): JSX.Element => {
         }}
         open={isMenuOpen}
         onClose={handleMenuClose}
+        disableScrollLock={true}
       >
         <MenuItem onClick={handleLanguageMenuOpen}>
           <ListItemIcon>
