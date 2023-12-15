@@ -10,6 +10,12 @@ const resources = {
       'Split Bill Easy': 'Split Bill Easy',
       'Welcome to React': 'Welcome to React and react-i18next',
 
+      // top navigation
+      'Choose language': 'Choose language',
+      'English': 'English',
+      'Russian': 'Russian',
+      'Profile': 'Profile',
+
       // bottom navigation
       'Payers': 'Payers',
       'Items': 'Items',
@@ -70,6 +76,12 @@ const resources = {
     translation: {
       'Split Bill Easy': 'Делите Счёт Легко!',
       'Welcome to React': 'Добро пожаловать в React и react-i18next',
+
+      // top navigation
+      'Choose language': 'Выберите язык',
+      'English': 'Английский',
+      'Russian': 'Русский',
+      'Profile': 'Профиль',
 
       // bottom navigation
       'Payers': 'Участники',
@@ -134,7 +146,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: 'rus', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
+    lng: 'en', // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
     // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
     // if you're using a language detector, do not define the lng option
 
