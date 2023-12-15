@@ -18,7 +18,7 @@ const vitestConfig = vitestDefineConfig({
 });
 
 const viteConfig = defineViteConfig({
-  base: '/split-bill-easy/',
+  base: '/',
   plugins: [
     react(),
     VitePWA({
