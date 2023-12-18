@@ -1,5 +1,4 @@
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import {
   Accordion,
@@ -15,11 +14,12 @@ import {
   Typography,
 } from '@mui/material';
 
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { BillLine } from '@/shared/types';
 import { RootState } from '@/shared/store';
 import { removeBillLine, setEditingBillLine } from '@/shared/store/bill/bill-slice';
+import { BillLine } from '@/shared/types';
 
 import { calculateIndividualPrices } from '../utils';
 

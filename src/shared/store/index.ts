@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import { payerReducer } from './payer/payer-slice';
 import { billReducer } from './bill/bill-slice';
-import { serviceReducer } from './service/service-slice';
+import { payerReducer } from './payer/payer-slice';
 import { profileReducer } from './profile/profile-slice';
+import { serviceReducer } from './service/service-slice';
 
 const rootReducer = combineReducers({
   payers: payerReducer,

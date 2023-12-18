@@ -1,9 +1,9 @@
 import { AppBar, Link as MuiLink, Toolbar, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-import { createPath } from '@/shared/utils';
 import { AppRoutes } from '@/shared/enums';
 import { HeaderMenu } from '@/shared/ui';
+import { createPath } from '@/shared/utils';
 
 type HeaderProps = {
   text: string;

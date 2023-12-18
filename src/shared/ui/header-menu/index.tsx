@@ -1,15 +1,15 @@
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuIcon from '@mui/icons-material/Menu';
+import TranslateIcon from '@mui/icons-material/Translate';
+import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
-import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import TranslateIcon from '@mui/icons-material/Translate';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-
-import { changeLanguage, changeCurrency } from '@/shared/store/profile/profile-slice';
+import { Currency } from '@/shared/enums';
 import { LanguageKey } from '@/shared/i18n/i18n';
-import { Currency } from '@/shared/constants';
+import { changeLanguage, changeCurrency } from '@/shared/store/profile/profile-slice';
 
 const HeaderMenu = (): JSX.Element => {
   const { i18n, t } = useTranslation();

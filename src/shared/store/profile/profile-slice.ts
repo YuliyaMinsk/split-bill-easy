@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Currency } from '@/shared/enums';
 import { LanguageKey } from '@/shared/i18n/i18n';
-import { Currency } from '@/shared/constants';
 
 type ProfileState = {
   language: LanguageKey;

@@ -1,6 +1,6 @@
+import { Box, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { Box, Button } from '@mui/material';
 
 import { RootState } from '@/shared/store';
 import { generateBillText } from '@/shared/utils';

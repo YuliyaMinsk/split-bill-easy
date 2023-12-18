@@ -1,9 +1,9 @@
 import { List } from '@mui/material';
 
-import { FieldWithPercent } from '@/shared/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/store';
 import { updateServices } from '@/shared/store/service/service-slice';
+import { FieldWithPercent } from '@/shared/ui';
 
 const ServiceCharge = (): JSX.Element => {
   const dispatch = useDispatch();

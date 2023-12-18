@@ -1,5 +1,5 @@
-import { IconButton } from '@mui/material';
 import { RemoveCircleOutline } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 
 type RemovePayerProps = {
   onRemove: () => void;

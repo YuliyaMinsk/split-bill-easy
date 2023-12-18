@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { Payer } from '@/shared/types';
 import { PAYERS_FAKE } from '@/shared/constants';
+import { Payer } from '@/shared/types';
 
 const initialState: Payer[] = PAYERS_FAKE;
 

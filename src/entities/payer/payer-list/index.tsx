@@ -1,6 +1,6 @@
+import { Box, List } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, List } from '@mui/material';
 
 import { AddPayer } from '@/features/add-payer';
 import { RemovePayer } from '@/features/remove-payer';

@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { registerSW } from 'virtual:pwa-register';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/es/integration/react';
+import { registerSW } from 'virtual:pwa-register';
 
 import { persistor, store } from '@/shared/store/index.ts';
 
+import { initializeI18n } from '../shared/i18n/i18n';
 import { RoutesApp } from './routes-app.tsx';
-import { initializeI18n } from '../shared/i18n/i18n.ts';
+/* eslint-disable-next-line import/no-internal-modules */
 import '../shared/styles/index.css';
 
 initializeI18n();

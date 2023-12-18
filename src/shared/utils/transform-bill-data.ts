@@ -8,14 +8,14 @@ const transformBillData = (bill: Bill, currentPayerId: string): PayerDishes => {
   };
 
   bill.forEach((item) => {
-    const payer = item.payers.find((p) => p.id === currentPayerId && p.isChecked && p.quantity > 0);
+    const payer = item.payers.find((p) => p.id === currentPayerId && p.isChecked && Number(p.quantity) > 0);
     if (payer) {
       payerDishes.name = payer.name;
       payerDishes.dishes.push({
         id: item.dish.id,
         name: item.dish.name,
         price: item.dish.price,
-        quantity: payer.quantity,
+        quantity: Number(payer.quantity),
       });
     }
   });

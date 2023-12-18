@@ -1,6 +1,6 @@
+import { Checkbox, List, ListItem, ListItemIcon, ListItemText, TextField, Typography } from '@mui/material';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Checkbox, List, ListItem, ListItemIcon, ListItemText, TextField, Typography } from '@mui/material';
 
 import { PayersWithQuantity } from '@/shared/types';
 
@@ -42,7 +42,8 @@ const PayersForBill = ({
 
   const handleQuantityChange = (event: React.ChangeEvent<EventTarget>, payerId: string) => {
     const target = event.target as HTMLInputElement;
-    const newQuantity = Number(target.value);
+    const value = target.value;
+    const newQuantity = value === '' ? null : Number(value);
 
     setPayersWithQuantity(
       payersWithQuantity.map((payer) => (payer.id === payerId ? { ...payer, quantity: newQuantity } : payer)),
@@ -50,7 +51,7 @@ const PayersForBill = ({
   };
 
   useEffect(() => {
-    const totalQuantityEntered = payersWithQuantity.reduce((sum, payer) => sum + payer.quantity, 0);
+    const totalQuantityEntered = payersWithQuantity.reduce((sum, payer) => sum + Number(payer.quantity), 0);
 
     if (Math.abs(totalQuantityEntered - totalQuantity) > 0.014 && totalQuantity > 0) {
       setError(t('Error: Incorrect amount') as string);

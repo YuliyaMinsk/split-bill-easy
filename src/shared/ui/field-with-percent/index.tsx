@@ -1,6 +1,6 @@
+import { FormControl, ListItem, MenuItem, MenuProps, Select, SelectChangeEvent, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormControl, ListItem, MenuItem, MenuProps, Select, SelectChangeEvent, Typography } from '@mui/material';
 
 const percentages = Array.from({ length: 21 }, (_, i) => i * 5);
 

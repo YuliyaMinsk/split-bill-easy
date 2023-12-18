@@ -1,5 +1,4 @@
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import {
   Accordion,
@@ -15,10 +14,11 @@ import {
   Typography,
 } from '@mui/material';
 
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
-import { Payer } from '@/shared/types';
 import { RootState } from '@/shared/store';
+import { Payer } from '@/shared/types';
 import { generateBillText } from '@/shared/utils';
 
 type PayerItemCalculationProps = {
@@ -78,7 +78,7 @@ const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.
                     </TableCell>
                     <TableCell align="right">----</TableCell>
                     <TableCell align="right">
-                      {Number(dish.quantity * dish.price).toFixed()} {currency}
+                      {Number(Number(dish.quantity) * dish.price).toFixed()} {currency}
                     </TableCell>
                   </TableRow>
                 );

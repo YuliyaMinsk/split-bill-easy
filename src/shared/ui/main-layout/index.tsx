@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { Container, Paper } from '@mui/material';
+import { ReactNode } from 'react';
 
 import { Footer, Header } from '@shared/ui';
 

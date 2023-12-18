@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
-import { ServiceCharge } from '@/features/set-service-charge';
 import { CopyPaymentSummary } from '@/features/copy-payment-summary';
+import { ServiceCharge } from '@/features/set-service-charge';
 
 import { PayerListForCalculation } from '@/entities/payer/payer-list-for-calculation';
 

@@ -1,6 +1,6 @@
+import { List, ListItem, TextField, Typography } from '@mui/material';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { List, ListItem, TextField, Typography } from '@mui/material';
 
 import { Dish, DishFieldUpdate } from '@/shared/types';
 

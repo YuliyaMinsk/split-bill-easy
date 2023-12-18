@@ -1,8 +1,9 @@
-import { describe, it, expect } from 'vitest';
 import { screen } from '@testing-library/react';
-import { MainPage } from '../main-page';
+import { describe, it, expect } from 'vitest';
 
 import { customRender } from '@/shared/tests';
+
+import { MainPage } from '../main-page';
 
 describe('Renders main page correctly', async () => {
   it('Should render the page correctly', async () => {

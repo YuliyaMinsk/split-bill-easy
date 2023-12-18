@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 
+import { CalculationsPage } from '../pages/calculations-page';
+import { ItemsPage } from '../pages/items-page';
 import { MainPage } from '../pages/main-page';
 import { PayersPage } from '../pages/payers-page';
-import { ItemsPage } from '../pages/items-page';
-import { CalculationsPage } from '../pages/calculations-page';
 
 import { AppRoutes } from '../shared/enums';
 import { createPath } from '../shared/utils';

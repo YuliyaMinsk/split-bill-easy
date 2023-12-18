@@ -1,8 +1,7 @@
+import { fireEvent, screen, waitFor, within, render, RenderOptions, RenderResult } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
-import { fireEvent, screen, waitFor, within, render, RenderOptions, RenderResult } from '@testing-library/react';
 
 import { createTestStore } from './test-store';
 

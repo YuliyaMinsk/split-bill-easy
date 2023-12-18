@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { MainLayout } from '@shared/ui';
 

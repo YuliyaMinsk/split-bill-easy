@@ -5,7 +5,7 @@ type Payer = {
 
 type PayersWithQuantity = Payer & {
   isChecked: boolean;
-  quantity: number;
+  quantity: number | null;
 };
 
 type PayerDishes = {

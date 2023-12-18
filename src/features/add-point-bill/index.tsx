@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { Box, Button, Typography } from '@mui/material';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { DishNew } from '@/entities/dish/dish-new';
 import { PayersForBill } from '@/entities/payer/payer-for-bill';
 
 import { RootState } from '@/shared/store';
-import { BillLine, Dish, PayersWithQuantity } from '@/shared/types';
 import { addBillLine, editBillLine, setEditingBillLine } from '@/shared/store/bill/bill-slice';
+import { BillLine, Dish, PayersWithQuantity } from '@/shared/types';
 import { deepEqual } from '@/shared/utils';
 
 const AddPointBill = (): JSX.Element => {
@@ -43,7 +43,7 @@ const AddPointBill = (): JSX.Element => {
   }, []);
 
   const validatePayers = useCallback((payers: PayersWithQuantity[]) => {
-    const isValid = payers.some((payer) => payer.isChecked && payer.quantity > 0);
+    const isValid = payers.some((payer) => payer.isChecked && Number(payer.quantity) > 0);
     setIsPayersValid(isValid);
   }, []);
 

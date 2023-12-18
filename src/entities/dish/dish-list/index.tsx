@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
 
