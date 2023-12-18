@@ -12,7 +12,7 @@ const MainLayout = ({ children, title }: MainLayoutProps): JSX.Element => {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={title} />
-      <Paper style={{ padding: '20px', marginTop: '20px' }}>{children}</Paper>
+      <Paper style={{ padding: '20px' }}>{children}</Paper>
       <Footer />
     </Container>
   );

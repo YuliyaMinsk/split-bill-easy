@@ -3,11 +3,13 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { payerReducer } from './payer/payer-slice';
 import { billReducer } from './bill/bill-slice';
 import { serviceReducer } from './service/service-slice';
+import { profileReducer } from './profile/profile-slice';
 
 const rootReducer = combineReducers({
   payers: payerReducer,
   bill: billReducer,
   services: serviceReducer,
+  profile: profileReducer,
 });
 
 export const store = configureStore({

@@ -7,8 +7,10 @@ import { Provider } from 'react-redux';
 import { store } from '@/shared/store/index.ts';
 
 import { RoutesApp } from './routes-app.tsx';
-import '../shared/i18n/i18n.ts';
+import { initializeI18n } from '../shared/i18n/i18n.ts';
 import '../shared/styles/index.css';
+
+initializeI18n();
 
 // Prompt for a refresh
 const updateSW = registerSW({

@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
+import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import TranslateIcon from '@mui/icons-material/Translate';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
+import { changeLanguage } from '@/shared/store/profile/profile-slice';
+import { LanguageKey } from '@/shared/i18n/i18n';
+
 const HeaderMenu = (): JSX.Element => {
   const { i18n, t } = useTranslation();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [languageMenuAnchorEl, setLanguageMenuAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -27,8 +32,9 @@ const HeaderMenu = (): JSX.Element => {
     setLanguageMenuAnchorEl(event.currentTarget);
   };
 
-  const handleLanguageChange = (language: string) => {
+  const handleLanguageChange = (language: LanguageKey) => {
     i18n.changeLanguage(language);
+    dispatch(changeLanguage(language));
     handleMenuClose();
   };
 
