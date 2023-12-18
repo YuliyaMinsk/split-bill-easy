@@ -77,7 +77,7 @@ const Dish = ({ billLine }: DishProps): JSX.Element => {
                       </TableCell>
                       <TableCell align="right">----</TableCell>
                       <TableCell align="right">
-                        {payer.quantity} х {price} {currency}
+                        {payer.quantity || 0} х {price} {currency}
                       </TableCell>
                       <TableCell align="right">----</TableCell>
                       <TableCell align="right">
