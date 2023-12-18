@@ -7,7 +7,9 @@ const enTranslations = {
     'Choose language': 'Choose language',
     'English': 'English',
     'Russian': 'Russian',
-    'Profile': 'Profile',
+    'Choose currency': 'Choose currency',
+    'Kazakhstani Tenge': 'Kazakhstani Tenge',
+    'Russian Ruble': 'Russian Ruble',
 
     // bottom navigation
     'Payers': 'Payers',

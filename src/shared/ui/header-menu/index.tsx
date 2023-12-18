@@ -7,17 +7,20 @@ import MenuIcon from '@mui/icons-material/Menu';
 import TranslateIcon from '@mui/icons-material/Translate';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import { changeLanguage } from '@/shared/store/profile/profile-slice';
+import { changeLanguage, changeCurrency } from '@/shared/store/profile/profile-slice';
 import { LanguageKey } from '@/shared/i18n/i18n';
+import { Currency } from '@/shared/constants';
 
 const HeaderMenu = (): JSX.Element => {
   const { i18n, t } = useTranslation();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [languageMenuAnchorEl, setLanguageMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [currencyMenuAnchorEl, setCurrencyMenuAnchorEl] = useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isLanguageMenuOpen = Boolean(languageMenuAnchorEl);
+  const isCurrencyMenuOpen = Boolean(currencyMenuAnchorEl);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,15 +29,25 @@ const HeaderMenu = (): JSX.Element => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     setLanguageMenuAnchorEl(null);
+    setCurrencyMenuAnchorEl(null);
   };
 
   const handleLanguageMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setLanguageMenuAnchorEl(event.currentTarget);
   };
 
+  const handleCurrencyMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setCurrencyMenuAnchorEl(event.currentTarget);
+  };
+
   const handleLanguageChange = (language: LanguageKey) => {
     i18n.changeLanguage(language);
     dispatch(changeLanguage(language));
+    handleMenuClose();
+  };
+
+  const handleCurrencyChange = (currency: Currency) => {
+    dispatch(changeCurrency(currency));
     handleMenuClose();
   };
 
@@ -86,12 +99,28 @@ const HeaderMenu = (): JSX.Element => {
           <MenuItem onClick={() => handleLanguageChange('rus')}>{t('Russian')}</MenuItem>
         </Menu>
 
-        <MenuItem onClick={handleMenuClose}>
+        <MenuItem onClick={handleCurrencyMenuOpen}>
           <ListItemIcon>
             <AccountCircle />
           </ListItemIcon>
-          <ListItemText primary={t('Profile')} />
+          <ListItemText primary={t('Choose currency')} />
         </MenuItem>
+        <Menu
+          anchorEl={currencyMenuAnchorEl}
+          open={isCurrencyMenuOpen}
+          onClose={handleMenuClose}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+        >
+          <MenuItem onClick={() => handleCurrencyChange(Currency.KZT)}>{t('Kazakhstani Tenge')}</MenuItem>
+          <MenuItem onClick={() => handleCurrencyChange(Currency.RUB)}>{t('Russian Ruble')}</MenuItem>
+        </Menu>
       </Menu>
     </div>
   );

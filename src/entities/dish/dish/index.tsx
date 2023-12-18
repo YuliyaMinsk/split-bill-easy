@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Accordion,
@@ -18,6 +18,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { BillLine } from '@/shared/types';
+import { RootState } from '@/shared/store';
 import { removeBillLine, setEditingBillLine } from '@/shared/store/bill/bill-slice';
 
 import { calculateIndividualPrices } from '../utils';
@@ -29,6 +30,7 @@ type DishProps = {
 const Dish = ({ billLine }: DishProps): JSX.Element => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const currency = useSelector((state: RootState) => state.profile.currency);
 
   const { dish, payers } = billLine;
   const { name, price, quantity } = dish;
@@ -51,7 +53,7 @@ const Dish = ({ billLine }: DishProps): JSX.Element => {
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
         <Typography sx={{ width: '40%', flexShrink: 0 }}>{name}</Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {quantity} → {price} {!!overpayment && ' + ' + overpayment} ₸
+          {quantity} → {price} {!!overpayment && ' + ' + overpayment} {currency}
         </Typography>
       </AccordionSummary>
 
@@ -75,10 +77,12 @@ const Dish = ({ billLine }: DishProps): JSX.Element => {
                       </TableCell>
                       <TableCell align="right">----</TableCell>
                       <TableCell align="right">
-                        {payer.quantity} х {price} ₸
+                        {payer.quantity} х {price} {currency}
                       </TableCell>
                       <TableCell align="right">----</TableCell>
-                      <TableCell align="right">{individualPrices[index]} ₸</TableCell>
+                      <TableCell align="right">
+                        {individualPrices[index]} {currency}
+                      </TableCell>
                     </TableRow>
                   ),
               )}

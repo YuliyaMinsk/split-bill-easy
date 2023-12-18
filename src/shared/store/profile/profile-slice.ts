@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LanguageKey } from '@/shared/i18n/i18n';
+import { Currency } from '@/shared/constants';
 
 type ProfileState = {
   language: LanguageKey;
-  currency: string;
+  currency: Currency;
 };
 
 const initialState: ProfileState = {
   language: 'en',
-  currency: 'USD',
+  currency: Currency.KZT,
 };
 
 const profileSlice = createSlice({
@@ -18,7 +19,7 @@ const profileSlice = createSlice({
     changeLanguage: (state, action: PayloadAction<LanguageKey>) => {
       state.language = action.payload;
     },
-    changeCurrency: (state, action: PayloadAction<string>) => {
+    changeCurrency: (state, action: PayloadAction<Currency>) => {
       state.currency = action.payload;
     },
   },

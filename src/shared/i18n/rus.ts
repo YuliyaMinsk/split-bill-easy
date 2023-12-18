@@ -7,7 +7,9 @@ const rusTranslations = {
     'Choose language': 'Выберите язык',
     'English': 'Английский',
     'Russian': 'Русский',
-    'Profile': 'Профиль',
+    'Choose currency': 'Выберите валюту',
+    'Kazakhstani Tenge': 'Казахстанский Тенге',
+    'Russian Ruble': 'Российский Рубль',
 
     // bottom navigation
     'Payers': 'Участники',

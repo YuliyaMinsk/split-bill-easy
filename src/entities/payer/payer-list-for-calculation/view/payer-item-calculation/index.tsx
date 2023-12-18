@@ -29,10 +29,11 @@ const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.
   const { t } = useTranslation();
   const bill = useSelector((state: RootState) => state.bill.billList);
   const serviceList = useSelector((state: RootState) => state.services);
+  const currency = useSelector((state: RootState) => state.profile.currency);
 
   const { name } = currentPayer;
 
-  const payerBillData = generateBillText([currentPayer], bill, serviceList, t);
+  const payerBillData = generateBillText([currentPayer], bill, serviceList, t, currency);
 
   const { billText, transformedData, totalPrice } = payerBillData[0];
 
@@ -49,7 +50,9 @@ const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
         <Typography sx={{ width: '40%', flexShrink: 0 }}>{name}</Typography>
-        <Typography sx={{ color: 'text.secondary' }}>{totalPrice.toFixed()} ₸</Typography>
+        <Typography sx={{ color: 'text.secondary' }}>
+          {totalPrice.toFixed()} {currency}
+        </Typography>
       </AccordionSummary>
 
       <AccordionDetails>
@@ -71,10 +74,12 @@ const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.
                     </TableCell>
                     <TableCell align="right">----</TableCell>
                     <TableCell align="right">
-                      {dish.quantity} х {Number(dish.price).toFixed()} ₸
+                      {dish.quantity} х {Number(dish.price).toFixed()} {currency}
                     </TableCell>
                     <TableCell align="right">----</TableCell>
-                    <TableCell align="right">{Number(dish.quantity * dish.price).toFixed()} ₸</TableCell>
+                    <TableCell align="right">
+                      {Number(dish.quantity * dish.price).toFixed()} {currency}
+                    </TableCell>
                   </TableRow>
                 );
               })}
