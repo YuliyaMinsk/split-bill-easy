@@ -10,8 +10,9 @@ const CopyPaymentSummary = (): JSX.Element => {
   const bill = useSelector((state: RootState) => state.bill.billList);
   const serviceList = useSelector((state: RootState) => state.services);
   const payerList = useSelector((state: RootState) => state.payers);
+  const currency = useSelector((state: RootState) => state.profile.currency);
 
-  const payerBillData = generateBillText(payerList, bill, serviceList, t);
+  const payerBillData = generateBillText(payerList, bill, serviceList, t, currency);
   const allBillsText = payerBillData.map((data) => data.billText).join('\n\n');
 
   const handleCopy = async () => {
