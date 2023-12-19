@@ -11,13 +11,13 @@ import { LanguageKey } from '@/shared/i18n/i18n';
 import { RootState } from '@/shared/store';
 import { changeLanguage, changeCurrency } from '@/shared/store/profile/profile-slice';
 
-interface IMenuItem {
+type MenuItem = {
   label: string;
   icon?: React.ReactNode;
   action?: () => void;
-  submenu?: IMenuItem[];
+  submenu?: MenuItem[];
   value?: LanguageKey | Currency;
-}
+};
 
 const HeaderMenu = (): JSX.Element => {
   const { i18n, t } = useTranslation();
@@ -25,9 +25,9 @@ const HeaderMenu = (): JSX.Element => {
   const { language: currentLanguage, currency: currentCurrency } = useSelector((state: RootState) => state.profile);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [currentMenu, setCurrentMenu] = useState<IMenuItem[]>([]);
+  const [currentMenu, setCurrentMenu] = useState<MenuItem[]>([]);
 
-  const menuItems: IMenuItem[] = [
+  const menuItems: MenuItem[] = [
     {
       label: t('Choose language:'),
       submenu: [
@@ -44,7 +44,7 @@ const HeaderMenu = (): JSX.Element => {
     },
   ];
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, items: IMenuItem[]) => {
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, items: MenuItem[]) => {
     setAnchorEl(event.currentTarget);
     setCurrentMenu(items);
   };
@@ -65,7 +65,7 @@ const HeaderMenu = (): JSX.Element => {
     handleMenuClose();
   };
 
-  const isItemSelected = (item: IMenuItem): boolean => {
+  const isItemSelected = (item: MenuItem): boolean => {
     return item.value === currentLanguage || item.value === currentCurrency;
   };
 
