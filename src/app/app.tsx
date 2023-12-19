@@ -17,7 +17,7 @@ initializeI18n();
 // Prompt for a refresh
 const updateSW = registerSW({
   onNeedRefresh() {
-    if (confirm('New content available. Reload?')) {
+    if (confirm('New version available. Reload?')) {
       updateSW(true);
     }
   },

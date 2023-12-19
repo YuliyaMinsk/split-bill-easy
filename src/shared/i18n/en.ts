@@ -10,6 +10,7 @@ const enTranslations = {
     'Choose currency:': 'Choose currency:',
     'Kazakhstani Tenge': 'Kazakhstani Tenge',
     'Russian Ruble': 'Russian Ruble',
+    'Belarusian Ruble': 'Belarusian Ruble',
 
     // bottom navigation
     'Payers': 'Payers',
@@ -67,6 +68,9 @@ const enTranslations = {
     'Add any extra charges like service fees or tips.': 'Add any extra charges like service fees or tips.',
     'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍':
       'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍',
+    "The program's developer is Yuliya Niaverova. If you need an experienced React developer to implement your project, feel free to contact me on LinkedIn.":
+      "The program's developer is Yuliya Niaverova. If you need an experienced React developer to implement your project, feel free to contact me on LinkedIn.",
+    'My LinkedIn account': 'My LinkedIn account',
   },
 };
 

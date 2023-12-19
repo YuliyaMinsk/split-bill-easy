@@ -40,6 +40,7 @@ const HeaderMenu: FC = () => {
       submenu: [
         { label: t('Kazakhstani Tenge'), action: () => handleCurrencyChange(Currency.KZT), value: Currency.KZT },
         { label: t('Russian Ruble'), action: () => handleCurrencyChange(Currency.RUB), value: Currency.RUB },
+        { label: t('Belarusian Ruble'), action: () => handleCurrencyChange(Currency.BYN), value: Currency.BYN },
       ],
     },
   ];

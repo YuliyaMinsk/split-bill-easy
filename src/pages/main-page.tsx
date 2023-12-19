@@ -36,7 +36,7 @@ const MainPage: FC = () => {
           </ListItem>
         </List>
 
-        <Typography variant="body1">
+        <Typography variant="body1" mb={2}>
           {t(
             'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍',
           )}
