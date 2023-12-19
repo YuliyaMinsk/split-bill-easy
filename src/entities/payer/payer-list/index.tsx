@@ -19,15 +19,17 @@ const PayerList: FC = () => {
 
   const [name, setName] = useState<string>(BLANK_NAME);
 
-  const lastId = payerList.length ? payerList[payerList.length - 1].id : '0';
+  const lastPayer = payerList.at(-1);
+  const lastId = lastPayer ? lastPayer.id : '0';
+  const newId = `${Number(lastId) + 1}`;
 
   const handleAdd = useCallback(() => {
     if (name.length > 0) {
-      const newPayer = { id: `${Number(lastId) + 1}`, name };
+      const newPayer = { id: newId, name };
       dispatch(addPayer(newPayer));
       setName(BLANK_NAME);
     }
-  }, [name, lastId, dispatch]);
+  }, [name, newId, dispatch]);
 
   const handleRemove = (id: string) => {
     dispatch(removePayer(id));

@@ -2,7 +2,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
-import { FC, Fragment, useState } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -92,22 +92,20 @@ const HeaderMenu: FC = () => {
         onClose={handleMenuClose}
         disableScrollLock={true}
       >
-        {currentMenu.map((item, index) => (
-          <Fragment key={index}>
-            <MenuItem disabled>
-              {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-              <ListItemText primary={item.label} />
+        {currentMenu.map((item, index) => [
+          <MenuItem key={`item-${index}`} disabled>
+            {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+            <ListItemText primary={item.label} />
+          </MenuItem>,
+          item.submenu?.map((subItem, subIndex) => (
+            <MenuItem key={`subitem-${index}-${subIndex}`} onClick={subItem.action}>
+              <ListItemIcon style={{ visibility: isItemSelected(subItem) ? 'visible' : 'hidden' }}>
+                <CheckIcon />
+              </ListItemIcon>
+              <ListItemText primary={subItem.label} />
             </MenuItem>
-            {item.submenu?.map((subItem, subIndex) => (
-              <MenuItem key={subIndex} onClick={subItem.action}>
-                <ListItemIcon style={{ visibility: isItemSelected(subItem) ? 'visible' : 'hidden' }}>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText primary={subItem.label} />
-              </MenuItem>
-            ))}
-          </Fragment>
-        ))}
+          )),
+        ])}
       </Menu>
     </div>
   );
