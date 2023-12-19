@@ -1,11 +1,11 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import { defineConfig as defineViteConfig, loadEnv } from 'vite';
+import { fileURLToPath } from 'url';
 import react from '@vitejs/plugin-react';
+import { defineConfig as defineViteConfig, loadEnv } from 'vite';
 import type { ConfigEnv } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import { fileURLToPath } from 'url';
 
 import { defineConfig as vitestDefineConfig } from 'vitest/config';
 
@@ -32,8 +32,8 @@ const viteConfig = defineViteConfig({
         'display': 'standalone',
         'scope': process.env.VITE_APP_BASE_URL,
         'start_url': process.env.VITE_API_BASE_URL,
-        'name': 'split bill easy',
-        'short_name': 'split bill easy',
+        'name': 'Split Bill Easy',
+        'short_name': 'Split Bill Easy',
         'description':
           'Effortlessly divide restaurant bills among friends. Accurate, customizable, with tip calculator & multiple currencies. Dine stress-free!',
         'icons': [
