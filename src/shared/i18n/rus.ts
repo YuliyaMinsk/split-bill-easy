@@ -4,10 +4,10 @@ const rusTranslations = {
     'Welcome to React': 'Добро пожаловать в React и react-i18next',
 
     // top navigation
-    'Choose language': 'Выберите язык',
+    'Choose language:': 'Выберите язык:',
     'English': 'Английский',
     'Russian': 'Русский',
-    'Choose currency': 'Выберите валюту',
+    'Choose currency:': 'Выберите валюту:',
     'Kazakhstani Tenge': 'Казахстанский Тенге',
     'Russian Ruble': 'Российский Рубль',
 

@@ -1,43 +1,57 @@
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import CheckIcon from '@mui/icons-material/Check';
 import MenuIcon from '@mui/icons-material/Menu';
-import TranslateIcon from '@mui/icons-material/Translate';
 import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Currency } from '@/shared/enums';
 import { LanguageKey } from '@/shared/i18n/i18n';
+import { RootState } from '@/shared/store';
 import { changeLanguage, changeCurrency } from '@/shared/store/profile/profile-slice';
+
+interface IMenuItem {
+  label: string;
+  icon?: React.ReactNode;
+  action?: () => void;
+  submenu?: IMenuItem[];
+  value?: LanguageKey | Currency;
+}
 
 const HeaderMenu = (): JSX.Element => {
   const { i18n, t } = useTranslation();
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [languageMenuAnchorEl, setLanguageMenuAnchorEl] = useState<null | HTMLElement>(null);
-  const [currencyMenuAnchorEl, setCurrencyMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const { language: currentLanguage, currency: currentCurrency } = useSelector((state: RootState) => state.profile);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isLanguageMenuOpen = Boolean(languageMenuAnchorEl);
-  const isCurrencyMenuOpen = Boolean(currencyMenuAnchorEl);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [currentMenu, setCurrentMenu] = useState<IMenuItem[]>([]);
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const menuItems: IMenuItem[] = [
+    {
+      label: t('Choose language:'),
+      submenu: [
+        { label: t('English'), action: () => handleLanguageChange('en'), value: 'en' },
+        { label: t('Russian'), action: () => handleLanguageChange('rus'), value: 'rus' },
+      ],
+    },
+    {
+      label: t('Choose currency:'),
+      submenu: [
+        { label: t('Kazakhstani Tenge'), action: () => handleCurrencyChange(Currency.KZT), value: Currency.KZT },
+        { label: t('Russian Ruble'), action: () => handleCurrencyChange(Currency.RUB), value: Currency.RUB },
+      ],
+    },
+  ];
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, items: IMenuItem[]) => {
     setAnchorEl(event.currentTarget);
+    setCurrentMenu(items);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setLanguageMenuAnchorEl(null);
-    setCurrencyMenuAnchorEl(null);
-  };
-
-  const handleLanguageMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setLanguageMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleCurrencyMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setCurrencyMenuAnchorEl(event.currentTarget);
+    setCurrentMenu([]);
   };
 
   const handleLanguageChange = (language: LanguageKey) => {
@@ -51,15 +65,19 @@ const HeaderMenu = (): JSX.Element => {
     handleMenuClose();
   };
 
+  const isItemSelected = (item: IMenuItem): boolean => {
+    return item.value === currentLanguage || item.value === currentCurrency;
+  };
+
   return (
     <div>
       <IconButton
         size="large"
         edge="end"
-        aria-controls={isMenuOpen ? 'account-menu' : undefined}
+        aria-controls={anchorEl ? 'account-menu' : undefined}
         aria-haspopup="true"
-        aria-expanded={isMenuOpen ? 'true' : undefined}
-        onClick={handleMenuOpen}
+        aria-expanded={anchorEl ? 'true' : undefined}
+        onClick={(e) => handleMenuOpen(e, menuItems)}
         color="inherit"
         sx={{ mr: 2 }}
       >
@@ -69,58 +87,27 @@ const HeaderMenu = (): JSX.Element => {
       <Menu
         anchorEl={anchorEl}
         id="basic-menu"
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-        open={isMenuOpen}
+        MenuListProps={{ 'aria-labelledby': 'basic-button' }}
+        open={Boolean(anchorEl)}
         onClose={handleMenuClose}
         disableScrollLock={true}
       >
-        <MenuItem onClick={handleLanguageMenuOpen}>
-          <ListItemIcon>
-            <TranslateIcon />
-          </ListItemIcon>
-          <ListItemText primary={t('Choose language')} />
-        </MenuItem>
-        <Menu
-          anchorEl={languageMenuAnchorEl}
-          open={isLanguageMenuOpen}
-          onClose={handleMenuClose}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-        >
-          <MenuItem onClick={() => handleLanguageChange('en')}>{t('English')}</MenuItem>
-          <MenuItem onClick={() => handleLanguageChange('rus')}>{t('Russian')}</MenuItem>
-        </Menu>
-
-        <MenuItem onClick={handleCurrencyMenuOpen}>
-          <ListItemIcon>
-            <AccountCircle />
-          </ListItemIcon>
-          <ListItemText primary={t('Choose currency')} />
-        </MenuItem>
-        <Menu
-          anchorEl={currencyMenuAnchorEl}
-          open={isCurrencyMenuOpen}
-          onClose={handleMenuClose}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-        >
-          <MenuItem onClick={() => handleCurrencyChange(Currency.KZT)}>{t('Kazakhstani Tenge')}</MenuItem>
-          <MenuItem onClick={() => handleCurrencyChange(Currency.RUB)}>{t('Russian Ruble')}</MenuItem>
-        </Menu>
+        {currentMenu.map((item, index) => (
+          <Fragment key={index}>
+            <MenuItem disabled>
+              {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+              <ListItemText primary={item.label} />
+            </MenuItem>
+            {item.submenu?.map((subItem, subIndex) => (
+              <MenuItem key={subIndex} onClick={subItem.action}>
+                <ListItemIcon style={{ visibility: isItemSelected(subItem) ? 'visible' : 'hidden' }}>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText primary={subItem.label} />
+              </MenuItem>
+            ))}
+          </Fragment>
+        ))}
       </Menu>
     </div>
   );
