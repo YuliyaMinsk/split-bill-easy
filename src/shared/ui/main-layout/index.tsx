@@ -1,5 +1,5 @@
 import { Container, Paper } from '@mui/material';
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { Footer, Header } from '@shared/ui';
 
@@ -8,7 +8,7 @@ type MainLayoutProps = {
   title: string;
 };
 
-const MainLayout = ({ children, title }: MainLayoutProps): JSX.Element => {
+const MainLayout: FC<MainLayoutProps> = ({ children, title }) => {
   return (
     <Container maxWidth="sm" disableGutters>
       <Header text={title} />

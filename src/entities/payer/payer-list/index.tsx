@@ -1,5 +1,5 @@
 import { Box, List } from '@mui/material';
-import { useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AddPayer } from '@/features/add-payer';
@@ -13,7 +13,7 @@ import { PayerNewItem } from './view/payer-new-item';
 
 const BLANK_NAME = '';
 
-const PayerList = (): JSX.Element => {
+const PayerList: FC = () => {
   const dispatch = useDispatch();
   const payerList = useSelector((state: RootState) => state.payers);
 

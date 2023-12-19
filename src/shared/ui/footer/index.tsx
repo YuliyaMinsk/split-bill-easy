@@ -1,13 +1,13 @@
 import { Person, ReceiptLong, Functions } from '@mui/icons-material';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
-import { SyntheticEvent, useState } from 'react';
+import { FC, SyntheticEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from '../../enums';
 import { createPath, getRelativePath } from '../../utils';
 
-const Footer = (): JSX.Element => {
+const Footer: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 

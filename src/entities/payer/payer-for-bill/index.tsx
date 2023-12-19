@@ -1,5 +1,5 @@
 import { Checkbox, List, ListItem, ListItemIcon, ListItemText, TextField, Typography } from '@mui/material';
-import { memo, useEffect, useState } from 'react';
+import { FC, memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PayersWithQuantity } from '@/shared/types';
@@ -14,13 +14,13 @@ type PayersForBillProps = {
   isDefault?: boolean;
 };
 
-const PayersForBill = ({
+const PayersForBill: FC<PayersForBillProps> = ({
   payerListWithQuantity,
   totalQuantity,
   updateValue,
   validatePayers,
   isDefault = false,
-}: PayersForBillProps): JSX.Element => {
+}) => {
   const { t } = useTranslation();
   const [payersWithQuantity, setPayersWithQuantity] = useState<PayersWithQuantity[]>(payerListWithQuantity);
   const [error, setError] = useState('');

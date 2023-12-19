@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { CalculationsPage } from '../pages/calculations-page';
@@ -8,7 +9,7 @@ import { PayersPage } from '../pages/payers-page';
 import { AppRoutes } from '../shared/enums';
 import { createPath } from '../shared/utils';
 
-const RoutesApp = (): JSX.Element => {
+const RoutesApp: FC = () => {
   return (
     <Routes>
       <Route path={createPath(AppRoutes.HOME)} element={<MainPage />} />

@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -6,7 +7,7 @@ import { RootState } from '@/shared/store';
 
 import { Dish } from '../dish';
 
-const DishList = (): JSX.Element => {
+const DishList: FC = () => {
   const { t } = useTranslation();
   const billList = useSelector((state: RootState) => state.bill.billList);
 

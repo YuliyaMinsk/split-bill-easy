@@ -1,11 +1,12 @@
 import { Box, Button } from '@mui/material';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
 import { generateBillText } from '@/shared/utils';
 
-const CopyPaymentSummary = (): JSX.Element => {
+const CopyPaymentSummary: FC = () => {
   const { t } = useTranslation();
   const bill = useSelector((state: RootState) => state.bill.billList);
   const serviceList = useSelector((state: RootState) => state.services);

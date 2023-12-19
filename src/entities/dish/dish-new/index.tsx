@@ -1,5 +1,5 @@
 import { List, ListItem, TextField, Typography } from '@mui/material';
-import { memo, useEffect, useState } from 'react';
+import { FC, memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Dish, DishFieldUpdate } from '@/shared/types';
@@ -13,7 +13,7 @@ type DishNewProps = {
   validateDish: (dish: Dish) => void;
 };
 
-const DishNew = ({ dish, onQuantityChange, updateValue, validateDish }: DishNewProps): JSX.Element => {
+const DishNew: FC<DishNewProps> = ({ dish, onQuantityChange, updateValue, validateDish }) => {
   const { t } = useTranslation();
   const [newDish, setNewDish] = useState(dish);
   const [errors, setErrors] = useState<{ [key in keyof Dish]?: boolean }>({});

@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CopyPaymentSummary } from '@/features/copy-payment-summary';
@@ -7,7 +8,7 @@ import { PayerListForCalculation } from '@/entities/payer/payer-list-for-calcula
 
 import { MainLayout } from '@shared/ui';
 
-function CalculationsPage() {
+const CalculationsPage: FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -17,6 +18,6 @@ function CalculationsPage() {
       <PayerListForCalculation />
     </MainLayout>
   );
-}
+};
 
 export { CalculationsPage };

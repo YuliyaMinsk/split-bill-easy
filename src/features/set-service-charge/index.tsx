@@ -1,11 +1,12 @@
 import { List } from '@mui/material';
 
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/store';
 import { updateServices } from '@/shared/store/service/service-slice';
 import { FieldWithPercent } from '@/shared/ui';
 
-const ServiceCharge = (): JSX.Element => {
+const ServiceCharge: FC = () => {
   const dispatch = useDispatch();
   const serviceList = useSelector((state: RootState) => state.services);
 

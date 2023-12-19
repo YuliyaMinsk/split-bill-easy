@@ -1,5 +1,5 @@
 import { FormControl, ListItem, MenuItem, MenuProps, Select, SelectChangeEvent, Typography } from '@mui/material';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const percentages = Array.from({ length: 21 }, (_, i) => i * 5);
@@ -20,7 +20,7 @@ type FieldWithPercentProps = {
   updateValue: (name: string, value: number) => void;
 };
 
-const FieldWithPercent = ({ name, value, updateValue }: FieldWithPercentProps): JSX.Element => {
+const FieldWithPercent: FC<FieldWithPercentProps> = ({ name, value, updateValue }) => {
   const { t } = useTranslation();
   const [percent, setPercent] = useState(value);
 

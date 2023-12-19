@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PayerList } from '@/entities/payer/payer-list';
 
 import { MainLayout } from '@shared/ui';
 
-function PayersPage() {
+const PayersPage: FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -12,6 +13,6 @@ function PayersPage() {
       <PayerList />
     </MainLayout>
   );
-}
+};
 
 export { PayersPage };

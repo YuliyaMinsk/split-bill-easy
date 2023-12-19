@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -27,7 +28,7 @@ type DishProps = {
   billLine: BillLine;
 };
 
-const Dish = ({ billLine }: DishProps): JSX.Element => {
+const Dish: FC<DishProps> = ({ billLine }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const currency = useSelector((state: RootState) => state.profile.currency);

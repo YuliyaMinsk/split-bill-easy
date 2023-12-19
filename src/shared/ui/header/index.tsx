@@ -1,4 +1,5 @@
 import { AppBar, Link as MuiLink, Toolbar, Typography } from '@mui/material';
+import { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { AppRoutes } from '@/shared/enums';
@@ -9,7 +10,7 @@ type HeaderProps = {
   text: string;
 };
 
-const Header = ({ text }: HeaderProps): JSX.Element => {
+const Header: FC<HeaderProps> = ({ text }) => {
   return (
     <AppBar position="sticky">
       <Toolbar>

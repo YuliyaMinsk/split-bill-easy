@@ -1,11 +1,12 @@
 import { AddCircleOutline } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
+import { FC } from 'react';
 
 type AddPayerProps = {
   onAdd: (event: React.MouseEvent) => void;
 };
 
-const AddPayer = ({ onAdd }: AddPayerProps): JSX.Element => {
+const AddPayer: FC<AddPayerProps> = ({ onAdd }) => {
   return (
     <IconButton aria-label="add" onClick={onAdd}>
       <AddCircleOutline />

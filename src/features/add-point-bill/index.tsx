@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,7 +11,7 @@ import { addBillLine, editBillLine, setEditingBillLine } from '@/shared/store/bi
 import { BillLine, Dish, PayersWithQuantity } from '@/shared/types';
 import { deepEqual } from '@/shared/utils';
 
-const AddPointBill = (): JSX.Element => {
+const AddPointBill: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const payerList = useSelector((state: RootState) => state.payers);

@@ -1,11 +1,12 @@
 import { Box } from '@mui/material';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
 
 import { PayerItemCalculation } from './view/payer-item-calculation';
 
-const PayerListForCalculation = (): JSX.Element => {
+const PayerListForCalculation: FC = () => {
   const payerList = useSelector((state: RootState) => state.payers);
 
   return (

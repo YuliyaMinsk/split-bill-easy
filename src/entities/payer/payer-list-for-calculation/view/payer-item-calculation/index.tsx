@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -25,7 +26,7 @@ type PayerItemCalculationProps = {
   currentPayer: Payer;
 };
 
-const PayerItemCalculation = ({ currentPayer }: PayerItemCalculationProps): JSX.Element => {
+const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer }) => {
   const { t } = useTranslation();
   const bill = useSelector((state: RootState) => state.bill.billList);
   const serviceList = useSelector((state: RootState) => state.services);

@@ -2,7 +2,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
-import { Fragment, useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,7 +19,7 @@ type MenuItem = {
   value?: LanguageKey | Currency;
 };
 
-const HeaderMenu = (): JSX.Element => {
+const HeaderMenu: FC = () => {
   const { i18n, t } = useTranslation();
   const dispatch = useDispatch();
   const { language: currentLanguage, currency: currentCurrency } = useSelector((state: RootState) => state.profile);

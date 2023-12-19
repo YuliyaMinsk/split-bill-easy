@@ -1,9 +1,10 @@
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { MainLayout } from '@shared/ui';
 
-function MainPage() {
+const MainPage: FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -43,6 +44,6 @@ function MainPage() {
       </Box>
     </MainLayout>
   );
-}
+};
 
 export { MainPage };

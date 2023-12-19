@@ -1,4 +1,5 @@
 import { ListItem, TextField } from '@mui/material';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Payer } from '@shared/types';
@@ -10,7 +11,7 @@ type PayerListItemProps = {
   handleAdd: () => void;
 };
 
-const PayerNewItem = ({ payer, ActionComponent, onNewPayerChange, handleAdd }: PayerListItemProps): JSX.Element => {
+const PayerNewItem: FC<PayerListItemProps> = ({ payer, ActionComponent, onNewPayerChange, handleAdd }) => {
   const { t } = useTranslation();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
