@@ -1,45 +1,38 @@
 import { ListItem, TextField } from '@mui/material';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { Payer } from '@shared/types';
 
-type PayerListItemProps = {
+interface PayerItemProps {
   payer: Payer;
   ActionComponent: JSX.Element;
-  onNewPayerChange: (newName: string) => void;
-  handleAdd: () => void;
-};
+  onPayerChange: (newValue: string) => void;
+  onEnterPress?: (value: string) => void;
+}
 
-const PayerNewItem: FC<PayerListItemProps> = ({ payer, ActionComponent, onNewPayerChange, handleAdd }) => {
+const PayerItem: FC<PayerItemProps> = ({ payer, ActionComponent, onPayerChange, onEnterPress }) => {
   const { t } = useTranslation();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onNewPayerChange(event.target.value);
+    onPayerChange(event.target.value);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key !== 'Enter') {
-      return;
-    }
-
-    const target = event.target as HTMLInputElement;
-    const value = target.value;
-
-    if (value) {
-      onNewPayerChange(value);
-      handleAdd();
+    if (event.key === 'Enter' && onEnterPress) {
+      const target = event.target as HTMLInputElement;
+      const value = target.value;
+      onEnterPress(value);
     }
   };
 
   return (
     <ListItem key={payer.id}>
       <TextField
-        id="outlined-basic"
+        id={`payer-input-${payer.id}`}
         fullWidth
         sx={{ mr: 1 }}
-        label={t('New name') || ''}
-        placeholder={t('Enter a new name') || ''}
+        label={payer.id ? t('Name') : t('New name')}
+        placeholder={payer.id ? '' : t('Enter a new name') || ''}
         value={payer.name}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
@@ -49,4 +42,4 @@ const PayerNewItem: FC<PayerListItemProps> = ({ payer, ActionComponent, onNewPay
   );
 };
 
-export { PayerNewItem };
+export { PayerItem };

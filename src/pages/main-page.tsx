@@ -7,6 +7,16 @@ import { MainLayout } from '@shared/ui';
 const MainPage: FC = () => {
   const { t } = useTranslation();
 
+  const listItem = [
+    { id: 1, text: t('1. Payers Tab'), secondary: t("Add everyone who's sharing the bill.") },
+    {
+      id: 2,
+      text: t('2. Items Tab'),
+      secondary: t('Enter each item on the bill, who ordered it, and how the cost is split.'),
+    },
+    { id: 3, text: t('3. Calculations Tab'), secondary: t('Add any extra charges like service fees or tips.') },
+  ];
+
   return (
     <MainLayout title={t('Split Bill Easy')}>
       <Box sx={{ m: '1rem', mb: '6rem' }}>
@@ -19,21 +29,11 @@ const MainPage: FC = () => {
         </Typography>
 
         <List>
-          <ListItem>
-            <ListItemText primary={t('1. Payers Tab')} secondary={t("Add everyone who's sharing the bill.")} />
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary={t('2. Items Tab')}
-              secondary={t('Enter each item on the bill, who ordered it, and how the cost is split.')}
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary={t('3. Calculations Tab')}
-              secondary={t('Add any extra charges like service fees or tips.')}
-            />
-          </ListItem>
+          {listItem.map((item) => (
+            <ListItem key={item.id}>
+              <ListItemText primary={item.text} secondary={item.secondary} />
+            </ListItem>
+          ))}
         </List>
 
         <Typography variant="body1" mb={2}>
