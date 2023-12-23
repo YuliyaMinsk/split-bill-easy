@@ -1,11 +1,11 @@
 import { ListItem, TextField } from '@mui/material';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Payer } from '@shared/types';
 
 interface PayerItemProps {
   payer: Payer;
-  ActionComponent: JSX.Element;
+  ActionComponent: ReactNode;
   onPayerChange: (newValue: string) => void;
   onEnterPress?: (value: string) => void;
 }
@@ -19,9 +19,7 @@ const PayerItem: FC<PayerItemProps> = ({ payer, ActionComponent, onPayerChange, 
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && onEnterPress) {
-      const target = event.target as HTMLInputElement;
-      const value = target.value;
-      onEnterPress(value);
+      onEnterPress(event.currentTarget.value);
     }
   };
 
