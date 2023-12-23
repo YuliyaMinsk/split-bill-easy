@@ -1,10 +1,14 @@
-import { List, ListItem, TextField, Typography } from '@mui/material';
-import { FC, memo, useEffect, useState } from 'react';
+import { List, Typography } from '@mui/material';
+import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Dish, DishFieldUpdate } from '@/shared/types';
 
-import { executeOnKeyDown } from '../utils/execute-on-key-down';
+import { ErrorDish, createFieldConfig } from './models';
+import { getErrorMessage } from './utils';
+import { DishTextField } from './views/dish-text-field';
+
+type FieldConfigKeys = 'name' | 'price' | 'quantity';
 
 type DishNewProps = {
   dish: Dish;
@@ -16,7 +20,9 @@ type DishNewProps = {
 const DishNew: FC<DishNewProps> = ({ dish, onQuantityChange, updateValue, validateDish }) => {
   const { t } = useTranslation();
   const [newDish, setNewDish] = useState(dish);
-  const [errors, setErrors] = useState<{ [key in keyof Dish]?: boolean }>({});
+  const [errors, setErrors] = useState<ErrorDish>({});
+
+  const fieldConfig = useMemo(() => createFieldConfig(t), [t]);
 
   const validateField = (field: keyof Dish): boolean => {
     switch (field) {
@@ -33,15 +39,6 @@ const DishNew: FC<DishNewProps> = ({ dish, onQuantityChange, updateValue, valida
 
   const handleBlur = (field: keyof Dish) => {
     setErrors({ ...errors, [field]: validateField(field) });
-  };
-
-  const getErrorMessage = (): string => {
-    const errorMessages = [];
-    if (errors.name) errorMessages.push(t('Item is required'));
-    if (errors.price) errorMessages.push(t('Price is required'));
-    if (errors.quantity) errorMessages.push(t('Quantity is required'));
-
-    return errorMessages.join(', ');
   };
 
   const handleInputChange = ({ field, value }: DishFieldUpdate) => {
@@ -75,48 +72,23 @@ const DishNew: FC<DishNewProps> = ({ dish, onQuantityChange, updateValue, valida
   return (
     <>
       <List>
-        <ListItem>
-          <TextField
-            id="item-name"
-            name="name"
-            fullWidth
-            label={t('Item') || ''}
-            placeholder={t('Enter an item') || ''}
-            value={newDish.name}
-            onChange={(e) => handleInputChange({ field: 'name', value: e.target.value })}
-            onKeyDown={(e) => executeOnKeyDown(e, handleInputChange)}
-            onBlur={() => handleBlur('name')}
-            error={errors.name}
-          />
-        </ListItem>
-        <ListItem>
-          <TextField
-            id="item-cost"
-            name="price"
-            fullWidth
-            label={t('Item cost') || ''}
-            placeholder={t('Enter an item cost') || ''}
-            value={newDish.price ? newDish.price.toString() : ''}
-            onChange={(e) => handleInputChange({ field: 'price', value: e.target.value })}
-            onKeyDown={(e) => executeOnKeyDown(e, handleInputChange)}
-            onBlur={() => handleBlur('price')}
-            error={errors.price}
-          />
-        </ListItem>
-        <ListItem>
-          <TextField
-            id="item-quantity"
-            type="number"
-            fullWidth
-            label={t('Quantity') || ''}
-            placeholder={t('Enter a quantity') || ''}
-            value={newDish.quantity ? newDish.quantity.toString() : ''}
-            onChange={(e) => handleInputChange({ field: 'quantity', value: e.target.value })}
-            onKeyDown={(e) => executeOnKeyDown(e, handleInputChange)}
-            onBlur={() => handleBlur('quantity')}
-            error={errors.quantity}
-          />
-        </ListItem>
+        {Object.keys(newDish).map((key) => {
+          if (key in fieldConfig) {
+            const fieldKey = key as FieldConfigKeys;
+            return (
+              <DishTextField
+                key={fieldKey}
+                fieldKey={fieldKey}
+                config={fieldConfig[fieldKey]}
+                value={newDish[fieldKey]?.toString() || ''}
+                handleInputChange={handleInputChange}
+                handleBlur={() => handleBlur(fieldKey)}
+                error={errors[fieldKey] || false}
+              />
+            );
+          }
+          return null;
+        })}
       </List>
       <Typography
         variant="caption"
@@ -125,11 +97,11 @@ const DishNew: FC<DishNewProps> = ({ dish, onQuantityChange, updateValue, valida
         color={Object.values(errors).some((e) => e) ? 'error' : 'inherit'}
         gutterBottom
       >
-        {Object.values(errors).some((e) => e) ? getErrorMessage() : ''}
+        {Object.values(errors).some((e) => e) ? getErrorMessage(errors, t) : ''}
       </Typography>
     </>
   );
 };
 
-const MemoizedDishNew: React.FC<DishNewProps> = memo(DishNew);
+const MemoizedDishNew: FC<DishNewProps> = memo(DishNew);
 export { MemoizedDishNew as DishNew };

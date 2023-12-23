@@ -5,7 +5,7 @@ import { AddPayer } from '@/features/add-payer';
 import { RemovePayer } from '@/features/remove-payer';
 
 import { usePayerList } from './hooks';
-import { PayerItem } from './view/payer-item';
+import { PayerItem } from './views/payer-item';
 
 const PayerList: FC = () => {
   const {

@@ -109,5 +109,5 @@ const PayersForBill: FC<PayersForBillProps> = ({
   );
 };
 
-const MemoizedPayersForBill: React.FC<PayersForBillProps> = memo(PayersForBill);
+const MemoizedPayersForBill: FC<PayersForBillProps> = memo(PayersForBill);
 export { MemoizedPayersForBill as PayersForBill };

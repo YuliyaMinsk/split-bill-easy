@@ -19,7 +19,7 @@ const PayerItem: FC<PayerItemProps> = ({ payer, ActionComponent, onPayerChange, 
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && onEnterPress) {
-      onEnterPress(event.currentTarget.value);
+      onEnterPress((event.target as HTMLInputElement).value);
     }
   };
 
