@@ -1,18 +1,10 @@
-import { FormControl, Grid, ListItem, MenuItem, MenuProps, Select, SelectChangeEvent, TextField } from '@mui/material';
-import { FC, useState } from 'react';
+import { Grid, ListItem, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { FC, useState, MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
+import { RootState } from '@/shared/store';
 import { FeeType } from '@/shared/types';
-
-const customMenuProps: Partial<MenuProps> = {
-  PaperProps: {
-    style: {
-      maxHeight: 195,
-      overflowY: 'auto',
-    },
-  },
-  disableScrollLock: true,
-};
 
 type FieldWithPercentProps = {
   name: string;
@@ -25,21 +17,24 @@ const FieldWithPercent: FC<FieldWithPercentProps> = ({ name, value, feeType, upd
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState<string>(value);
   const [selectedFeeType, setSelectedFeeType] = useState<FeeType>(feeType || 'percentage');
+  const currency = useSelector((state: RootState) => state.profile.currency);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     updateValue(name, Number(event.target.value), selectedFeeType);
   };
 
-  const handleFeeTypeChange = (event: SelectChangeEvent<FeeType>) => {
-    setSelectedFeeType(event.target.value as FeeType);
-    updateValue(name, Number(inputValue), event.target.value as FeeType);
+  const handleFeeTypeChange = (_event: MouseEvent<HTMLElement>, newFeeType: FeeType) => {
+    if (newFeeType !== null) {
+      setSelectedFeeType(newFeeType);
+      updateValue(name, Number(inputValue), newFeeType);
+    }
   };
 
   return (
     <ListItem key={name}>
       <Grid container spacing={2}>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <TextField
             fullWidth
             id={`outlined-basic-${name}`}
@@ -50,19 +45,27 @@ const FieldWithPercent: FC<FieldWithPercentProps> = ({ name, value, feeType, upd
             placeholder={t(name) || ''}
           />
         </Grid>
-        <Grid item xs={4}>
-          <FormControl fullWidth>
-            <Select
-              labelId={`fee-type-label-${name}`}
-              id={`fee-type-select-${name}`}
-              value={selectedFeeType}
-              onChange={handleFeeTypeChange}
-              MenuProps={customMenuProps}
+        <Grid item xs={2}>
+          <ToggleButtonGroup
+            color="primary"
+            exclusive
+            value={selectedFeeType}
+            onChange={handleFeeTypeChange}
+            sx={{ height: '100%' }}
+          >
+            <ToggleButton
+              value="percentage"
+              sx={{ minWidth: '50px', fontSize: '1.15rem', border: '1px solid rgba(0, 0, 0, 0.20)' }}
             >
-              <MenuItem value="percentage">{t('Percentage')}</MenuItem>
-              <MenuItem value="fixed">{t('Fixed')}</MenuItem>
-            </Select>
-          </FormControl>
+              %
+            </ToggleButton>
+            <ToggleButton
+              value="fixed"
+              sx={{ minWidth: '50px', fontSize: '1.15rem', border: '1px solid rgba(0, 0, 0, 0.20)' }}
+            >
+              {currency}
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Grid>
       </Grid>
     </ListItem>
