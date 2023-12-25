@@ -1,7 +1,18 @@
+import styled from '@emotion/styled';
 import { Container, Paper } from '@mui/material';
 import { FC, ReactNode } from 'react';
 
 import { Footer, Header } from '@shared/ui';
+
+const StyledPaper = styled(Paper)`
+  padding: 20px;
+  margin-bottom: 4rem;
+  flex-grow: 1;
+
+  @media (max-width: 480px) {
+    padding: 0;
+  }
+`;
 
 type MainLayoutProps = {
   children: ReactNode;
@@ -12,7 +23,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children, title }) => {
   return (
     <Container maxWidth="sm" disableGutters sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <Header text={title} />
-      <Paper sx={{ padding: '20px', mb: '4rem', flexGrow: 1 }}>{children}</Paper>
+      <StyledPaper>{children}</StyledPaper>
       <Footer />
     </Container>
   );

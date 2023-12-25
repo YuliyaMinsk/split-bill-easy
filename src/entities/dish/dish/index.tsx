@@ -76,11 +76,9 @@ const Dish: FC<DishProps> = ({ billLine }) => {
                       <TableCell component="th" scope="row">
                         {payer.name}
                       </TableCell>
-                      <TableCell align="right">----</TableCell>
                       <TableCell align="right">
                         {payer.quantity || 0} х {price} {currency}
                       </TableCell>
-                      <TableCell align="right">----</TableCell>
                       <TableCell align="right">
                         {individualPrices[index]} {currency}
                       </TableCell>

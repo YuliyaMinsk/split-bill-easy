@@ -1,10 +1,17 @@
-import { Grid, ListItem, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import styled from '@emotion/styled';
+import { ListItem, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { FC, useState, MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
 import { FeeType } from '@/shared/types';
+
+const StyledToggleButton = styled(ToggleButton)`
+  min-width: 50px;
+  font-size: 1.15rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+`;
 
 type FieldWithPercentProps = {
   name: string;
@@ -33,41 +40,26 @@ const FieldWithPercent: FC<FieldWithPercentProps> = ({ name, value, feeType, upd
 
   return (
     <ListItem key={name}>
-      <Grid container spacing={2}>
-        <Grid item xs={9}>
-          <TextField
-            fullWidth
-            id={`outlined-basic-${name}`}
-            value={inputValue}
-            onChange={handleInputChange}
-            type="number"
-            label={t(name) || ''}
-            placeholder={t(name) || ''}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <ToggleButtonGroup
-            color="primary"
-            exclusive
-            value={selectedFeeType}
-            onChange={handleFeeTypeChange}
-            sx={{ height: '100%' }}
-          >
-            <ToggleButton
-              value="percentage"
-              sx={{ minWidth: '50px', fontSize: '1.15rem', border: '1px solid rgba(0, 0, 0, 0.20)' }}
-            >
-              %
-            </ToggleButton>
-            <ToggleButton
-              value="fixed"
-              sx={{ minWidth: '50px', fontSize: '1.15rem', border: '1px solid rgba(0, 0, 0, 0.20)' }}
-            >
-              {currency}
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </Grid>
-      </Grid>
+      <TextField
+        fullWidth
+        id={`outlined-basic-${name}`}
+        value={inputValue}
+        onChange={handleInputChange}
+        type="number"
+        label={t(name) || ''}
+        placeholder={t(name) || ''}
+        sx={{ mr: 2 }}
+      />
+      <ToggleButtonGroup
+        color="primary"
+        exclusive
+        value={selectedFeeType}
+        onChange={handleFeeTypeChange}
+        sx={{ height: '100%' }}
+      >
+        <StyledToggleButton value="percentage">%</StyledToggleButton>
+        <StyledToggleButton value="fixed">{currency}</StyledToggleButton>
+      </ToggleButtonGroup>
     </ListItem>
   );
 };

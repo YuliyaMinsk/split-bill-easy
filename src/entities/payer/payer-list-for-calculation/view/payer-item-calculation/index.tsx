@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import {
@@ -21,6 +22,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/shared/store';
 import { Payer } from '@/shared/types';
 import { generateBillText } from '@/shared/utils';
+
+const StyledTableContainer = styled(TableContainer)`
+  background: rgba(151, 71, 255, 0.04);
+  border: 1px dashed #9747ff;
+  border-radius: 16px;
+  padding: 4px;
+`;
 
 type PayerItemCalculationProps = {
   currentPayer: Payer;
@@ -57,14 +65,7 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer }) =
       </AccordionSummary>
 
       <AccordionDetails>
-        <TableContainer
-          sx={{
-            background: 'rgba(151, 71, 255, 0.04)',
-            border: '1px dashed #9747FF',
-            borderRadius: 4,
-            padding: '4px',
-          }}
-        >
+        <StyledTableContainer>
           <Table sx={{ minWidth: '100%' }} size="small">
             <TableBody>
               {transformedData.dishes.map((dish) => {
@@ -73,11 +74,9 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer }) =
                     <TableCell component="th" scope="row">
                       {dish.name}
                     </TableCell>
-                    <TableCell align="right">----</TableCell>
                     <TableCell align="right">
                       {dish.quantity} х {Number(dish.price).toFixed()} {currency}
                     </TableCell>
-                    <TableCell align="right">----</TableCell>
                     <TableCell align="right">
                       {Number(Number(dish.quantity) * dish.price).toFixed()} {currency}
                     </TableCell>
@@ -92,7 +91,7 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer }) =
               {t('Copy to clipboard for ') + name}
             </Button>
           </Box>
-        </TableContainer>
+        </StyledTableContainer>
       </AccordionDetails>
     </Accordion>
   );

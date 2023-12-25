@@ -10,7 +10,7 @@ const PayerListForCalculation: FC = () => {
   const payerList = useSelector((state: RootState) => state.payers);
 
   return (
-    <Box sx={{ mt: 1, ml: 2, mr: 2, mb: 4 }}>
+    <Box sx={{ mt: 1, ml: 2, mr: 2, mb: 8 }}>
       {payerList.map((payer) => (
         <PayerItemCalculation key={payer.id} currentPayer={payer} />
       ))}
