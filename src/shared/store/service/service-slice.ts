@@ -7,6 +7,7 @@ const initialState: Service[] = SERVICE_FEE_ADJUSTMENTS.map(({ name, type }, ind
   id: String(index),
   name: name,
   type: type,
+  feeType: 'percentage',
   value: 0,
 }));
 

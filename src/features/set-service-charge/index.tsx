@@ -19,8 +19,14 @@ const ServiceCharge: FC = () => {
 
   return (
     <List>
-      {serviceList.map(({ id, name, value }) => (
-        <FieldWithPercent key={id} name={name} value={String(value) || '0'} updateValue={handleUpdateValue} />
+      {serviceList.map(({ id, name, feeType, value }) => (
+        <FieldWithPercent
+          key={id}
+          name={name}
+          feeType={feeType}
+          value={String(value) || '0'}
+          updateValue={handleUpdateValue}
+        />
       ))}
     </List>
   );

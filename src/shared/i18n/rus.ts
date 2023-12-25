@@ -48,6 +48,8 @@ const rusTranslations = {
     'Tips': 'Чаевые',
     'Discount': 'Скидка',
     'Tax': 'Налог',
+    'Percentage': 'Проценты',
+    'Fixed': 'Фиксированная сумма',
 
     // error messages
     'Error: Incorrect amount': 'Ошибка: Некорректная сумма',

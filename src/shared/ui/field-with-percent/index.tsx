@@ -1,8 +1,8 @@
-import { FormControl, ListItem, MenuItem, MenuProps, Select, SelectChangeEvent, Typography } from '@mui/material';
+import { FormControl, Grid, ListItem, MenuItem, MenuProps, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const percentages = Array.from({ length: 21 }, (_, i) => i * 5);
+import { FeeType } from '@/shared/types';
 
 const customMenuProps: Partial<MenuProps> = {
   PaperProps: {
@@ -17,36 +17,54 @@ const customMenuProps: Partial<MenuProps> = {
 type FieldWithPercentProps = {
   name: string;
   value: string;
-  updateValue: (name: string, value: number) => void;
+  feeType?: FeeType;
+  updateValue: (name: string, value: number, feeType: FeeType) => void;
 };
 
-const FieldWithPercent: FC<FieldWithPercentProps> = ({ name, value, updateValue }) => {
+const FieldWithPercent: FC<FieldWithPercentProps> = ({ name, value, feeType, updateValue }) => {
   const { t } = useTranslation();
-  const [percent, setPercent] = useState(value);
+  const [inputValue, setInputValue] = useState<string>(value);
+  const [selectedFeeType, setSelectedFeeType] = useState<FeeType>(feeType || 'percentage');
 
-  const handleInputChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
-    setPercent(event.target.value);
-    updateValue(name, Number(event.target.value));
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+    updateValue(name, Number(event.target.value), selectedFeeType);
+  };
+
+  const handleFeeTypeChange = (event: SelectChangeEvent<FeeType>) => {
+    setSelectedFeeType(event.target.value as FeeType);
+    updateValue(name, Number(inputValue), event.target.value as FeeType);
   };
 
   return (
     <ListItem key={name}>
-      <Typography
-        variant="body1"
-        sx={{ width: '80%', display: 'inline-block', mr: 1, pb: 1, borderBottom: '1px solid rgba(0, 0, 0, 0.42)' }}
-      >
-        {t(name)}
-      </Typography>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <Select id={`outlined-basic-${name}`} value={percent} onChange={handleInputChange} MenuProps={customMenuProps}>
-          {percentages.map((percentItem) => (
-            <MenuItem key={percentItem} value={percentItem.toString()}>
-              {percentItem}%
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <TextField
+            fullWidth
+            id={`outlined-basic-${name}`}
+            value={inputValue}
+            onChange={handleInputChange}
+            type="number"
+            label={t(name) || ''}
+            placeholder={t(name) || ''}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <FormControl fullWidth>
+            <Select
+              labelId={`fee-type-label-${name}`}
+              id={`fee-type-select-${name}`}
+              value={selectedFeeType}
+              onChange={handleFeeTypeChange}
+              MenuProps={customMenuProps}
+            >
+              <MenuItem value="percentage">{t('Percentage')}</MenuItem>
+              <MenuItem value="fixed">{t('Fixed')}</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
     </ListItem>
   );
 };

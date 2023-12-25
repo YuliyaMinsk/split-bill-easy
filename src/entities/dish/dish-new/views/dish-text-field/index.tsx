@@ -24,7 +24,7 @@ const DishTextField: FC<DishTextFieldProps> = ({ fieldKey, config, value, handle
         label={config.label}
         placeholder={config.placeholder}
         type={config.type}
-        value={value}
+        value={value === '0' ? '' : value}
         onChange={(e) => handleInputChange({ field: fieldKey, value: e.target.value })}
         onBlur={handleBlur}
         error={error}

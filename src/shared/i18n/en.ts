@@ -48,6 +48,8 @@ const enTranslations = {
     'Tips': 'Tips',
     'Discount': 'Discount',
     'Tax': 'Tax',
+    'Percentage': 'Percentage',
+    'Fixed': 'Fixed',
 
     // error messages
     'Error: Incorrect amount': 'Error: Incorrect amount',
