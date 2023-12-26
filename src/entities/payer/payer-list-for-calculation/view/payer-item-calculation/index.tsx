@@ -21,7 +21,7 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
 import { Payer } from '@/shared/types';
-import { generateBillText } from '@/shared/utils';
+import { DetailedPayerTotal, formatBillText } from '@/shared/utils';
 
 const StyledTableContainer = styled(TableContainer)`
   background: rgba(151, 71, 255, 0.04);
@@ -32,23 +32,17 @@ const StyledTableContainer = styled(TableContainer)`
 
 type PayerItemCalculationProps = {
   currentPayer: Payer;
+  payerDetail: DetailedPayerTotal;
 };
 
-const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer }) => {
+const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, payerDetail }) => {
   const { t } = useTranslation();
-  const bill = useSelector((state: RootState) => state.bill.billList);
-  const serviceList = useSelector((state: RootState) => state.services);
   const currency = useSelector((state: RootState) => state.profile.currency);
 
-  const { name } = currentPayer;
-
-  const payerBillData = generateBillText([currentPayer], bill, serviceList, t, currency);
-
-  const { billText, transformedData, totalPrice } = payerBillData[0];
-
   const handleCopyToClipboard = async () => {
+    const result = formatBillText(currentPayer, payerDetail, currency);
     try {
-      await navigator.clipboard.writeText(billText);
+      await navigator.clipboard.writeText(result);
       console.log('Bill copied to clipboard');
     } catch (err) {
       console.error('Failed to copy: ', err);
@@ -58,9 +52,9 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer }) =
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
-        <Typography sx={{ width: '40%', flexShrink: 0 }}>{name}</Typography>
+        <Typography sx={{ width: '40%', flexShrink: 0 }}>{currentPayer.name}</Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {totalPrice.toFixed()} {currency}
+          {payerDetail.total.toFixed(2)} {currency}
         </Typography>
       </AccordionSummary>
 
@@ -68,30 +62,39 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer }) =
         <StyledTableContainer>
           <Table sx={{ minWidth: '100%' }} size="small">
             <TableBody>
-              {transformedData.dishes.map((dish) => {
-                return (
-                  <TableRow key={String(currentPayer.id) + String(dish.id)}>
-                    <TableCell component="th" scope="row">
-                      {dish.name}
-                    </TableCell>
-                    <TableCell align="right">
-                      {dish.quantity} х {Number(dish.price).toFixed()} {currency}
-                    </TableCell>
-                    <TableCell align="right">
-                      {Number(Number(dish.quantity) * dish.price).toFixed()} {currency}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+              {payerDetail.dishes.map((dish) => (
+                <TableRow key={dish.dishId}>
+                  <TableCell component="th" scope="row">
+                    {dish.dishName}
+                  </TableCell>
+                  <TableCell align="right">{dish.quantity}</TableCell>
+                  <TableCell align="right">
+                    {dish.cost.toFixed(2)} {currency}
+                  </TableCell>
+                </TableRow>
+              ))}
+              {payerDetail.services.map(
+                (service) =>
+                  service.amount !== 0 && (
+                    <TableRow key={service.serviceId}>
+                      <TableCell component="th" scope="row" colSpan={2}>
+                        {service.serviceName}
+                      </TableCell>
+                      <TableCell align="right">
+                        {service.amount.toFixed(2)} {currency}
+                      </TableCell>
+                    </TableRow>
+                  ),
+              )}
             </TableBody>
           </Table>
-
-          <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
-            <Button size="small" variant="text" sx={{ mr: 1 }} onClick={handleCopyToClipboard}>
-              {t('Copy to clipboard for ') + name}
-            </Button>
-          </Box>
         </StyledTableContainer>
+
+        <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
+          <Button size="small" variant="text" sx={{ mr: 1 }} onClick={handleCopyToClipboard}>
+            {t('Copy to clipboard for ') + currentPayer.name}
+          </Button>
+        </Box>
       </AccordionDetails>
     </Accordion>
   );

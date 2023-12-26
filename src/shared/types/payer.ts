@@ -19,4 +19,10 @@ type PayerDishes = {
   }[];
 };
 
-export type { Payer, PayersWithQuantity, PayerDishes };
+type PayerTotal = {
+  id: string;
+  name: string;
+  total: number;
+};
+
+export type { Payer, PayerTotal, PayersWithQuantity, PayerDishes };
