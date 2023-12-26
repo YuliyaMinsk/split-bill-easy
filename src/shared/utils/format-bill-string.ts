@@ -1,10 +1,12 @@
+import { TFunction } from 'i18next';
+
 import { Currency } from '../enums';
 import { Payer } from '../types';
 import { DetailedPayerTotal } from '.';
 
-function formatBillText(currentPayer: Payer, payerDetail: DetailedPayerTotal, currency: Currency) {
+function formatBillText(currentPayer: Payer, payerDetail: DetailedPayerTotal, currency: Currency, t: TFunction) {
   let totalForPayer = 0;
-  let billText = `Счёт для: ${currentPayer.name}\n`;
+  let billText = '```\n' + t('Bill for') + `: ${currentPayer.name}\n`;
   billText += '------------------------------\n';
 
   payerDetail.dishes.forEach((dish) => {
@@ -20,7 +22,7 @@ function formatBillText(currentPayer: Payer, payerDetail: DetailedPayerTotal, cu
   });
 
   billText += '------------------------------\n';
-  billText += `Итоговая сумма      : ${totalForPayer.toFixed(2)} ${currency}`;
+  billText += t('Total price') + `      : ${totalForPayer.toFixed(2)} ${currency}` + '\n```';
 
   return billText;
 }

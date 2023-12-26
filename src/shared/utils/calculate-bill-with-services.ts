@@ -90,20 +90,18 @@ function applyServices(detailedTotals: DetailedPayerTotal[], services: Service[]
 }
 
 function applyAddServices(detailedTotals: DetailedPayerTotal[], services: Service[]): DetailedPayerTotal[] {
-  return detailedTotals.map((payer) => {
+  const appliedAddTotals = detailedTotals.map((payer) => {
     let total = payer.total;
-    const appliedServices = [...payer.services];
+    const appliedServices = JSON.parse(JSON.stringify(payer.services));
 
+    console.log('🥶 payer', payer.name);
+    console.log('🥶 appliedServices 1', [...appliedServices]);
+
+    let totalPercentageServices = 0;
     services.forEach((service) => {
-      if (service.type === 'add') {
-        let serviceAmount: number;
-        if (service.feeType === 'fixed') {
-          serviceAmount = service.value / detailedTotals.length;
-        } else {
-          serviceAmount = total * (service.value / 100);
-        }
-
-        total += serviceAmount;
+      if (service.type === 'add' && service.feeType === 'percentage') {
+        const serviceAmount = payer.total * (service.value / 100);
+        totalPercentageServices += serviceAmount;
 
         appliedServices.push({
           serviceId: service.id,
@@ -114,12 +112,32 @@ function applyAddServices(detailedTotals: DetailedPayerTotal[], services: Servic
       }
     });
 
+    services.forEach((service) => {
+      if (service.type === 'add' && service.feeType === 'fixed') {
+        const serviceAmount = service.value / detailedTotals.length;
+        total += serviceAmount;
+
+        console.log('🥶 appliedServices 2', [...appliedServices]);
+
+        appliedServices.push({
+          serviceId: service.id,
+          serviceName: service.name,
+          type: service.type,
+          amount: serviceAmount,
+        });
+      }
+    });
+
+    total += totalPercentageServices;
+
     return {
       ...payer,
       total,
       services: appliedServices,
     };
   });
+
+  return appliedAddTotals;
 }
 
 function applyFixedSubtractService(detailedTotals: DetailedPayerTotal[], service: Service): PayerDiscount[] {

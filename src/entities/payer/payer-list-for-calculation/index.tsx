@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
-import { applyServices, calculateDishCosts, calculateTotalBill } from '@/shared/utils';
+import { applyServices, calculateDishCosts } from '@/shared/utils';
 
 import { PayerItemCalculation } from './view/payer-item-calculation';
 
@@ -14,7 +14,6 @@ const PayerListForCalculation: FC = () => {
 
   let detailedTotals = calculateDishCosts(payerList, billList);
   detailedTotals = applyServices(detailedTotals, services);
-  const totalBill = calculateTotalBill(detailedTotals);
 
   return (
     <Box sx={{ mt: 1, ml: 2, mr: 2, mb: 10 }}>

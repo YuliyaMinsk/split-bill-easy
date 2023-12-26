@@ -40,7 +40,7 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, pay
   const currency = useSelector((state: RootState) => state.profile.currency);
 
   const handleCopyToClipboard = async () => {
-    const result = formatBillText(currentPayer, payerDetail, currency);
+    const result = formatBillText(currentPayer, payerDetail, currency, t);
     try {
       await navigator.clipboard.writeText(result);
       console.log('Bill copied to clipboard');

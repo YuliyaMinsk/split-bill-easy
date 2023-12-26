@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
-import { applyServices, calculateDishCosts, calculateTotalBill } from '@/shared/utils';
+import { applyServices, calculateDishCosts, formatBillText } from '@/shared/utils';
 
 const CopyPaymentSummary: FC = () => {
   const { t } = useTranslation();
@@ -15,14 +15,17 @@ const CopyPaymentSummary: FC = () => {
 
   let detailedTotals = calculateDishCosts(payerList, billList);
   detailedTotals = applyServices(detailedTotals, serviceList);
-  const totalBill = calculateTotalBill(detailedTotals);
 
-  // const payerBillData = generateBillText(payerList, bill, serviceList, t, currency);
-  // const allBillsText = payerBillData.map((data) => data.billText).join('\n\n');
+  const allBillsText = detailedTotals
+    .map((payerDetail) => {
+      const currentPayer = payerList.find((payer) => payer.id === payerDetail.id);
+      return currentPayer ? formatBillText(currentPayer, payerDetail, currency, t) : '';
+    })
+    .join('\n');
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText('!!!');
+      await navigator.clipboard.writeText(allBillsText);
       console.log('Bill copied to clipboard');
     } catch (err) {
       console.error('Failed to copy: ', err);
