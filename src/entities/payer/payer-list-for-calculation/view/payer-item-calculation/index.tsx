@@ -30,6 +30,12 @@ const StyledTableContainer = styled(TableContainer)`
   padding: 4px;
 `;
 
+const StyledTableRow = styled(TableRow)(() => ({
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
 type PayerItemCalculationProps = {
   currentPayer: Payer;
   payerDetail: DetailedPayerTotal;
@@ -59,36 +65,38 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, pay
       </AccordionSummary>
 
       <AccordionDetails>
-        <StyledTableContainer>
-          <Table sx={{ minWidth: '100%' }} size="small">
-            <TableBody>
-              {payerDetail.dishes.map((dish) => (
-                <TableRow key={dish.dishId}>
-                  <TableCell component="th" scope="row">
-                    {dish.dishName}
-                  </TableCell>
-                  <TableCell align="right">{dish.quantity}</TableCell>
-                  <TableCell align="right">
-                    {dish.cost.toFixed(2)} {currency}
-                  </TableCell>
-                </TableRow>
-              ))}
-              {payerDetail.services.map(
-                (service) =>
-                  service.amount !== 0 && (
-                    <TableRow key={service.serviceId}>
-                      <TableCell component="th" scope="row" colSpan={2}>
-                        {service.serviceName}
-                      </TableCell>
-                      <TableCell align="right">
-                        {service.amount.toFixed(2)} {currency}
-                      </TableCell>
-                    </TableRow>
-                  ),
-              )}
-            </TableBody>
-          </Table>
-        </StyledTableContainer>
+        {!!payerDetail.dishes.length && (
+          <StyledTableContainer>
+            <Table sx={{ minWidth: '100%' }} size="small">
+              <TableBody>
+                {payerDetail.dishes.map((dish) => (
+                  <StyledTableRow key={dish.dishId}>
+                    <TableCell component="th" scope="row">
+                      {dish.dishName}
+                    </TableCell>
+                    <TableCell align="right">{dish.quantity}</TableCell>
+                    <TableCell align="right">
+                      {dish.cost.toFixed(2)} {currency}
+                    </TableCell>
+                  </StyledTableRow>
+                ))}
+                {payerDetail.services.map(
+                  (service) =>
+                    service.amount !== 0 && (
+                      <StyledTableRow key={service.serviceId}>
+                        <TableCell component="th" scope="row" colSpan={2}>
+                          {service.serviceName}
+                        </TableCell>
+                        <TableCell align="right">
+                          {service.amount.toFixed(2)} {currency}
+                        </TableCell>
+                      </StyledTableRow>
+                    ),
+                )}
+              </TableBody>
+            </Table>
+          </StyledTableContainer>
+        )}
 
         <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
           <Button size="small" variant="text" sx={{ mr: 1 }} onClick={handleCopyToClipboard}>
