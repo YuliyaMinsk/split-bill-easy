@@ -35,6 +35,9 @@ const enTranslations = {
     'Save': 'Save',
     'Edit': 'Edit',
     'Delete': 'Delete',
+    'Total': 'Total',
+
+    // calculations
     'Calculate after extra charges': 'Calculate after extra charges',
     'Copy to clipboard for everyone': 'Copy to clipboard for everyone',
     'Copy to clipboard for ': 'Copy to clipboard for ',

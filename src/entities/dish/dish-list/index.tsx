@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -19,6 +19,8 @@ const StyledBox = styled(Box)`
 const DishList: FC = () => {
   const { t } = useTranslation();
   const billList = useSelector((state: RootState) => state.bill.billList);
+  const currency = useSelector((state: RootState) => state.profile.currency);
+  const total = billList.reduce((acc, bill) => acc + bill.dish.price * bill.dish.quantity, 0);
 
   if (billList.length === 0) {
     return (
@@ -33,6 +35,9 @@ const DishList: FC = () => {
       {billList.map((bill) => (
         <Dish key={bill.dish.name + bill.dish.id} billLine={bill} />
       ))}
+      <Typography variant="h5" sx={{ color: 'text.secondary', m: 1, textAlign: 'right' }}>
+        {t('Total') + ':'} {total} {currency}
+      </Typography>
     </StyledBox>
   );
 };

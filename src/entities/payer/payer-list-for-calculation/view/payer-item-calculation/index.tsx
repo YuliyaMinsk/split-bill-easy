@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import {
@@ -10,8 +9,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
-  TableRow,
   Typography,
 } from '@mui/material';
 
@@ -20,21 +17,9 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
+import { StyledTableContainer, StyledTableRow } from '@/shared/styles';
 import { Payer } from '@/shared/types';
 import { DetailedPayerTotal, formatBillText } from '@/shared/utils';
-
-const StyledTableContainer = styled(TableContainer)`
-  background: rgba(151, 71, 255, 0.04);
-  border: 1px dashed #9747ff;
-  border-radius: 16px;
-  padding: 4px;
-`;
-
-const StyledTableRow = styled(TableRow)(() => ({
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
 
 type PayerItemCalculationProps = {
   currentPayer: Payer;

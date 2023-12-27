@@ -35,6 +35,9 @@ const rusTranslations = {
     'Save': 'Сохранить',
     'Edit': 'Редактировать',
     'Delete': 'Удалить',
+    'Total': 'Итого',
+
+    // calculations
     'Calculate after extra charges': 'Рассчитать после дополнительных сборов',
     'Copy to clipboard for everyone': 'Копировать список участников с итоговыми суммами',
     'Copy to clipboard for ': 'Копировать список для ',
@@ -44,7 +47,7 @@ const rusTranslations = {
     'Total price': 'Итоговая сумма',
 
     // services
-    'Service Charge': 'Сервисный сбор',
+    'Service Charge': 'За обслуживание',
     'Tips': 'Чаевые',
     'Discount': 'Скидка',
     'Tax': 'Налог',

@@ -21,7 +21,7 @@ const CopyPaymentSummary: FC = () => {
       const currentPayer = payerList.find((payer) => payer.id === payerDetail.id);
       return currentPayer ? formatBillText(currentPayer, payerDetail, currency, t) : '';
     })
-    .join('\n');
+    .join('\n\n');
 
   const handleCopy = async () => {
     try {

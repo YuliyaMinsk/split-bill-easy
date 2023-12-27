@@ -41,7 +41,7 @@ function calculateDishCosts(payers: Payer[], billList: BillLine[]): DetailedPaye
     billItem.payers.forEach((payer) => {
       const payerDetail = detailedTotals.find((detail) => detail.id === payer.id);
       if (payerDetail && payer.isChecked && payer.quantity !== null) {
-        const payerShare = Math.round(dishCost * (payer.quantity / billItem.dish.quantity) * 100);
+        const payerShare = Math.ceil(dishCost * (Number(payer.quantity) / billItem.dish.quantity) * 100);
         payerDetail.dishes.push({
           dishId: billItem.dish.id,
           dishName: billItem.dish.name,
@@ -94,9 +94,6 @@ function applyAddServices(detailedTotals: DetailedPayerTotal[], services: Servic
     let total = payer.total;
     const appliedServices = JSON.parse(JSON.stringify(payer.services));
 
-    console.log('🥶 payer', payer.name);
-    console.log('🥶 appliedServices 1', [...appliedServices]);
-
     let totalPercentageServices = 0;
     services.forEach((service) => {
       if (service.type === 'add' && service.feeType === 'percentage') {
@@ -116,8 +113,6 @@ function applyAddServices(detailedTotals: DetailedPayerTotal[], services: Servic
       if (service.type === 'add' && service.feeType === 'fixed') {
         const serviceAmount = service.value / detailedTotals.length;
         total += serviceAmount;
-
-        console.log('🥶 appliedServices 2', [...appliedServices]);
 
         appliedServices.push({
           serviceId: service.id,

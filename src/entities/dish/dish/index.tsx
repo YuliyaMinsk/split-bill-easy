@@ -9,8 +9,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
-  TableRow,
   Typography,
 } from '@mui/material';
 
@@ -20,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
 import { removeBillLine, setEditingBillLine } from '@/shared/store/bill/bill-slice';
+import { StyledTableContainer, StyledTableRow } from '@/shared/styles';
 import { BillLine } from '@/shared/types';
 
 import { calculateIndividualPrices } from '../utils';
@@ -37,9 +36,6 @@ const Dish: FC<DishProps> = ({ billLine }) => {
   const { name, price, quantity } = dish;
 
   const individualPrices = calculateIndividualPrices(price, quantity, payers);
-  const totalPaid = individualPrices.reduce((sum, price) => sum + price, 0);
-  const totalCost = price * quantity;
-  const overpayment = totalPaid - totalCost;
 
   const handleEdit = () => {
     dispatch(setEditingBillLine(billLine));
@@ -52,27 +48,20 @@ const Dish: FC<DishProps> = ({ billLine }) => {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
-        <Typography sx={{ width: '40%', flexShrink: 0 }}>{name}</Typography>
+        <Typography sx={{ width: '40%', flexShrink: 0, textAlign: 'left' }}>{name}</Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {quantity} → {price} {!!overpayment && ' + ' + overpayment} {currency}
+          {quantity} → {price} {currency}
         </Typography>
       </AccordionSummary>
 
       <AccordionDetails>
-        <TableContainer
-          sx={{
-            background: 'rgba(151, 71, 255, 0.04)',
-            border: '1px dashed #9747FF',
-            borderRadius: 4,
-            padding: '4px',
-          }}
-        >
+        <StyledTableContainer>
           <Table sx={{ minWidth: '100%' }} size="small">
             <TableBody>
               {payers.map(
                 (payer, index) =>
                   payer.isChecked && (
-                    <TableRow key={payer.id}>
+                    <StyledTableRow key={payer.id}>
                       <TableCell component="th" scope="row">
                         {payer.name}
                       </TableCell>
@@ -80,23 +69,23 @@ const Dish: FC<DishProps> = ({ billLine }) => {
                         {payer.quantity || 0} х {price} {currency}
                       </TableCell>
                       <TableCell align="right">
-                        {individualPrices[index]} {currency}
+                        {individualPrices[index].toFixed(2)} {currency}
                       </TableCell>
-                    </TableRow>
+                    </StyledTableRow>
                   ),
               )}
             </TableBody>
           </Table>
+        </StyledTableContainer>
 
-          <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
-            <Button size="small" variant="text" sx={{ mr: 1 }} onClick={handleEdit}>
-              {t('Edit')}
-            </Button>
-            <Button size="small" variant="text" onClick={handleDelete}>
-              {t('Delete')}
-            </Button>
-          </Box>
-        </TableContainer>
+        <Box sx={{ display: 'flex', justifyContent: 'center', margin: 1 }}>
+          <Button size="small" variant="text" sx={{ mr: 1 }} onClick={handleEdit}>
+            {t('Edit')}
+          </Button>
+          <Button size="small" variant="text" onClick={handleDelete}>
+            {t('Delete')}
+          </Button>
+        </Box>
       </AccordionDetails>
     </Accordion>
   );
