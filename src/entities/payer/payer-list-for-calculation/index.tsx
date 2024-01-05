@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
-import { applyServices, calculateDishCosts } from '@/shared/utils';
+import { applyServices, calculateDishCosts, roundUp } from '@/shared/utils';
 
 import { PayerItemCalculation } from './view/payer-item-calculation';
 
@@ -22,7 +22,7 @@ const PayerListForCalculation: FC = () => {
   return (
     <Box sx={{ mt: 1, ml: 2, mr: 2, mb: 10 }}>
       <Typography variant="h5" sx={{ color: 'text.secondary', m: 1, textAlign: 'right' }}>
-        {t('Total') + ':'} {total} {currency}
+        {t('Total') + ':'} {roundUp(total)} {currency}
       </Typography>
 
       {payerList.map((payer) => {

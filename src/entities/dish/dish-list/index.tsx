@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
+import { roundUp } from '@/shared/utils';
 
 import { Dish } from '../dish';
 
@@ -36,7 +37,7 @@ const DishList: FC = () => {
         <Dish key={bill.dish.name + bill.dish.id} billLine={bill} />
       ))}
       <Typography variant="h5" sx={{ color: 'text.secondary', m: 1, textAlign: 'right' }}>
-        {t('Total') + ':'} {total} {currency}
+        {t('Total') + ':'} {roundUp(total)} {currency}
       </Typography>
     </StyledBox>
   );

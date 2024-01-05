@@ -20,6 +20,7 @@ import { RootState } from '@/shared/store';
 import { removeBillLine, setEditingBillLine } from '@/shared/store/bill/bill-slice';
 import { StyledTableContainer, StyledTableRow } from '@/shared/styles';
 import { BillLine } from '@/shared/types';
+import { roundUp } from '@/shared/utils';
 
 import { calculateIndividualPrices } from '../utils';
 
@@ -66,10 +67,10 @@ const Dish: FC<DishProps> = ({ billLine }) => {
                         {payer.name}
                       </TableCell>
                       <TableCell align="right">
-                        {payer.quantity || 0} х {price} {currency}
+                        {payer.quantity ? roundUp(payer.quantity, 2) : 0} х {price} {currency}
                       </TableCell>
                       <TableCell align="right">
-                        {individualPrices[index].toFixed(2)} {currency}
+                        {roundUp(individualPrices[index], 2)} {currency}
                       </TableCell>
                     </StyledTableRow>
                   ),

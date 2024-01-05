@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/shared/store';
 import { StyledTableContainer, StyledTableRow } from '@/shared/styles';
 import { Payer } from '@/shared/types';
-import { DetailedPayerTotal, formatBillText } from '@/shared/utils';
+import { DetailedPayerTotal, formatBillText, roundUp } from '@/shared/utils';
 
 type PayerItemCalculationProps = {
   currentPayer: Payer;
@@ -45,7 +45,7 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, pay
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel-content" id="panel-header">
         <Typography sx={{ width: '40%', flexShrink: 0 }}>{currentPayer.name}</Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {payerDetail.total.toFixed(2)} {currency}
+          {roundUp(payerDetail.total, 2)} {currency}
         </Typography>
       </AccordionSummary>
 
@@ -59,9 +59,9 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, pay
                     <TableCell component="th" scope="row">
                       {dish.dishName}
                     </TableCell>
-                    <TableCell align="right">{dish.quantity}</TableCell>
+                    <TableCell align="right">{roundUp(dish.quantity, 2)}</TableCell>
                     <TableCell align="right">
-                      {dish.cost.toFixed(2)} {currency}
+                      {roundUp(dish.cost, 2)} {currency}
                     </TableCell>
                   </StyledTableRow>
                 ))}
@@ -73,7 +73,7 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, pay
                           {service.serviceName}
                         </TableCell>
                         <TableCell align="right">
-                          {service.amount.toFixed(2)} {currency}
+                          {roundUp(service.amount, 2)} {currency}
                         </TableCell>
                       </StyledTableRow>
                     ),
