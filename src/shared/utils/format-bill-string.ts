@@ -22,7 +22,7 @@ function formatBillText(currentPayer: Payer, payerDetail: DetailedPayerTotal, cu
   });
 
   billText += '------------------------------\n';
-  billText += t('Total price') + `      : ${totalForPayer.toFixed(2)} ${currency}` + '\n```';
+  billText += t('Total price') + `      : ${totalForPayer.toFixed(2)} ${currency}` + '\n\n```';
 
   return billText;
 }

@@ -15,7 +15,7 @@ const createFieldConfig = (
   price: {
     label: t('Item cost'),
     placeholder: t('Enter an item cost'),
-    type: 'text',
+    type: 'number',
   },
   quantity: {
     label: t('Quantity'),

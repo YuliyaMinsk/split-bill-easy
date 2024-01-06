@@ -70,7 +70,7 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, pay
                     service.amount !== 0 && (
                       <StyledTableRow key={service.serviceId}>
                         <TableCell component="th" scope="row" colSpan={2}>
-                          {service.serviceName}
+                          {t(service.serviceName)}
                         </TableCell>
                         <TableCell align="right">
                           {roundUp(service.amount, 2)} {currency}
