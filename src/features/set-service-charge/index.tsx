@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/store';
 import { updateServices } from '@/shared/store/service/service-slice';
 import { FeeType } from '@/shared/types';
-import { FieldWithPercent } from '@/shared/ui';
+import { FieldWithType } from '@/shared/ui';
 
 const ServiceCharge: FC = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const ServiceCharge: FC = () => {
 
   const handleUpdateValue = (name: string, value: number, feeType: FeeType) => {
     const serviceToUpdate = serviceList.find((service) => service.name === name);
+
     if (serviceToUpdate) {
       dispatch(updateServices({ ...serviceToUpdate, value, feeType }));
     }
@@ -22,7 +23,7 @@ const ServiceCharge: FC = () => {
   return (
     <List>
       {serviceList.map(({ id, name, feeType, value }) => (
-        <FieldWithPercent
+        <FieldWithType
           key={id}
           name={name}
           feeType={feeType}

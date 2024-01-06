@@ -163,6 +163,8 @@ function applyFixedSubtractService(detailedTotals: DetailedPayerTotal[], service
       }
     });
 
+    totalDiscountApplied = Math.round(totalDiscountApplied * 1000) / 1000;
+
     remainingDiscount -= totalDiscountApplied;
 
     payersEligibleForDiscount = detailedTotals.filter(

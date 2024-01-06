@@ -13,21 +13,21 @@ const StyledToggleButton = styled(ToggleButton)`
   border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
-type FieldWithPercentProps = {
+type FieldWithTypeProps = {
   name: string;
   value: string;
   feeType?: FeeType;
   updateValue: (name: string, value: number, feeType: FeeType) => void;
 };
 
-const FieldWithPercent: FC<FieldWithPercentProps> = ({ name, value, feeType, updateValue }) => {
+const FieldWithType: FC<FieldWithTypeProps> = ({ name, value, feeType, updateValue }) => {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState<string>(value);
   const [selectedFeeType, setSelectedFeeType] = useState<FeeType>(feeType || 'percentage');
   const currency = useSelector((state: RootState) => state.profile.currency);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    setInputValue(String(event.target.value || ''));
     updateValue(name, Number(event.target.value), selectedFeeType);
   };
 
@@ -64,4 +64,4 @@ const FieldWithPercent: FC<FieldWithPercentProps> = ({ name, value, feeType, upd
   );
 };
 
-export { FieldWithPercent };
+export { FieldWithType };

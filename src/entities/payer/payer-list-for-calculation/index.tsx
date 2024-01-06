@@ -15,9 +15,9 @@ const PayerListForCalculation: FC = () => {
   const services = useSelector((state: RootState) => state.services);
   const currency = useSelector((state: RootState) => state.profile.currency);
 
-  let detailedTotals = calculateDishCosts(payerList, billList);
-  detailedTotals = applyServices(detailedTotals, services);
-  const total = detailedTotals.reduce((acc, detail) => acc + detail.total, 0);
+  const detailedTotals = calculateDishCosts(payerList, billList);
+  const detailedTotalsWithServices = applyServices(detailedTotals, services);
+  const total = detailedTotalsWithServices.reduce((acc, detail) => acc + detail.total, 0);
 
   return (
     <Box sx={{ mt: 1, ml: 2, mr: 2, mb: 10 }}>
@@ -26,7 +26,7 @@ const PayerListForCalculation: FC = () => {
       </Typography>
 
       {payerList.map((payer) => {
-        const payerDetail = detailedTotals.find((detail) => detail.id === payer.id);
+        const payerDetail = detailedTotalsWithServices.find((detail) => detail.id === payer.id);
         return payerDetail ? (
           <PayerItemCalculation key={payer.id} currentPayer={payer} payerDetail={payerDetail} />
         ) : null;
