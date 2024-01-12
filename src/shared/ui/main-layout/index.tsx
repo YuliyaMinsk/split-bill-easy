@@ -14,10 +14,10 @@ const StyledPaper = styled(Paper)`
   }
 `;
 
-type MainLayoutProps = {
+interface MainLayoutProps {
   children: ReactNode;
   title: string;
-};
+}
 
 const MainLayout: FC<MainLayoutProps> = ({ children, title }) => {
   return (

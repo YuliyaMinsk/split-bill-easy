@@ -18,13 +18,13 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
 import { StyledTableContainer, StyledTableRow } from '@/shared/styles';
-import { Payer } from '@/shared/types';
-import { DetailedPayerTotal, formatBillText, roundUp } from '@/shared/utils';
+import { DetailedPayerTotal, Payer } from '@/shared/types';
+import { formatBillText, roundUp } from '@/shared/utils';
 
-type PayerItemCalculationProps = {
+interface PayerItemCalculationProps {
   currentPayer: Payer;
   payerDetail: DetailedPayerTotal;
-};
+}
 
 const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, payerDetail }) => {
   const { t } = useTranslation();

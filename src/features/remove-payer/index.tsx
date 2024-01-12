@@ -2,9 +2,9 @@ import { RemoveCircleOutline } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { FC } from 'react';
 
-type RemovePayerProps = {
+interface RemovePayerProps {
   onRemove: () => void;
-};
+}
 
 const RemovePayer: FC<RemovePayerProps> = ({ onRemove }) => {
   return (

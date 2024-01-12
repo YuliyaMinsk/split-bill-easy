@@ -24,9 +24,9 @@ import { roundUp } from '@/shared/utils';
 
 import { calculateIndividualPrices } from '../utils';
 
-type DishProps = {
+interface DishProps {
   billLine: BillLine;
-};
+}
 
 const Dish: FC<DishProps> = ({ billLine }) => {
   const { t } = useTranslation();

@@ -1,31 +1,4 @@
-import { BillLine, Payer, Service } from '../types';
-
-interface DetailedPayerTotal {
-  id: string;
-  name: string;
-  dishes: DishTotal[];
-  services: ServiceTotal[];
-  total: number;
-}
-
-interface DishTotal {
-  dishId: string;
-  dishName: string;
-  cost: number;
-  quantity: number;
-}
-
-interface ServiceTotal {
-  serviceId: string;
-  serviceName: string;
-  type: 'add' | 'subtract';
-  amount: number;
-}
-
-interface PayerDiscount {
-  payerId: string;
-  discountAmount: number;
-}
+import { BillLine, DetailedPayerTotal, Payer, PayerDiscount, Service } from '../types';
 
 function calculateDishCosts(payers: Payer[], billList: BillLine[]): DetailedPayerTotal[] {
   const detailedTotals: DetailedPayerTotal[] = payers.map((payer) => ({
@@ -180,4 +153,3 @@ function calculateTotalBill(detailedTotals: DetailedPayerTotal[]): number {
 }
 
 export { calculateTotalBill, applyServices, calculateDishCosts };
-export type { DetailedPayerTotal };

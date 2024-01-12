@@ -1,8 +1,7 @@
 import { TFunction } from 'i18next';
 
 import { Currency } from '../enums';
-import { Payer } from '../types';
-import { DetailedPayerTotal } from '.';
+import { DetailedPayerTotal, Payer } from '../types';
 
 function formatBillText(currentPayer: Payer, payerDetail: DetailedPayerTotal, currency: Currency, t: TFunction) {
   let totalForPayer = 0;

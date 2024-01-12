@@ -10,12 +10,12 @@ import { DishTextField } from './views/dish-text-field';
 
 type FieldConfigKeys = 'name' | 'price' | 'quantity';
 
-type DishNewProps = {
+interface DishNewProps {
   dish: Dish;
   onQuantityChange: (quantity: number) => void;
   updateValue: (dish: Dish) => void;
   validateDish: (dish: Dish) => void;
-};
+}
 
 const DishNew: FC<DishNewProps> = ({ dish, onQuantityChange, updateValue, validateDish }) => {
   const { t } = useTranslation();

@@ -6,9 +6,9 @@ import { AppRoutes } from '@/shared/enums';
 import { HeaderMenu } from '@/shared/ui';
 import { createPath } from '@/shared/utils';
 
-type HeaderProps = {
+interface HeaderProps {
   text: string;
-};
+}
 
 const Header: FC<HeaderProps> = ({ text }) => {
   return (

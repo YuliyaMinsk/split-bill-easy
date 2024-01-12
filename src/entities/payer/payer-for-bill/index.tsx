@@ -6,13 +6,13 @@ import { PayersWithQuantity } from '@/shared/types';
 
 import { countQuantity } from '../utils';
 
-type PayersForBillProps = {
+interface PayersForBillProps {
   payerListWithQuantity: PayersWithQuantity[];
   totalQuantity: number;
   updateValue: (payersWithQuantity: PayersWithQuantity[]) => void;
   validatePayers: (payersWithQuantity: PayersWithQuantity[]) => void;
   isDefault?: boolean;
-};
+}
 
 const PayersForBill: FC<PayersForBillProps> = ({
   payerListWithQuantity,

@@ -13,12 +13,12 @@ const StyledToggleButton = styled(ToggleButton)`
   border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
-type FieldWithTypeProps = {
+interface FieldWithTypeProps {
   name: string;
   value: string;
   feeType?: FeeType;
   updateValue: (name: string, value: number, feeType: FeeType) => void;
-};
+}
 
 const FieldWithType: FC<FieldWithTypeProps> = ({ name, value, feeType, updateValue }) => {
   const { t } = useTranslation();
