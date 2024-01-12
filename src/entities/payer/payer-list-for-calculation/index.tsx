@@ -17,7 +17,10 @@ const PayerListForCalculation: FC = () => {
 
   const detailedTotals = calculateDishCosts(payerList, billList);
   const detailedTotalsWithServices = applyServices(detailedTotals, services);
-  const total = detailedTotalsWithServices.reduce((acc, detail) => acc + detail.total, 0);
+  const total = detailedTotalsWithServices.reduce((acc, detail) => {
+    const total = Math.ceil(detail.total * 100) / 100;
+    return acc + total;
+  }, 0);
 
   return (
     <Box sx={{ mt: 1, ml: 2, mr: 2, mb: 10 }}>
