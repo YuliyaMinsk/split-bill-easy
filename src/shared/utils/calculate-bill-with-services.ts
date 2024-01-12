@@ -14,14 +14,14 @@ function calculateDishCosts(payers: Payer[], billList: BillLine[]): DetailedPaye
     billItem.payers.forEach((payer) => {
       const payerDetail = detailedTotals.find((detail) => detail.id === payer.id);
       if (payerDetail && payer.isChecked && payer.quantity !== null) {
-        const payerShare = Math.ceil(dishCost * (Number(payer.quantity) / billItem.dish.quantity) * 100);
+        const payerShare = Math.ceil(dishCost * (Number(payer.quantity) / billItem.dish.quantity) * 1000);
         payerDetail.dishes.push({
           dishId: billItem.dish.id,
           dishName: billItem.dish.name,
           quantity: payer.quantity,
-          cost: payerShare / 100,
+          cost: payerShare / 1000,
         });
-        payerDetail.total += payerShare / 100;
+        payerDetail.total += payerShare / 1000;
       }
     });
   });

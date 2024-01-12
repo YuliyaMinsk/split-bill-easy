@@ -37,7 +37,7 @@ const DishList: FC = () => {
         <Dish key={bill.dish.name + bill.dish.id} billLine={bill} />
       ))}
       <Typography variant="h5" sx={{ color: 'text.secondary', m: 1, textAlign: 'right' }}>
-        {t('Total') + ':'} {roundUp(total)} {currency}
+        {t('Total') + ':'} {roundUp(total, 2)} {currency}
       </Typography>
     </StyledBox>
   );

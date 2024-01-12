@@ -53,7 +53,7 @@ const PayersForBill: FC<PayersForBillProps> = ({
   useEffect(() => {
     const totalQuantityEntered = payersWithQuantity.reduce((sum, payer) => sum + Number(payer.quantity), 0);
 
-    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.014 && totalQuantity > 0) {
+    if (Math.abs(totalQuantityEntered - totalQuantity) > 0.001 && totalQuantity > 0) {
       setError(t('Error: Incorrect amount') as string);
     } else {
       setError('');

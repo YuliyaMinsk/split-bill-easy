@@ -11,7 +11,7 @@ const calculateIndividualPrices = (price: number, quantity: number, payers: Paye
     if (payer.isChecked && Number(payer.quantity) > 0) {
       const share = Number(payer.quantity) / totalPaidPortions;
       const individualCost = totalCost * share;
-      return Math.ceil(individualCost * 100) / 100;
+      return Math.ceil(individualCost * 1000) / 1000;
     }
     return 0;
   });
