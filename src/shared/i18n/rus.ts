@@ -68,8 +68,8 @@ const rusTranslations = {
     'Enter each item on the bill, who ordered it, and how the cost is split.':
       'Введите каждую позицию в счете, кто её заказал и как будет разделена стоимость',
     '3. Calculations Tab': '3. Подсчёты',
-    'Add any extra charges like service fees or tips.':
-      'Добавьте любые дополнительные расходы, включая сервисный сбор или чаевые',
+    'Add any extra charges like service fees or tips. Note: The total amount may be slightly higher than the bill due to rounding.':
+      'Добавьте любые дополнительные расходы, такие как плата за обслуживание или чаевые. Обратите внимание: общая сумма может быть немного выше, чем указано в чеке, из-за округления',
     'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍':
       'Затем просто скопируйте и поделитесь итоговым расчетом с друзьями. Наслаждайтесь вашей трапезой без неловких математических расчетов! 🍽️👍',
     "The program's developer is Yuliya Niaverova. If you need an experienced React developer to implement your project, feel free to contact me on LinkedIn.":

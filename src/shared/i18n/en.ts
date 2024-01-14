@@ -68,7 +68,8 @@ const enTranslations = {
     'Enter each item on the bill, who ordered it, and how the cost is split.':
       'Enter each item on the bill, who ordered it, and how the cost is split.',
     '3. Calculations Tab': '3. Calculations Tab',
-    'Add any extra charges like service fees or tips.': 'Add any extra charges like service fees or tips.',
+    'Add any extra charges like service fees or tips. Note: The total amount may be slightly higher than the bill due to rounding.':
+      'Add any extra charges like service fees or tips. Note: The total amount may be slightly higher than the bill due to rounding.',
     'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍':
       'Then, just copy and share the final breakdown with your friends. Enjoy your meal without the awkward math! 🍽️👍',
     "The program's developer is Yuliya Niaverova. If you need an experienced React developer to implement your project, feel free to contact me on LinkedIn.":

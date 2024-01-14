@@ -14,7 +14,13 @@ const MainPage: FC = () => {
       text: t('2. Items Tab'),
       secondary: t('Enter each item on the bill, who ordered it, and how the cost is split.'),
     },
-    { id: 3, text: t('3. Calculations Tab'), secondary: t('Add any extra charges like service fees or tips.') },
+    {
+      id: 3,
+      text: t('3. Calculations Tab'),
+      secondary: t(
+        'Add any extra charges like service fees or tips. Note: The total amount may be slightly higher than the bill due to rounding.',
+      ),
+    },
   ];
 
   return (
