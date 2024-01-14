@@ -31,8 +31,8 @@ const HeaderMenu: FC = () => {
     {
       label: t('Choose language:'),
       submenu: [
-        { label: t('English'), action: () => handleLanguageChange('en'), value: 'en' },
-        { label: t('Russian'), action: () => handleLanguageChange('rus'), value: 'rus' },
+        { label: 'English', action: () => handleLanguageChange('en'), value: 'en' },
+        { label: 'Русский', action: () => handleLanguageChange('rus'), value: 'rus' },
       ],
     },
     {

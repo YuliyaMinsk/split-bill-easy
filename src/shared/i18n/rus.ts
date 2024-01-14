@@ -5,8 +5,6 @@ const rusTranslations = {
 
     // top navigation
     'Choose language:': 'Выберите язык:',
-    'English': 'Английский',
-    'Russian': 'Русский',
     'Choose currency:': 'Выберите валюту:',
     'Kazakhstani Tenge': 'Казахстанский Тенге',
     'Russian Ruble': 'Российский Рубль',
