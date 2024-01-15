@@ -33,6 +33,7 @@ function applyServices(detailedTotals: DetailedPayerTotal[], services: Service[]
   const totalsAfterAdd = applyAddServices(detailedTotals, services);
 
   const totalsAfterSubtract = totalsAfterAdd.map((payer) => {
+    const baseTotal = detailedTotals.find((p) => p.id === payer.id)?.total || 0;
     let total = payer.total;
     const appliedServices = [...payer.services];
 
@@ -41,6 +42,16 @@ function applyServices(detailedTotals: DetailedPayerTotal[], services: Service[]
         const discounts = applyFixedSubtractService(totalsAfterAdd, service);
         const discount = discounts.find((d) => d.payerId === payer.id)?.discountAmount || 0;
 
+        total -= discount;
+
+        appliedServices.push({
+          serviceId: service.id,
+          serviceName: service.name,
+          type: service.type,
+          amount: -discount,
+        });
+      } else if (service.type === 'subtract' && service.feeType === 'percentage') {
+        const discount = baseTotal * (service.value / 100);
         total -= discount;
 
         appliedServices.push({
