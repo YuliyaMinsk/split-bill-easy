@@ -36,9 +36,13 @@ const billSlice = createSlice({
     setEditingBillLine: (state, action: PayloadAction<BillLine | null>) => {
       state.editingBillLine = action.payload;
     },
+    clearBill: (state) => {
+      state.billList = initialState.billList;
+      state.editingBillLine = initialState.editingBillLine;
+    },
   },
 });
 
-export const { addBillLine, removeBillLine, editBillLine, setEditingBillLine } = billSlice.actions;
+export const { addBillLine, removeBillLine, editBillLine, setEditingBillLine, clearBill } = billSlice.actions;
 
 export const billReducer = billSlice.reducer;

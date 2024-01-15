@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ListItem, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { FC, useState, MouseEvent } from 'react';
+import { FC, useState, MouseEvent, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -37,6 +37,11 @@ const FieldWithType: FC<FieldWithTypeProps> = ({ name, value, feeType, updateVal
       updateValue(name, Number(inputValue), newFeeType);
     }
   };
+
+  useEffect(() => {
+    setInputValue(String(value));
+    setSelectedFeeType(feeType || 'percentage');
+  }, [value, feeType]);
 
   return (
     <ListItem key={name}>

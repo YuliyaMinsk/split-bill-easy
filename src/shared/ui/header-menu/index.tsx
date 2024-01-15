@@ -9,7 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Currency } from '@/shared/enums';
 import { LanguageKey } from '@/shared/i18n/i18n';
 import { RootState } from '@/shared/store';
+import { clearBill } from '@/shared/store/bill/bill-slice';
 import { changeLanguage, changeCurrency } from '@/shared/store/profile/profile-slice';
+import { clearServices } from '@/shared/store/service/service-slice';
 
 type MenuItem = {
   label: string;
@@ -43,6 +45,7 @@ const HeaderMenu: FC = () => {
         { label: t('Belarusian Ruble'), action: () => handleCurrencyChange(Currency.BYN), value: Currency.BYN },
       ],
     },
+    { label: t('Clear Items and Services'), action: () => handleClearItemsAndServices() },
   ];
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, items: MenuItem[]) => {
@@ -63,6 +66,12 @@ const HeaderMenu: FC = () => {
 
   const handleCurrencyChange = (currency: Currency) => {
     dispatch(changeCurrency(currency));
+    handleMenuClose();
+  };
+
+  const handleClearItemsAndServices = () => {
+    dispatch(clearBill());
+    dispatch(clearServices());
     handleMenuClose();
   };
 
@@ -94,7 +103,7 @@ const HeaderMenu: FC = () => {
         disableScrollLock={true}
       >
         {currentMenu.map((item, index) => [
-          <MenuItem key={`item-${index}`} disabled>
+          <MenuItem key={`item-${index}`} onClick={item.action} disabled={!item.action}>
             {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
             <ListItemText primary={item.label} />
           </MenuItem>,

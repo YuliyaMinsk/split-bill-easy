@@ -9,6 +9,7 @@ const enTranslations = {
     'Kazakhstani Tenge': 'Kazakhstani Tenge',
     'Russian Ruble': 'Russian Ruble',
     'Belarusian Ruble': 'Belarusian Ruble',
+    'Clear Items and Services': 'Clear Items and Services',
 
     // bottom navigation
     'Payers': 'Payers',

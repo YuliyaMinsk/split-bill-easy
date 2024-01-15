@@ -18,12 +18,13 @@ const serviceSlice = createSlice({
     updateServices: (state, action: PayloadAction<Service>) => {
       const index = state.findIndex((service) => service.id === action.payload.id);
       if (index !== -1) {
-        state[index] = action.payload;
+        state[index] = { ...state[index], ...action.payload };
       }
     },
+    clearServices: () => initialState,
   },
 });
 
-export const { updateServices } = serviceSlice.actions;
+export const { updateServices, clearServices } = serviceSlice.actions;
 
 export const serviceReducer = serviceSlice.reducer;

@@ -9,6 +9,7 @@ const rusTranslations = {
     'Kazakhstani Tenge': 'Казахстанский Тенге',
     'Russian Ruble': 'Российский Рубль',
     'Belarusian Ruble': 'Белорусский Рубль',
+    'Clear Items and Services': 'Очистить Позиции и Подсчёты',
 
     // bottom navigation
     'Payers': 'Участники',
