@@ -37,8 +37,9 @@ const rusTranslations = {
 
     // calculations
     'Calculate after extra charges': 'Рассчитать после дополнительных сборов',
-    'Copy to clipboard for everyone': 'Копировать список участников с итоговыми суммами',
+    'Copy to clipboard for everyone': 'Копировать итоговый список',
     'Copy to clipboard for ': 'Копировать список для ',
+    'Bill copied to clipboard': 'Счёт скопирован',
 
     // copy to clipboard
     'Bill for': 'Счёт для',

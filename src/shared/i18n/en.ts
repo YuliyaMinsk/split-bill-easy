@@ -39,6 +39,7 @@ const enTranslations = {
     'Calculate after extra charges': 'Calculate after extra charges',
     'Copy to clipboard for everyone': 'Copy to clipboard for everyone',
     'Copy to clipboard for ': 'Copy to clipboard for ',
+    'Bill copied to clipboard': 'Bill copied to clipboard',
 
     // copy to clipboard
     'Bill for': 'Bill for',

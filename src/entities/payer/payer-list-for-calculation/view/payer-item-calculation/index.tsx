@@ -12,13 +12,14 @@ import {
   Typography,
 } from '@mui/material';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
 import { StyledTableContainer, StyledTableRow } from '@/shared/styles';
 import { DetailedPayerTotal, Payer } from '@/shared/types';
+import { SnackbarTop } from '@/shared/ui';
 import { formatBillText, roundUp } from '@/shared/utils';
 
 interface PayerItemCalculationProps {
@@ -28,16 +29,23 @@ interface PayerItemCalculationProps {
 
 const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, payerDetail }) => {
   const { t } = useTranslation();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
   const currency = useSelector((state: RootState) => state.profile.currency);
 
   const handleCopyToClipboard = async () => {
     const result = formatBillText(currentPayer, payerDetail, currency, t);
     try {
       await navigator.clipboard.writeText(result);
-      console.log('Bill copied to clipboard');
+      setOpenSnackbar(true);
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
+  };
+
+  const handleClose = (_event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') return;
+    setOpenSnackbar(false);
   };
 
   return (
@@ -87,6 +95,7 @@ const PayerItemCalculation: FC<PayerItemCalculationProps> = ({ currentPayer, pay
           <Button size="small" variant="text" sx={{ mr: 1 }} onClick={handleCopyToClipboard}>
             {t('Copy to clipboard for ') + currentPayer.name}
           </Button>
+          <SnackbarTop open={openSnackbar} handleClose={handleClose} message={t('Bill copied to clipboard')} />
         </Box>
       </AccordionDetails>
     </Accordion>
