@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
+import { StyledBox } from '@/shared/styles';
 import { applyServices, calculateDishCosts, roundUp } from '@/shared/utils';
 
 import { PayerItemCalculation } from './view/payer-item-calculation';
@@ -14,6 +15,14 @@ const PayerListForCalculation: FC = () => {
   const billList = useSelector((state: RootState) => state.bill.billList);
   const services = useSelector((state: RootState) => state.services);
   const currency = useSelector((state: RootState) => state.profile.currency);
+
+  if (billList.length === 0) {
+    return (
+      <StyledBox>
+        <p>{t('There are no items in your bill. Fill the form on Items page to add them')}</p>
+      </StyledBox>
+    );
+  }
 
   const detailedTotals = calculateDishCosts(payerList, billList);
   const detailedTotalsWithServices = applyServices(detailedTotals, services);

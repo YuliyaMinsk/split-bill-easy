@@ -1,21 +1,13 @@
-import styled from '@emotion/styled';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/shared/store';
+import { StyledBox } from '@/shared/styles';
 import { roundUp } from '@/shared/utils';
 
 import { Dish } from '../dish';
-
-const StyledBox = styled(Box)`
-  margin-top: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
 
 const DishList: FC = () => {
   const { t } = useTranslation();

@@ -41,6 +41,8 @@ const rusTranslations = {
     'Copy to clipboard for everyone': 'Копировать итоговый список',
     'Copy to clipboard for ': 'Копировать список для ',
     'Bill copied to clipboard': 'Счёт скопирован',
+    'There are no items in your bill. Fill the form on Items page to add them':
+      'В счёте нет позиций. Заполните форму на странице Позиции, чтобы добавить их',
 
     // copy to clipboard
     'Bill for': 'Счёт для',

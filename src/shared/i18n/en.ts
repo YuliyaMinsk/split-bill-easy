@@ -41,6 +41,8 @@ const enTranslations = {
     'Copy to clipboard for everyone': 'Copy to clipboard for everyone',
     'Copy to clipboard for ': 'Copy to clipboard for ',
     'Bill copied to clipboard': 'Bill copied to clipboard',
+    'There are no items in your bill. Fill the form on Items page to add them':
+      'There are no items in your bill. Fill the form on Items page to add them',
 
     // copy to clipboard
     'Bill for': 'Bill for',
