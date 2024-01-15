@@ -19,7 +19,7 @@ const PayerList: FC = () => {
   } = usePayerList();
 
   return (
-    <Box sx={{ mt: '1rem', mb: '6rem' }}>
+    <Box sx={{ mb: '6rem' }}>
       <List>
         {payerList.map((payer) => (
           <PayerItem

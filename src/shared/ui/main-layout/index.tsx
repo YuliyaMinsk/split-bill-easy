@@ -10,7 +10,7 @@ const StyledPaper = styled(Paper)`
   flex-grow: 1;
 
   @media (max-width: 480px) {
-    padding: 0;
+    padding: 10px 0 0 0;
   }
 `;
 
