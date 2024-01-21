@@ -1,6 +1,6 @@
 import CheckIcon from '@mui/icons-material/Check';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Divider, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, css, styled } from '@mui/material';
+import { Divider, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, styled } from '@mui/material';
 
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -50,7 +50,7 @@ const enTranslations = {
     'Bill for': 'Bill for',
     'Total price': 'Total price',
     'Instruction to add app to Home screen':
-      'How do I install Split Bill Easy, app to dividing restaurant bills?\n' +
+      'How do I install Split Bill Easy, an app for dividing restaurant bills?\n' +
       'Although not required, you may save Split Bill Easy to your home screen to make them more accessible.\n\n' +
       'Android\n' +
       '1. Open Split Bill Easy in your browser (e.g., Chrome).\n' +
