@@ -51,8 +51,8 @@ const enTranslations = {
     'Total price': 'Total price',
     'Instruction to add app to Home screen':
       'How do I install PWAs?\n' +
-      'Although not required, you may save PWAs to your home screen to make them more accessible.\n' +
-      'Android\n\n' +
+      'Although not required, you may save PWAs to your home screen to make them more accessible.\n\n' +
+      'Android\n' +
       'Open the PWA site in your browser (e.g., Chrome).\n' +
       'Tap the menu button (three dots) in the address bar.\n' +
       'Select "Add to Home screen".\n' +
