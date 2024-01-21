@@ -10,6 +10,8 @@ const enTranslations = {
     'Russian Ruble': 'Russian Ruble',
     'Belarusian Ruble': 'Belarusian Ruble',
     'Clear Items and Services': 'Clear Items and Services',
+    'Copy link to share app': 'Copy link to share app',
+    'App Link copied to clipboard': 'App Link copied to clipboard',
 
     // bottom navigation
     'Payers': 'Payers',
@@ -47,6 +49,20 @@ const enTranslations = {
     // copy to clipboard
     'Bill for': 'Bill for',
     'Total price': 'Total price',
+    'Instruction to add app to Home screen':
+      'How do I install PWAs?\n' +
+      'Although not required, you may save PWAs to your home screen to make them more accessible.\n' +
+      'Android\n\n' +
+      'Open the PWA site in your browser (e.g., Chrome).\n' +
+      'Tap the menu button (three dots) in the address bar.\n' +
+      'Select "Add to Home screen".\n' +
+      'Enter a name and tap "Add".\n\n' +
+      'iOS\n' +
+      'Open the PWA site in Safari.\n' +
+      'Tap the share button (arrow icon at the bottom).\n' +
+      'Scroll and select "Add to Home Screen".\n' +
+      'Enter a name and tap "Add".\n' +
+      'Now the PWA is available on your home screen like a regular app.\n\n',
 
     // services
     'Service Charge': 'Service Charge',

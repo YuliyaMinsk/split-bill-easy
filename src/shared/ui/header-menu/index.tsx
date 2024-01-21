@@ -12,6 +12,7 @@ import { RootState } from '@/shared/store';
 import { clearBill } from '@/shared/store/bill/bill-slice';
 import { changeLanguage, changeCurrency } from '@/shared/store/profile/profile-slice';
 import { clearServices } from '@/shared/store/service/service-slice';
+import { SnackbarTop } from '../snackbar-top';
 
 type MenuItem = {
   label: string;
@@ -28,6 +29,7 @@ const HeaderMenu: FC = () => {
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [currentMenu, setCurrentMenu] = useState<MenuItem[]>([]);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const menuItems: MenuItem[] = [
     {
@@ -45,6 +47,7 @@ const HeaderMenu: FC = () => {
         { label: t('Belarusian Ruble'), action: () => handleCurrencyChange(Currency.BYN), value: Currency.BYN },
       ],
     },
+    { label: t('Copy link to share app'), action: () => handleCopyToShare() },
     { label: t('Clear Items and Services'), action: () => handleClearItemsAndServices() },
   ];
 
@@ -69,10 +72,26 @@ const HeaderMenu: FC = () => {
     handleMenuClose();
   };
 
+  const handleCopyToShare = async () => {
+    const result = `${t('Instruction to add app to Home screen')}${window.location.href}`;
+    try {
+      await navigator.clipboard.writeText(result);
+      setOpenSnackbar(true);
+      handleMenuClose();
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
   const handleClearItemsAndServices = () => {
     dispatch(clearBill());
     dispatch(clearServices());
     handleMenuClose();
+  };
+
+  const handleClose = (_event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') return;
+    setOpenSnackbar(false);
   };
 
   const isItemSelected = (item: MenuItem): boolean => {
@@ -117,6 +136,7 @@ const HeaderMenu: FC = () => {
           )),
         ])}
       </Menu>
+      <SnackbarTop open={openSnackbar} handleClose={handleClose} message={t('App Link copied to clipboard')} />
     </div>
   );
 };
