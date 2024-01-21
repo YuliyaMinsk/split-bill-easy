@@ -1,6 +1,6 @@
 import CheckIcon from '@mui/icons-material/Check';
 import MenuIcon from '@mui/icons-material/Menu';
-import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { Divider, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, css, styled } from '@mui/material';
 
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,12 +15,20 @@ import { clearServices } from '@/shared/store/service/service-slice';
 import { SnackbarTop } from '../snackbar-top';
 
 type MenuItem = {
-  label: string;
+  isDivider?: boolean;
   icon?: React.ReactNode;
+  label?: string | null;
   action?: () => void;
-  submenu?: MenuItem[];
   value?: LanguageKey | Currency;
+  styleType?: 'dangerous';
+  submenu?: MenuItem[];
 };
+
+const DangerousMenuItem = styled(MenuItem)<{ styleType?: string }>`
+  & {
+    color: ${(props) => (props.styleType === 'dangerous' ? 'red' : 'inherit')};
+  }
+`;
 
 const HeaderMenu: FC = () => {
   const { i18n, t } = useTranslation();
@@ -47,8 +55,10 @@ const HeaderMenu: FC = () => {
         { label: t('Belarusian Ruble'), action: () => handleCurrencyChange(Currency.BYN), value: Currency.BYN },
       ],
     },
+    { isDivider: true },
     { label: t('Copy link to share app'), action: () => handleCopyToShare() },
-    { label: t('Clear Items and Services'), action: () => handleClearItemsAndServices() },
+    { isDivider: true },
+    { label: t('Clear Items and Services'), action: () => handleClearItemsAndServices(), styleType: 'dangerous' },
   ];
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, items: MenuItem[]) => {
@@ -73,7 +83,7 @@ const HeaderMenu: FC = () => {
   };
 
   const handleCopyToShare = async () => {
-    const result = `${t('Instruction to add app to Home screen')}${window.location.href}`;
+    const result = `${window.location.href}\n\n${t('Instruction to add app to Home screen')}`;
     try {
       await navigator.clipboard.writeText(result);
       setOpenSnackbar(true);
@@ -121,20 +131,31 @@ const HeaderMenu: FC = () => {
         onClose={handleMenuClose}
         disableScrollLock={true}
       >
-        {currentMenu.map((item, index) => [
-          <MenuItem key={`item-${index}`} onClick={item.action} disabled={!item.action}>
-            {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-            <ListItemText primary={item.label} />
-          </MenuItem>,
-          item.submenu?.map((subItem, subIndex) => (
-            <MenuItem key={`subitem-${index}-${subIndex}`} onClick={subItem.action}>
-              <ListItemIcon style={{ visibility: isItemSelected(subItem) ? 'visible' : 'hidden' }}>
-                <CheckIcon />
-              </ListItemIcon>
-              <ListItemText primary={subItem.label} />
-            </MenuItem>
-          )),
-        ])}
+        {currentMenu.map((item, index) =>
+          item.isDivider ? (
+            <Divider key={`divider-${index}`} />
+          ) : (
+            [
+              <DangerousMenuItem
+                key={`item-${index}`}
+                onClick={item.action}
+                disabled={!item.action}
+                styleType={item.styleType}
+              >
+                {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+                <ListItemText primary={item.label} />
+              </DangerousMenuItem>,
+              item.submenu?.map((subItem, subIndex) => (
+                <MenuItem key={`subitem-${index}-${subIndex}`} onClick={subItem.action}>
+                  <ListItemIcon style={{ visibility: isItemSelected(subItem) ? 'visible' : 'hidden' }}>
+                    <CheckIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={subItem.label} />
+                </MenuItem>
+              )),
+            ]
+          ),
+        )}
       </Menu>
       <SnackbarTop open={openSnackbar} handleClose={handleClose} message={t('App Link copied to clipboard')} />
     </div>

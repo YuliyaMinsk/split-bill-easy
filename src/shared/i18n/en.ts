@@ -50,19 +50,19 @@ const enTranslations = {
     'Bill for': 'Bill for',
     'Total price': 'Total price',
     'Instruction to add app to Home screen':
-      'How do I install PWAs?\n' +
-      'Although not required, you may save PWAs to your home screen to make them more accessible.\n\n' +
+      'How do I install Split Bill Easy, app to dividing restaurant bills?\n' +
+      'Although not required, you may save Split Bill Easy to your home screen to make them more accessible.\n\n' +
       'Android\n' +
-      'Open the PWA site in your browser (e.g., Chrome).\n' +
-      'Tap the menu button (three dots) in the address bar.\n' +
-      'Select "Add to Home screen".\n' +
-      'Enter a name and tap "Add".\n\n' +
+      '1. Open Split Bill Easy in your browser (e.g., Chrome).\n' +
+      '2. Tap the menu button (three dots) in the address bar.\n' +
+      '3. Select "Add to Home screen".\n' +
+      '4. If you want, you\'ll be able to edit a name and tap "Add".\n\n' +
       'iOS\n' +
-      'Open the PWA site in Safari.\n' +
-      'Tap the share button (arrow icon at the bottom).\n' +
-      'Scroll and select "Add to Home Screen".\n' +
-      'Enter a name and tap "Add".\n' +
-      'Now the PWA is available on your home screen like a regular app.\n\n',
+      '1. Open Split Bill Easy in Safari.\n' +
+      '2. Tap the share button (arrow icon at the bottom).\n' +
+      '3. Scroll and select "Add to Home Screen".\n' +
+      '4. If you want, you\'ll be able to edit a name and tap "Add".\n\n' +
+      'Now Split Bill Easy is available on your home screen like a regular app.\n',
 
     // services
     'Service Charge': 'Service Charge',
