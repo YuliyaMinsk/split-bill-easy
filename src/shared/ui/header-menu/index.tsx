@@ -20,13 +20,13 @@ type MenuItem = {
   label?: string | null;
   action?: () => void;
   value?: LanguageKey | Currency;
-  styleType?: 'dangerous';
+  styletype?: 'dangerous';
   submenu?: MenuItem[];
 };
 
-const DangerousMenuItem = styled(MenuItem)<{ styleType?: string }>`
+const DangerousMenuItem = styled(MenuItem)<{ styletype?: string }>`
   & {
-    color: ${(props) => (props.styleType === 'dangerous' ? 'red' : 'inherit')};
+    color: ${(props) => (props.styletype === 'dangerous' ? 'red' : 'inherit')};
   }
 `;
 
@@ -58,7 +58,7 @@ const HeaderMenu: FC = () => {
     { isDivider: true },
     { label: t('Copy link to share app'), action: () => handleCopyToShare() },
     { isDivider: true },
-    { label: t('Clear Items and Services'), action: () => handleClearItemsAndServices(), styleType: 'dangerous' },
+    { label: t('Clear Items and Services'), action: () => handleClearItemsAndServices(), styletype: 'dangerous' },
   ];
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, items: MenuItem[]) => {
@@ -140,7 +140,7 @@ const HeaderMenu: FC = () => {
                 key={`item-${index}`}
                 onClick={item.action}
                 disabled={!item.action}
-                styleType={item.styleType}
+                styletype={item.styletype}
               >
                 {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
                 <ListItemText primary={item.label} />

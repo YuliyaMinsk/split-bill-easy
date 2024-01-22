@@ -5,8 +5,8 @@ import { DetailedPayerTotal, Payer } from '../types';
 
 function formatBillText(currentPayer: Payer, payerDetail: DetailedPayerTotal, currency: Currency, t: TFunction) {
   let totalForPayer = 0;
-  let billText = '```\n' + t('Bill for') + `: ${currentPayer.name}\n`;
-  billText += '--------------------------\n';
+  let billText = '``` ' + t('Bill for') + `: ${currentPayer.name}\n`;
+  billText += '-------------------------- \n';
 
   payerDetail.dishes.forEach((dish) => {
     billText += `${dish.dishName.padEnd(16)}      ${Number(dish.cost).toFixed(2)} ${currency}\n`;
@@ -20,8 +20,8 @@ function formatBillText(currentPayer: Payer, payerDetail: DetailedPayerTotal, cu
     }
   });
 
-  billText += '--------------------------\n';
-  billText += t('Total price') + `:       ${totalForPayer.toFixed(2)} ${currency}` + '\n\n```';
+  billText += '-------------------------- \n';
+  billText += t('Total price') + `:       ${totalForPayer.toFixed(2)} ${currency}` + '\n\n ```';
 
   return billText;
 }
