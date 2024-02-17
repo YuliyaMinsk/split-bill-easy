@@ -154,6 +154,10 @@ function applyFixedSubtractService(detailedTotals: DetailedPayerTotal[], service
     payersEligibleForDiscount = detailedTotals.filter(
       (payer) => payer.total > 0 && !payerDiscounts.some((discount) => discount.payerId === payer.id),
     );
+
+    if (totalDiscountApplied === 0) {
+      break;
+    }
   }
 
   return payerDiscounts;
