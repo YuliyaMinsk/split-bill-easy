@@ -6,12 +6,14 @@ import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { API_URL } from '@/shared/constants';
 import { Currency } from '@/shared/enums';
 import { LanguageKey } from '@/shared/i18n/i18n';
 import { RootState } from '@/shared/store';
 import { clearBill } from '@/shared/store/bill/bill-slice';
 import { changeLanguage, changeCurrency } from '@/shared/store/profile/profile-slice';
 import { clearServices } from '@/shared/store/service/service-slice';
+
 import { SnackbarTop } from '../snackbar-top';
 
 type MenuItem = {
@@ -83,7 +85,7 @@ const HeaderMenu: FC = () => {
   };
 
   const handleCopyToShare = async () => {
-    const result = `${window.location.href}\n\n${t('Instruction to add app to Home screen')}`;
+    const result = `${API_URL}\n\n${t('Instruction to add app to Home screen')}`;
     try {
       await navigator.clipboard.writeText(result);
       setOpenSnackbar(true);

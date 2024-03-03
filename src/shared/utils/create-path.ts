@@ -1,6 +1,7 @@
+import { BASE_URL } from "../constants";
+
 function createPath(path: string): string {
-  const baseUrl = import.meta.env.VITE_APP_BASE_URL || '/split-bill-easy/';
-  return `${baseUrl}${path}`;
+  return `${BASE_URL}${path}`;
 }
 
 export { createPath };

@@ -1,5 +1,7 @@
+import { BASE_URL } from "../constants";
+
 function getRelativePath(fullPath: string): string {
-  return fullPath.replace(import.meta.env.VITE_APP_BASE_URL, '');
+  return fullPath.replace(BASE_URL, '');
 }
 
 export { getRelativePath };
