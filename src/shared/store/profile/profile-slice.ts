@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Currency } from '@/shared/enums';
-import { LanguageKey } from '@/shared/i18n/i18n';
+import { getBrowserLanguage, LanguageKey } from '@/shared/i18n/i18n';
 
 type ProfileState = {
   language: LanguageKey;
@@ -8,7 +8,7 @@ type ProfileState = {
 };
 
 const initialState: ProfileState = {
-  language: 'en',
+  language: getBrowserLanguage(),
   currency: Currency.KZT,
 };
 

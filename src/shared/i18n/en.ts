@@ -1,7 +1,6 @@
 const enTranslations = {
   translation: {
     'Split Bill Easy': 'Split Bill Easy',
-    'Welcome to React': 'Welcome to React and react-i18next',
 
     // top navigation
     'Choose language:': 'Choose language:',
