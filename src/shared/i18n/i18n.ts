@@ -3,14 +3,24 @@ import { initReactI18next } from 'react-i18next';
 
 import { store } from '../store';
 import { enTranslations } from './en';
-import { rusTranslations } from './rus';
+import { ruTranslations } from './ru';
 
 const resources = {
   en: enTranslations,
-  rus: rusTranslations,
+  ru: ruTranslations,
 };
 
 type LanguageKey = keyof typeof resources;
+
+const getBrowserLanguage = (): LanguageKey => {
+  const browserLang = navigator.language.split('-')[0]; 
+
+  if (Object.keys(resources).includes(browserLang)) {
+    return browserLang as LanguageKey;
+  }
+  return 'en';
+};
+
 
 const initializeI18n = (): void => {
   const initialLanguage = store.getState().profile.language;
@@ -32,5 +42,5 @@ const initializeI18n = (): void => {
   });
 };
 
-export { initializeI18n };
+export { initializeI18n, getBrowserLanguage };
 export type { LanguageKey };

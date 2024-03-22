@@ -1,7 +1,6 @@
-const rusTranslations = {
+const ruTranslations = {
   translation: {
     'Split Bill Easy': 'Делите Счёт Легко!',
-    'Welcome to React': 'Добро пожаловать в React и react-i18next',
 
     // top navigation
     'Choose language:': 'Выберите язык:',
@@ -98,4 +97,4 @@ const rusTranslations = {
   },
 };
 
-export { rusTranslations };
+export { ruTranslations };
